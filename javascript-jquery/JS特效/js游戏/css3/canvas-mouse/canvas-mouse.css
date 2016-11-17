@@ -1,0 +1,17 @@
+﻿/*
+*for game - canvas-mouse
+*create @ 2012.01.29
+*by ajccom
+*qq:136157536
+*email:136157536@qq.com
+*/
+* {padding:0;margin:0;}
+ul,li,ol{list-style:none}
+#main-wrap {width:1000px;height:500px;overflow:hidden;margin:0 auto;background:#fee}
+.option {width: 150px;position:absolute;left:0;top:20px;}
+.option h4{font-size:14px;text-align:center;padding-bottom: 5px}
+.option .fonts{width:125px;margin-left:25px;}
+.option .fonts li{padding:5px 20px;}
+.option .fonts li a {display:block;width:60px;cursor:pointer}
+.option .fonts li a:hover, .option .fonts li a.current {background:#ddd;}
+.option .fonts li a img {width:60px;}

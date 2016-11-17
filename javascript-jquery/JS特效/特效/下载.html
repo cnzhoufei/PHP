@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#die{
+			width:200px;
+			height:20px;
+			border:1px solid gray;
+		}
+		#son{
+			width:10%;
+			height:20px;
+			background:yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id='die'>
+		<div id='son'></div>
+	</div>
+	<p id='p'></p>
+</body>
+</html>
+<script>
+	var son = document.getElementById('son');
+
+	var timer = null;
+	var a = 10;
+	timer = setInterval(function(){
+		a++;
+		
+		son.style.width = a + '%';
+
+		var p = document.getElementById('p');
+
+		p.innerHTML = '　　已下载　' + a + '%';
+
+		if(a >= 100){
+			alert('下载完成');
+			clearInterval(timer);
+		}
+
+	},30);
+</script>

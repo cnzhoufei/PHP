@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Document</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	</head>
+	<body>
+		<font id='zi' size='7'></font>
+
+		<!-- <font id='zi' size='7'>java<font color='red'>s</font>cript</font> -->
+	</body>
+	<script>
+
+		// 找对象
+		var zi = document.getElementById('zi');
+		var msg = '汤俊好帅';
+
+
+		var i = 0;
+		setInterval(function(){
+			zi.innerHTML = move(i,msg);
+			i++;
+			if(i >= msg.length){
+				i = 0;
+			}
+		},100);
+
+		function move(i,msg){
+			// 0 , j avascript
+			// 从0开始，截取 i 个
+			var tmp = msg.substr(0,i);
+
+			// j 
+
+			tmp += '<font color="red">'+ msg[i] +'</font>';
+			// 截取第i+1 到最后
+			tmp += msg.substr(i+1);
+
+			 // '' + '<font color="red">j</font>avascript';
+			 
+			return tmp;
+		}
+
+
+	</script>
+</html>

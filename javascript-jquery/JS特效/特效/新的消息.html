@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id='vo'></div>
+	<script>
+		var kaiguan = true;
+		var a = document.getElementById('vo')
+
+		setInterval(function(){
+			if(kaiguan){
+			 	vo.innerHTML = '[新的消息]';
+				kaiguan = false;
+			}else{
+			 	vo.innerHTML = '[　　　　]';
+				
+				kaiguan = true;
+			}
+			
+		},300);
+	</script>
+</body>
+</html>

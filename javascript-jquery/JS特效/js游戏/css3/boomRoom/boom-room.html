@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>boom room</title>
+	<style>
+	* {padding:0;margin:0}
+	body {padding:20px 0 0;}
+	.wrap {width:1000px;margin:0 auto;text-align:center;position:relative;}
+	.top {margin:0 auto;height40px;width:800px;font-size:18px;color:#ff0;font-weight:bold;text-align:center;background:#aaa;border-left:1px solid #000;border-right:1px solid #000;line-height:25px;}
+	.room {margin:0 auto;width:800px;height:400px;background:#efe;border:1px solid #000;overflow:hidden;position:relative;}
+	.left {width:200px;height:400px;background:#66f;float:left;position:relative;}
+	.right {width:200px;height:400px;background:#f33;float:right;position:relative;}
+	.boom-bed {width:400px;height:400px;background:#aaa;float:left;position:relative;}
+	.boom {position:absolute;width:40px;height:40px;left:0px;top:0px;cursor:move;border-radius:20px;-moz-border-radius:20px;-webkit-border-radius:20px}
+	.b {background:#00f;border:1px solid transparent}
+	.b:hover {border:1px solid #fff;background:#55f}
+	.r {background:#f00;border:1px solid transparent}
+	.r:hover {border:1px solid #fff;background:#f33}
+	.life {text-align:center}
+	.life span {color:#f00;}
+	.state-booms span {color:#000}
+	.max-booms span {color:#000}
+	.user {position:absolute;top:20px;left:100px;}
+	.state-booms {position:absolute;top:25px;left:700px;}
+	.max-booms {position:absolute;top:5px;left:700px;}
+	</style>
+	<script src="../js/jquery-1.4.4.min.js"></script>
+	<script src="boom-room.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="top">
+			<div class="score"><b>SCORE:</b><span class="point">0</span></div>
+			<div class="life"><b>left life:</b><span>3</span></div>
+			<div class="state-booms"><b>state booms:</b><span>0</span></div>
+			<div class="max-booms"><b>max booms:</b><span>15</span></div>
+			<div class="user"><input class="player-name" value="" type="box" placeholder="请输入您的游戏名" /><input class="start-btn" type="button" value="开始" /><input class="end-btn" type="button" value="结束" /></div>
+		</div>
+		<div class="room">
+			<div class="left blue"></div>
+			<div class="boom-bed">
+				<!--
+				<div class="boom b" draggable="true" title="i'm blue"></div>
+				<div class="boom r" draggable="true" title="i'm red"></div>
+				-->
+			</div>
+			<div class="right red"></div>
+		</div>
+		<div class="info">
+			<p>
+				<span>最高分[<strong class="name">name</strong>:<em class="high-score">0</em>]</span>
+			</p>
+		</div>
+	</div>
+</body>
+</html>

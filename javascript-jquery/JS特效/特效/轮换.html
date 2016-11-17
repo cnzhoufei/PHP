@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{
+			position:absolute;
+			top:680px;
+			left:1155px;
+		}
+	</style>
+</head>
+<body>
+	<div id='divs'>
+		<img src="./images/2.jpg" width='99%'; height='99%'; id='images'>
+	</div>
+	<div id='box'>
+		<button onclick='text1();'>1</button>
+		<button onclick='text2();'>2</button>
+		<button onclick='text3();'>3</button>
+	</div>
+</body>
+</html>
+<script>
+	var box = document.getElementById('box');
+
+	function text1(){
+		images.setAttribute('src','./images/2.jpg')
+
+		return false;
+	}
+
+	function text2(){
+		images.setAttribute('src','./images/3.jpg');
+
+		return false;
+	}
+
+	function text3(){
+		images.setAttribute('src','./images/4.jpg');
+
+		return false;
+	}
+</script>

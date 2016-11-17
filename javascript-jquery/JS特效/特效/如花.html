@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Document</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<style>
+			
+		</style>
+	</head>
+	<body>
+		<img id='pic1' src="./1.png" width='200px'>
+		<img id='pic2' src="./2.png" width='200px' style='display:none;margin-top:10px;'>
+	</body>
+	<script>
+		/*
+		事件列表 ：
+				文档事件：
+					onload			文档加载完成
+					onunload		关闭页面执行
+					onbeforeunload	关闭前才执行(刷新时也会执行这个事件)
+				图片事件：
+					onload	加载完成 
+					onerror	加载错误
+					onabort 加载中断
+				鼠标事件：
+					onclick 	单击
+					ondblclick 	双击
+
+					onmousemove 	鼠标移动
+
+					onmousedown	鼠标按下
+					onmouseup	鼠标弹起
+
+					onmouseover	经过
+					onmouseout  离开
+
+					onmouseenter
+					onmouseleave
+		*/
+
+		var pic1 = document.getElementById('pic1');
+		var pic2 = document.getElementById('pic2');
+		var timer = null;
+		pic2.onmouseenter = pic1.onmouseenter = function(){
+			clearTimeout(timer);
+			pic2.style.display = 'block';
+		}
+		pic2.onmouseleave = pic1.onmouseleave = function(){
+			timer = setTimeout(function(){
+				pic2.style.display = 'none';
+			},200);
+		}
+		
+	</script>
+</html>

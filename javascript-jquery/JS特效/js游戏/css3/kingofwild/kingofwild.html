@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>kingofwild</title>
+<script src="../js/jquery-1.4.4.min.js"></script>
+<script src="kingofwild.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="map"></div>
+		<div class="control"></div>
+	</div>
+	<style>
+		* {margin:0;padding:0;}
+		.wrap {width:600px;margin:10px auto;position:relative;position:relative;}
+		.wrap .map {width:550px;overflow: hidden;}
+			.wrap .map div {width: 75px; height: 75px;border: 1px solid #000;float:left;position: relative;}
+			.wrap .map .unmove {background: #000; opacity: 0.5;width: 75px; height: 75px;position: absolute; top: 0; left: 0}
+			.trap {background: #ccc;line-height:75px;text-align:center}
+			.river {background: #22f;line-height:75px;text-align:center}
+			.home {background: red;line-height:75px;text-align:center}
+		.wrap .control {position: absolute;z-index:2;width:550px;overflow: hidden;top: 0; left: 0}
+			.wrap .control div {width: 75px; height: 75px;border: 1px solid transparent;float:left;}
+			.wrap .control div .red {background: #faa;}
+			.wrap .control div .blue {background: #aaf;}
+			.wrap .control div .chess {width: 73px; height: 73px;border:1px solid transparent;border-radius:40px;display:block;text-align:center;line-height:73px;cursor:pointer}
+	</style>
+</body>
+</html>

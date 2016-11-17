@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>网页游戏五子棋</title>
+<style>
+*{margin:0;padding:0;}
+#layout{width:502px;height:502px;border-top:#555 solid 1px;border-right:#555 solid 1px;background-color:#CCC;margin:0px auto;position:absolute;z-index:1;}
+#layout .div{width:19px;height:19px;border-bottom:#555 solid 1px;border-left:#555 solid 1px;float:left;display:inline;line-height:19px;}
+#context{position:absolute;z-index:2;padding:10px;width:480px;height:480px;}
+#context span{width:20px;height:20px;display:block;float:left;cursor:pointer;line-height:20px;font-size:1px;border-radius: 10px;}
+#context span:hover{border:1px solid #55f;width:18px;height:18px;}
+#context span.white{background:#fff;}
+#context span.black{background:#000;}
+#option{text-align:center;height:36px;line-height:36px;font-size:17px}
+#option p .player1{float:left;}
+#option p .player2{float:right;}
+</style>
+<script src="../js/jquery-1.4.4.min.js"></script>
+<script src="myFivegame.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div id="option">
+			<p>
+				<span class="player1">小明</span><span class="timer">0</span><span class="player2">小红</span>
+			</p>
+		</div>
+		<div id="layout"></div>
+		<div id="context"></div>
+	</div>
+</body>
+</html>

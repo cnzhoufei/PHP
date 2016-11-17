@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<img src="./images/3.jpg"; width='500px'; height:'500px;' id='imgs'>
+</body>
+</html>
+<script>
+	var imgs = document.getElementById('imgs');
+	
+	imgs.onmouseover = function(){
+		imgs.setAttribute('src','./images/2.jpg');
+	}
+
+	imgs.onmouseout = function(){
+		imgs.setAttribute('src','./images/3.jpg');
+	}
+</script>

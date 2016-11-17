@@ -1,0 +1,58 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div.out {
+			width:150px;
+			height:150px;
+			background:#E2FFC5;
+			margin:20px;
+			float:left;
+		}
+		div.in {
+			width:50px;
+			height:150px;
+			line-height:150px;
+			text-align:center;
+			font-size:50px;
+			font-weight:bold;
+			background:#CCCEFF;
+		}
+		div.out.on {
+			background:#C4FF8B;
+		}
+		div.out.on div.in {
+			color:red;
+			background:#686FFE;
+		}
+		
+	</style>
+	
+	<script>
+		function changeDiv(onDiv) {
+			var outDiv = document.getElementsByClassName('out');
+			
+			for(var i=0; i<outDiv.length; i++) {
+				outDiv[i].className = 'out';
+			}
+			
+			onDiv.className = 'out on';
+		}
+	</script>
+</head>
+
+<body>
+<div class="out on" onmouseover="changeDiv(this);">
+	<div class="in">1</div>
+</div>
+<div class="out" onmouseover="changeDiv(this);">
+	<div class="in">2</div>
+</div>
+<div class="out" onmouseover="changeDiv(this);">
+	<div class="in">3</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+		<style>
+			#r_img{
+				height: 420px;
+				display: none;
+				/*position: fixed;*/
+			}
+			body{
+				height: 2000px;
+			}
+		</style>
+
+</head>
+<body>
+	<div ><img src="./images/5.jpg" alt="" id="r_img"/></div>
+</body>
+	<script>
+		
+
+		window.onload=function(){
+			var timer;
+			var r_img=document.getElementById('r_img');
+
+			var wid=document.documentElement.clientWidth || documen.body.clientWidth;
+			var hei=document.documentElement.clientHeight || documen.body.clientHeight;
+
+			function float_r(){
+
+
+				timer=setInterval(function(){
+					var soc=document.documentElement.scrollTop || document.body.scrollTop;
+
+			 		r_img.style.marginLeft=wid-r_img.clientWidth-20+'px';
+					r_img.style.marginTop=(hei-r_img.clientHeight)/2+soc+'px';	
+
+
+				console.log(soc);
+				
+				},300);
+
+			r_img.style.display='block';
+			};
+			float_r();
+
+
+			r_img.onclick=function(){
+				r_img.style.display='none';
+				clearInterval(timer);
+
+				setTimeout(float_r,1000);
+			}
+
+
+
+		}
+	</script>
+</html>

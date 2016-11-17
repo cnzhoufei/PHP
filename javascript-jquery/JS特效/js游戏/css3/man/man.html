@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>man</title>
+<script src="../js/jquery-1.4.4.min.js"></script>
+<script src="man.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="control">
+			<div class="time">time: <span>0</span>s</div>
+			<div class="logo">Are you man? Hold on! 30's!</div>
+			<div class="msg"></div>
+		</div>
+		<div class="box"></div>
+		<div class="man" draggable="true"></div>
+	</div>
+	<style>
+		* {margin:0;padding:0;}
+		.wrap {width:1000px;margin:0 auto;position:relative;border:1px solid #f00;}
+		.control {height:50px;position:relative;}
+		.time {position:absolute;left:0;bottom:0;}
+		.time span {font-size: 18px;color:#f00; font-weight:bold;}
+		.logo {position:absolute;left:35%;top:20%;font-size:18px;font-weight:bold;}
+		.msg {position:absolute;left:700px;top:30px;font-size:14px;font-weight:bold;color:red}
+		.box {height:500px;position:relative;border-top:1px solid #f00;overflow:hidden;}
+		.man {width:30px;height:30px;border-radius:15px;background:#f99;position:absolute;left:50%;top:50%}
+		.boom {width:20px;height:20px;border-radius:10px;background-color:#f00;position:absolute}
+	</style>
+</body>
+</html>

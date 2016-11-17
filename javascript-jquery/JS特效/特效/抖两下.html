@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Document</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+		<style>
+			#box{
+				border:1px solid red;
+				width:300px;
+				height:200px;
+				position:absolute;
+				top:50%;
+				left:50%;
+			}
+		</style>
+	</head>
+	<body>
+	<!-- 编程 != 敲代码 -->
+		<div id='box'>
+			<form id='myform' action="">
+				<p>帐号：<input type="text"></p>
+				<p>密码：<input id='pwd1' name='pwd1' type="text"></p>
+				<p id='p1'></p>
+				<p>重复密码：<input id='pwd2' name='pwd2' type="text"></p>
+				<button type='submit'>submit</button>
+			</form>
+		</div>
+	</body>
+	<script>
+		var box = document.getElementById('box');
+		box.style.marginLeft = -(box.offsetWidth  / 2) + 'px';
+		box.style.marginTop = -(box.offsetHeight / 2) + 'px';
+
+		var myform = document.getElementById('myform');
+		myform.onsubmit = function(){
+			// 找到密码框
+			var pwd1 = document.getElementById('pwd1');
+			var pwd2 = document.getElementById('pwd2');
+			var p1 = document.getElementById('p1');
+			if(pwd1.value != pwd2.value){
+				p1.innerHTML = '<font color="red">密码都不对，玩你妹啊！</font>';
+				dou(); // 抖一下
+				return false;  // 阻止表单提交
+			}
+		}
+
+		function dou(){
+			var box = document.getElementById('box');
+
+			// 这个只是一个开关标记
+			var mask = true;
+
+			var timer = null;
+			timer = setInterval(function(){
+				if(mask){
+					box.style.marginLeft = -150 + 10 + 'px';
+					mask = false;
+				}else{
+					box.style.marginLeft = -150 - 10 + 'px';
+					mask = true;
+				}
+			},20);
+
+			setTimeout(function(){
+				clearInterval(timer);
+				box.style.marginLeft = -150 + 'px';
+			},30*10);
+		}
+	</script>
+</html>
