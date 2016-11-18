@@ -1,0 +1,91 @@
+
+课程要点： 
+
+1. SQL语言介绍 
+2. Select 查询语句 
+3. Insert 新增语句 
+4. Update 修改语句 
+5. Delete 删除语句 
+
+1. SQL语言介绍 
+
+
+SQL语言就是数据库操作的一种语言。 
+
+ 
+
+在dedecms系统的后台，SQL语句执行的地方： 
+
+系统.系统设置.SQL命令行工具 
+
+2. Select查询语句 
+
+
+语句格式：Select … From … Where … 
+
+中文解说：查询(什么?)从(那张表?)条件(啥条件?) 
+
+例句演示： 
+
+1.查询出管理员类型表表中的所有数据 
+
+ Select * from dede_admintype 
+
+2.管理员类型表我只查询显示rank,typename 
+
+ Select rank,typename from dede_admintype 
+
+
+3.管理员类型表我只查询显示rank值小5的记录 
+
+ Select * from dede_admintype where rank<5 
+
+4.查询会员表中性别等于男的会员 
+
+ Select * from dede_member where sex=’男’ 
+
+3.Insert新增语句 
+
+语句格式：Insert into … values … 
+
+中文解说：新增到(那张表?(字段名)) 值(字段名对应的值) 
+
+例句演示： 
+
+向友情链接表中新增一条记录 
+
+ 
+
+insert into dede_flink (id,sortrank,url,webname,msg,email,logo,dtime, typeid,ischeck) 
+
+values (null , '0', 'http://www.72cms.net', '72建站网', '', '', '', '0', '0', '2'); 
+
+
+4.Update修改语句 
+
+语句格式：update … set … where … 
+
+中文解说：更新(那张表?)设置(字段=’值’)条件(更新哪条记录？) 
+
+
+例句演示： 
+
+修改id为8的一条记录的msg值 
+
+
+update dede_flink set msg='monkey的网站' where id=8 
+
+
+5.Delete删除语句 
+
+语句格式：delete from … where … 
+
+中文解说：删除,从(哪张表?)条件(就是指定要删除的记录) 
+
+例句演示: 
+
+删除id=22的这条记录 
+
+delete from dede_flink where id=22 
+
+

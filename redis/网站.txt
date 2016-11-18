@@ -1,0 +1,5 @@
+http://download.csdn.net/search?q=redis
+
+
+redis  集群配置下载地址
+http://download.csdn.net/download/liu_zhaoming/8873325  

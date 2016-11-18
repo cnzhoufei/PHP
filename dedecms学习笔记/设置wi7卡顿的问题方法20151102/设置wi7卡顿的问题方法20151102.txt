@@ -1,0 +1,8 @@
+网站后台/核心/文件式管理器/根目录/dede/temcpls/index_body.htm  
+在两个位置加上/*   */  如图片
+
+
+
+ 此教程目标网站：lgcfzs.com
+ 讲师qq:316248534
+ 讲师个人网站：myk58.com  

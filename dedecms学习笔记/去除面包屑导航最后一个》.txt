@@ -1,0 +1,20 @@
+找到include/typelink.class.php 文件中的GetPositionLink方法，首先是去掉最后一个栏目的超链接，找到一下代码
+$this->valuePosition = $this->GetOneTypeLink($this->TypeInfos);
+更改为如下代码$this->valuePosition = $this->TypeInfos['typename'];
+
+
+找到include/typelink.class.php，现在是去除最后面的样式">"
+找到 return $this->valuePosition.$this->SplitSymbol
+更改为
+return $this->valuePosition;
+
+
+
+$this->SplitSymbol这个代码就是dedecms面包屑导航里面的 “>”,这个的更改是在该文件的43行，可以通过更改
+$this->SplitSymbol = $GLOBALS['cfg_list_symbol']；这句话将样式改为自己想要的，但是更改完了之后二级栏目和三级栏目直接的连接也会相应的更改，那么如何防止其更改呢？
+将LogicGetPosition方法中的
+$this->valuePositionName = $tinfos['typename'].$this->SplitSymbol.$this->valuePositionName;
+更改为$this->valuePositionName = $tinfos['typename'].$GLOBALS['cfg_list_symbol'].$this->valuePositionName;就可以了
+
+
+原文地址：http://jingyan.baidu.com/article/e3c78d644d1eec3c4c85f5c9.html

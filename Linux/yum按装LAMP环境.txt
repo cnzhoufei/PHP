@@ -1,0 +1,361 @@
+http://windows.php.net/downloads/pecl/releases/   windows扩展下载列表
+
+
+
+
+
+查找软件文件   比如查找mysql的配置文件  
+rpm -qa \*mysql\*   查找到的  mysql-server-5.1.73-7.el6.i686 就是mysql服务器的安装包
+在执行
+rpm -ql mysql-server-5.1.73-7.el6.i686
+结果中的：/usr/share/mysql/my-medium.cnf 就是mysql的配置文件
+
+先用rpm -qa \*mysql\*    看看你安装了哪些包，然后用　rpm -ql xxxxxxx　去查看具体的包安装位置
+
+yum卸载
+   
+   yum remove -y 软件名
+   或                    
+
+   yum erase -y 软件名
+  yum remove -y gcc-c++
+
+---------------------yum安装LAMP------------------------------
+先更新一下yum -y update   可以不更新 时间长
+
+yum -y install gcc 
+yum -y install gcc-c++ 
+yum -y install make 
+yum -y install "libtool*"
+yum -y install "libtool-ltdl*"
+yum -y install php-devel
+
+
+yum search  httpd   --搜索Apache 或者搜索apache2
+yum -y install httpd.i686  安装Apache
+
+yum -y install mysql-server mysql php php-mysql php-xml php-gd php-mbstring 安装mysql
+
+service mysqld start  启动mysql
+
+iptables -F  清空防火墙规则
+
+service iptables save  把规则存到硬盘上
+
+service iptables stop 关掉防火墙
+
+vi /etc/selinux/config 
+把SELINUX=enforcing改成SELINUX=disabled
+
+apachectl restart  启动Apache  会报错 修改
+
+vi /etc/httpd/conf/httpd.conf
+ServerName www.example.com:80 注释去掉
+
+cd /var/www/html  网站根目录
+
+开机自启动
+chkconfig --level 345 httpd on
+chkconfig --level 345 mysqld on
+
+
+
+mysql 配置文件/usr/share/mysql/my-medium.cnf
+
+
+
+
+
+查看系统是32位还是64位
+1.getconf LONG_BIT
+2.file /sbin/init
+3.file /bin/ls
+
+
+yum -y update  更新系统
+如果要查看当前系统更新到什么版本了，可以通过输入 yum　info updates即可查看每个版本或软件的版本号等
+实用于所有Linux 
+查看系统版本  uname -r
+查看SentOS 版本 cat /etc/redhat-release
+
+
+-------------------------yum安装LAMP网上教程 1------------------------------
+
+
+http://www.yiweihy.com/knowledge/develop/207-centos-lamp.html
+第一步：更新系统内核（如果不想更新可以跳过本步）。
+首先更新系统内核到最新，因为最新版的CentOS 6.3的php版本为 5.3，早起版本的CentOS的php版本也比较低。
+
+执行命令：
+
+yum -y update
+注意：如果执行失败报错，可以执行修复命令：
+
+rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY*
+
+
+第二步： 安装Apahce、Mysql、PHP 及其基础扩展。
+执行命令：
+yum -y install httpd php php-mysql mysql mysql-server
+
+
+第三步：安装PHP的其他常用扩展
+执行命名：
+yum -y install php-gd php-xml php-mbstring php-ldap php-pear php-xmlrpc
+
+
+第四步：安装Apache的扩展
+执行命令：
+yum -y install httpd-manual mod_ssl mod_perl mod_auth_mysql
+执行完这四步软件就安装完成了，接下来要做一些常规的设置。
+
+
+第五步：设置apache/mysql-server环境开机自动启动
+执行命令：
+
+# 设置apache为开机自启动
+/sbin/chkconfig httpd on
+
+# 添加mysql服务
+/sbin/chkconfig --add mysqld
+
+# 设置mysql为开机自启动
+/sbin/chkconfig mysqld on
+
+第六步：启动apache与msyql
+分别执行命令：
+
+service httpd start
+service mysqld start
+
+
+第七步：设置mysql数据库root帐号密码
+mysqladmin -u root password 'mysql的管理员密码'
+
+第八步：安装phpmyadmin
+从phpmyadmin官方网站:http://www.phpmyadmin.net/home_page/downloads.php下载最新的phpmyadmin安装包，下载到网站目录下默认在/var/www/html/下。解压phpmyadmin压缩包后，找到 config.sample.inc.php 重命名为 config.inc.php，修改配置，就安装完成了。
+
+如果phpmyadmin报错“mcrypt组件缺失”其实不影响使用，如果想修改的话请查看我另一篇文章《CentOS yum安装mcrypt详细图解教程》。
+
+
+
+--skip-broken  解决冲突的  在安装软件后加上
+yum install mysql55w mysql55w-server --skip-broken
+
+
+
+
+-------------------------yum安装LAMP网上教程 2------------------------------
+
+  解决软件冲突  在安装软件后加上--skip-broken如
+yum install mysql55w mysql55w-server --skip-broken
+
+
+
+http://www.myexception.cn/operating-system/1893295.html
+centos6.4更新yum源来搭建高版本lamp环境
+服务器使用centos6的话，使用yum方式搭建lamp环境，可能会面临软件版本过低的问题，这时可以选择新的yum源(这里选择的是Webtatic EL6 YUM源)，然后选择安装较高版本的mysql、php等软件。
+
+步骤一：更新yum源 
+1.执行以下命令更新yum源为Webtatic EL6 YUM源: 
+rpm -Uvh http://repo.webtatic.com/yum/el6/latest.rpm
+
+步骤二：查看yum源中软件包可以下载安装的版本 
+1.查看可以安装的php版本，如: 
+yum list availiable php* //查看yum源中以php开头的软件包 
+包含php5.6和php5.5等多个版本
+
+
+2.查看可以安装的mysql版本 
+yum list availiable mysql* 
+包含mysql5.5
+
+3.查看可以安装的apache版本 
+yum list availiable httpd* 
+包含apache2.2
+
+
+步骤三：安装指定版本的mysql、apache、php 
+（安装之前先使用rpm -qa|grep mysql 查看软件包安装情况， 
+用rpm -e 【mysql-xx】或rpm -e –nodeps 【mysql-xx】命令 
+删除已安装的软件包）。 
+1.安装mysql5.5 
+yum install mysql55w mysql55w-server 
+ 
+2.安装apache,用默认的版本就可以了 
+yum install httpd 
+ 
+3.安装php5.6 
+yum install php56w 
+yum install -y php56w-common-5.6.24-1.w6.i386
+ 
+4.安装php扩展组件(根据需要选择性安装) 
+这里索性把可能用到的全给安装了，一绝后患！ 
+yum install php56w-bcmath php56w-dba php56w-devel php56w-embedded php56w-enchant php56w-fpm php56w-gd php56w-imap php56w-interbase php56w-intl php56w-ldap php56w-mbstring php56w-mcrypt php56w-mssql php56w-mysqlnd php56w-odbc php56w-opcache php56w-pdo php56w-pear.noarch php56w-pecl-apcu php56w-pecl-apcu-devel php56w-pecl-gearman php56w-pecl-geoip php56w-pecl-igbinary php56w-pecl-igbinary-devel php56w-pecl-imagick php56w-pecl-imagick-devel php56w-pecl-memcache php56w-pecl-memcached php56w-pecl-redis php56w-pecl-xdebug php56w-pgsql php56w-phpdbg php56w-process php56w-pspell php56w-recode php56w-snmp php56w-soap php56w-tidy php56w-xml php56w-xmlrpc 
+5.设置httpd、mysqld服务开机启动 
+使用命令:chkconfig –levels 235 httpd on 
+chkconfig –levels 235 mysqld on 
+6.查看安装效果: 
+①开启httpd服务，service httpd restart ,（如果显示“httpd: Could not reliably determine the server’s fully qualified domain name, using 127.0.0.1 for ServerName”）， 
+则要修改httpd.conf配置文件中的ServerName，vim /etc/httpd/conf/httpd.conf 
+将#ServerName www.example.com:80更改为ServerName 自己的域名或localhost:80 
+，然后访问localhost本地网址 
+index.php文件输出phpinfo()显示php版本
+②开启mysqld服务，service mysqld restart， 
+（ 如果显示“mysql: unrecognized service”可能是权限问题，尝试修改mysqld执行权限: 
+chmod 755 /etc/rc.d/init.d/mysqld 修改mysqld执行权限） 
+开启mysqld服务后，mysql -uroot -p密码 ，进入mysql，初始密码为空，如果之前yum方式安装mysql而没有卸载删除干净，可能会遗留原来数据库信息，root用户的密码仍然是原来的。 
+select version()；//显示mysql版本信息 
+mysql版本信息 
+7.更改mysql初始密码 
+使用命令 mysql_secure_installation , 
+按两下回车，出现”set root password?[Y/n]”时，再按回车建，然后输入两次密码，之后一直回车确认就可以了 
+8.安装目录： 
+①.默认的网站根目录: 
+/var/www/html 
+②.apache配置文件目录: 
+/etc/httpd/conf/httpd.conf 
+③.apache log文件目录: 
+/var/log/httpd/ 
+④.php配置文件php.ini目录: 
+/etc/php.ini 
+⑤.mysql配置文件my.cnf目录: 
+/etc/my.cnf 
+⑥.mysql error log文件目录: 
+/var/log/mysqld.log
+
+
+
+check          Check for problems in the rpmdb
+check-update   检查是否有软件包更新
+clean          删除缓存的数据
+deplist        列出软件包的依赖关系
+distribution-synchronization Synchronize installed packages to the latest available versions
+downgrade      downgrade a package
+erase          从系统中移除一个或多个软件包
+groupinfo      显示组的详细信息
+groupinstall   向系统中安装一组软件包
+grouplist      列出可安装的组
+groupremove    从系统中移除一组软件包
+help           显示用法信息
+history        Display, or use, the transaction history
+info           显示关于软件包或组的详细信息
+install        向系统中安装一个或多个软件包
+list           列出一个或一组软件包
+load-transaction load a saved transaction from filename
+makecache      创建元数据缓存
+provides       查找提供指定内容的软件包
+reinstall      覆盖安装一个包
+repolist       显示已配置的仓库
+resolvedep     判断哪个包提供了指定的依赖
+search         在软件包详细信息中搜索指定字符串
+shell          运行交互式的 yum 外壳
+update         更新系统中的一个或多个软件包
+update-minimal Works like update, but goes to the 'newest' package match which fixes a problem that affects your system
+updateinfo     Acts on repository update information
+upgrade        更新软件包同时考虑软件包取代关系
+version        Display a version for the machine and/or available repos.
+
+
+
+----------------------php安装-----------------------------
+http://my.oschina.net/u/573270/blog/423238
+
+# rpm -Uvh http://ftp.iij.ad.jp/pub/linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+# rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+
+yum install --enablerepo=remi --enablerepo=remi-php56 php php-opcache php-devel php-mbstring php-mcrypt php-mysqlnd php-phpunit-PHPUnit php-pecl-xdebug php-pecl-xhprof
+
+
+
+------------------------------Apache安装------------------------------
+http://ilazycat.com/posts/2014/10/yum-install-apache24-hhvm.html
+
+cd /etc/yum.repos.d
+wget http://repos.fedorapeople.org/repos/jkaluza/httpd24/epel-httpd24.repo
+
+yum install httpd24-httpd httpd24-httpd-devel httpd24-mod_ssl
+
+
+service httpd24-httpd start  启动命令
+
+
+
+--------------------------安装mysql---------------------------
+第一步就是看linu是否安装了mysql，经过rpm -qa|grep mysql查看到centos下安装了mysql5.1，那就开始卸载咯
+centos6.5下yum安装mysql5.5
+2
+
+接下来就是卸载mysql5.1了，命令：rpm -e mysql-libs --nodeps
+centos6.5下yum安装mysql5.5
+
+yum中之后mysql5.1，安装还是5.1，现在就要去增加一个新的repo
+
+rpm -Uvh http://mirror.steadfast.net/epel/6/i386/epel-release-6-8.noarch.rpm
+centos6.5下yum安装mysql5.5
+
+一共需要增加两个repo，现在增加另一个
+
+rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+centos6.5下yum安装mysql5.5
+
+现在查看一些是否增加成功了，yum --enablerepo=remi,remi-test list mysql mysql-server
+
+看到下面这些就是安装成功了。
+centos6.5下yum安装mysql5.5
+
+接下来就是安装mysql5.5了
+
+yum --enablerepo=remi,remi-test install mysql mysql-server
+centos6.5下yum安装mysql5.5
+
+出现这个东西的时候一定要选择y。不然神都救不了你，就要重新安装了。
+centos6.5下yum安装mysql5.5
+
+看到下面这个图片证明你的mysql安装成功了。
+centos6.5下yum安装mysql5.5
+
+接下来需要启动一下mysql
+
+/etc/init.d/mysqld start
+centos6.5下yum安装mysql5.5
+
+下面这条命令设置开机自启动，省的我们每次开机就去启动一下mysql了。
+
+chkconfig --levels 345 mysqld on
+centos6.5下yum安装mysql5.5
+
+要启用MySQL 安全设置请输入以下命令
+
+/usr/bin/mysql_secure_installation
+centos6.5下yum安装mysql5.5
+centos6.5下yum安装mysql5.5
+centos6.5下yum安装mysql5.5
+
+到这里就要验证一下mysql是否安装成功了。如果输入看到以下界面的话，那么你就安装成功了。犒劳一下自己吧。
+centos6.5下yum安装mysql5.5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://www.multisilicon.com/blog/a26361064.html 安装指定版本
+
+
+
+
+MySQL5.5
+Apache2.4
+PHP5.5
+

@@ -1,0 +1,1 @@
+修改  DEDE下  article_edit.php   里面，找到$description = cn_substrR($description,250);  将这里的250改成想要的数字即可。

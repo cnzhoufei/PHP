@@ -1,0 +1,7 @@
+//:clock不管您是新手还是老手，请严格按照教程安装修改，完整的多看几遍后，再安装！！否则容易出错。
+http://www.99yuanma.net/record_share/44.html 【安装前必看！！建议先看完整后一遍，再对着做】
+选看教程：
+http://www.moyublog.com/notes/200.html 
+帝国CMS基础设置：http://www.moyublog.com/notes/204.html（ -里面一些问题点还是有帮助的）
+
+帝国CMS使用教程手册：http://www.phome.net/doc/manual/（选看-帝国后台操作详细教程，开发手册，模板美工手册）

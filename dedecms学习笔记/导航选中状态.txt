@@ -1,0 +1,106 @@
+<script type="text/javascript">
+    //导航选中
+    $("#nav" + navID).addClass("onnav");
+
+    //样式
+    $(".website_list dl dd:last").css("border-bottom", "0");
+
+    $(".Top .slide .a").hover(function () {
+        $(this).removeClass("a");
+    }, function () {
+        $(this).addClass("a");
+    })
+
+    $(".Top .slide_bg .slide").each(function () {
+        $(this).attr("data-height", $(this).outerHeight(true));
+    })
+
+
+    $(".MainNav ul li").hover(function () {
+        var _index = $(this).index(),
+            dataheight = $(".Top .slide_bg .slide" + _index).attr("data-height");
+        $(".Top .slide_bg .slide").stop().animate({ height: 0 }, 500)
+        $(".Top .slide_bg .slide" + _index).stop().animate({ height: dataheight }, 500);
+        $(".Top .slide_bg").stop().animate({ height: dataheight }, 500);
+    }, function () {
+        $(".Top .slide").hover(function () {
+            var dataheight = $(this).attr("data-height");
+            $(".Top .slide_bg .slide").stop().animate({ height: 0 }, 500)
+            $(this).stop().animate({ height: dataheight }, 500);
+            $(".Top .slide_bg").stop().animate({ height: dataheight }, 500);
+            return false;
+        }, function () {
+            $(".Top .slide_bg .slide").stop().animate({ height: 0 }, 500);
+            $(".Top .slide_bg").stop().animate({ height: 0 }, 500);
+        })
+        $(".Top .slide_bg .slide").stop().animate({ height: 0 }, 500);
+        $(".Top .slide_bg").stop().animate({ height: 0 }, 500);
+    })
+
+    $(".Top .slide2 .left a").hover(function () {
+        var _index = $(this).index();
+        $(this).addClass("a_bg").siblings("a").removeClass("a_bg");
+        $(".Top .slide2 .right .list").hide().eq(_index).show();
+    })
+    $(".Top .slide3 .left a").hover(function () {
+        var _index = $(this).index();
+        $(this).addClass("a_bg").siblings("a").removeClass("a_bg");
+        $(".Top .slide3 .right").hide().eq(_index).show();
+    })
+    $(".Top .slide6 .left a").hover(function () {
+        var _index = $(this).index();
+        $(this).addClass("a_bg").siblings("a").removeClass("a_bg");
+        $(".Top .slide6 .right .list").hide().eq(_index).show();
+    })
+    $(".Top .slide7 .left a").hover(function () {
+        var _index = $(this).index();
+        $(this).addClass("a_bg").siblings("a").removeClass("a_bg");
+        $(".Top .slide7 .right .list").hide().eq(_index).show();
+    })
+    $(".Top .slide8 .left a").hover(function () {
+        var _index = $(this).index();
+        $(this).addClass("a_bg").siblings("a").removeClass("a_bg");
+        $(".Top .slide8 .right .list").hide().eq(_index).show();
+    })
+
+
+</script>
+
+
+
+对应页面需加代码 
+<script type="text/javascript">
+        var navID = "9",        //navID=对应的序号
+		
+    </script>
+
+导航需加id=序号  如：
+{dede:channel row='8'  type ='top' }
+<li id="nav[field:global name=autoindex runphp="yes"]@me=@me+2;[/field:global]"><a class="navA" href="[field:typelink/]" title="[field:typename/]">[field:typename/]</a></li>
+{/dede:channel}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

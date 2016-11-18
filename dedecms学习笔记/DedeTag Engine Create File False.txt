@@ -1,0 +1,16 @@
+
+原文地址：http://www.dedecms8.com/dedecms/use/2149.html
+
+思路1：确认文件夹a、data（以前的版本好像html，你也可能自定义静态网页存放目录）有写入权限，在安装dedecms的时候会显示目录的权限。这项一般没问题，是如果你试遍了其他办法，不妨查看下这个文件夹的权限。
+
+
+
+思路2：找出出现DedeTag Engine Create File False问题原因，方法很简单。织梦系统默认的设置是，一有报错，不能生成，即显示“DedeTag Engine Create File False”。而掌管这个命令的文件就是include/dedetag.class.php文件。
+
+打开include/dedetag.class.php文件，搜索"DedeTag Engine Create File False"，会找到下面的第一个代码修改为第二个代码：
+
+$fp = @fopen($filename,"w") or die("DedeTag Engine Create File False"); 
+
+$fp = @fopen($filename,"w") or die("DedeTag Engine Create File False:$filename");
+
+这样，重新生成的时候，就会显示哪里出错，根据提示去解决具体的错位原因。好了，这就是DedeTag Engine Create File False问题的解决办法。

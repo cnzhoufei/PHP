@@ -1,0 +1,140 @@
+
+
+1.文档主表 
+
+管理员在网站后台添加的所有的 文章-软件-图片-信息-商品 信息都分别存放
+在下面这6张表内。 
+
+文档主表存放默认的五个模型共有的字段部分； 
+
+而每个模型特有的内容则存放在相对应的附加表内。 
+
+ 
+
+也就是说：当我们在网站后台发布文章的时候，点击了”确定”，程序会把你输入
+的信息同时向两张表写入(主表和附加表)。 
+
+ 
+
+程序先往主表写内容，然后以对应的id在相应的附加表添加附加数据。 
+
+
+dede_archives (文档主表) 
+
+dede_addonarticle (文章附加表) 
+
+dede_addonimages (图集附加表) 
+
+dede_addonsoft (软件附加表) 
+
+dede_addoninfos (分类信息附加表) 
+
+dede_addonshop (商城附加表) 
+
+主表重要字段分析： 
+
+ 
+
+1. id 文章的id 
+2. typeid 文章所属的栏目的id 
+3. flag 自定义属性 
+4. ismake 是否生成静态(1为生成 0为未生成) 
+5. channel 模型对应的id 
+6. arcrank 浏览权限的设定 (根据会员的等价值) 
+7. click 点击数 
+8. money 需要的金币 
+9. title 标题 
+10. color 标题颜色 
+11. writer 作者 
+12. source 来源 
+13. litpic 缩略图 
+14. pubdate 发布时间 
+15. mid 会员id 
+16. keywords 关键字 
+17. lastpost 最后回复 
+18. goodpost 好评数 
+19. badpost 差评数 
+20. notpost 不允许回复 
+21. description 描述，也就是简介 
+22. filename 自定义文件名 
+23. weight 权重 
+
+
+2.文章附加表 
+
+dede_addonarticle (文章附加表) 
+
+ 
+
+1.aid 主表对应的id 
+
+2.typeid 栏目id 
+
+3.body 文章内容 
+
+
+
+3.软件附加表 
+
+dede_addonsoft (软件附加表) 
+
+1.aid 主表对应的id 
+
+2.typeid 栏目id 
+
+3.filetype 资源的类型 
+
+4.language 界面语言 
+
+5.softtype 软件类型 
+
+6.accredit 授权方式 
+
+7.os 运行环境 
+
+8.softrank 软件等级 
+
+9.officialurl 官方网址 
+
+10.officialdemo 演示网址 
+
+11.softsize 软件大小 
+
+12.softlinks 下载链接 
+
+13. introduce 软件介绍 
+
+14.daccess 下载级别 
+
+15.needmoney 需要的金币 
+
+16.redirecturl 跳转地址 
+
+
+4.图集附加表 
+
+dede_addonimages (图集附加表) 
+
+
+1.aid 主表对应的id 
+
+2.typeid 栏目id 
+
+3.pagestyle 显示的列表样式 
+
+4.imgurls 图片地址 
+
+5.row 行数 
+
+6.col 列数 
+
+
+7.ddmaxwidth 缩略图的最大宽度 
+
+8.pagepicnum 每页显示的图片数量 
+
+9.isrm 上传方式 
+
+10.body 图集说明 
+
+

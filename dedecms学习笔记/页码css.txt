@@ -1,0 +1,30 @@
+<div class="zhongzhandede_pages">
+<ul class="pagelistzhongzhan">
+<li>��ҳ</li>
+<li class="thisclass">1</li>
+<li><a href='list_1_2.html'>2</a></li>
+<li><a href='list_1_3.html'>3</a></li>
+<li><a href='list_1_4.html'>4</a></li>
+<li><a href='list_1_5.html'>5</a></li>
+<li><a href='list_1_6.html'>6</a></li>
+<li><a href='list_1_7.html'>7</a></li>
+<li><a href='list_1_8.html'>8</a></li>
+<li><a href='list_1_9.html'>9</a></li>
+<li><a href='list_1_10.html'>10</a></li>
+<li><a href='list_1_11.html'>11</a></li>
+<li><a href='list_1_2.html'>��һҳ</a></li>
+<li><a href='list_1_20.html'>ĩҳ</a></li>
+</ul>
+</div>
+
+
+
+
+
+.zhongzhandede_pages{height:30px; width:1000px; margin:0 auto;  text-align:center; }
+.zhongzhandede_pages .pagelistzhongzhan{height:30px;width:1000px; margin:0 auto; text-align:center;  }
+.zhongzhandede_pages .pagelistzhongzhan a{ color:#000; font-size:18px;}
+.zhongzhandede_pages .pagelistzhongzhan li{ margin-left:10px; font-size:14px;display:inline;}
+.zhongzhandede_pages .thisclass{font-size:20px; padding-right: 6px; padding-left: 6px; font-weight: bold; padding-bottom: 2px; color: #ff0084; margin-right: 3px; padding-top: 2px;}
+
+.zhongzhandede_pages .pagelistzhongzhan li .pageinfo{ color:#000;}

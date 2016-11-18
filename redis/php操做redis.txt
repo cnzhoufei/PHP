@@ -1,0 +1,18 @@
+//创建对象
+$redis = new Redis();
+
+//连接服务器
+$redis->connect('192.168.1.150',6379);
+
+
+//选择数据库
+$redis->select(5);//连接第五这个库
+
+//设置key
+$redis->set('key','varue');
+
+//设置key  设置缓存时间
+$redis->setex('arr',3,$arrs);
+
+//取值
+$redis->get('key');
