@@ -1,0 +1,6 @@
+统计栏目内二级栏目的个数
+{dede:sql sql="select count(reid) as monkey from dede_arctype where reid=21"}
+[field:monkey/]
+{/dede:sql}
+Count 计算 reid的个数 然后 (as)创建一个monkey字段 当reid=21的时候
+福缘网赚www.fuyuanweb.net免费提供本教程下载

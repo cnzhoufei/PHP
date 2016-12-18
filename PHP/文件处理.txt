@@ -1,0 +1,43 @@
+filetype返回文件的类型
+
+is_dir()  是否目录
+is_file(); 是否文件
+is_link()— 判断给定文件名是否为一个符号连接 
+
+
+move_uploaded_file() 剪切图片  上传图片时用
+is_executable(); 是否可执行
+is_readable()  是否可读
+		is_writable(); 是否可写
+file_exists() 		检查文件或目录是否存在
+filesize() 	 		取得文件大小
+filectime() 		获取文件的创建时间
+filemtime() 		获取文件的修改时间
+fileatime()  		获取文件的访问时间
+stat() 				获取文件大部分属性
+__FILE__返回当前文件路径
+
+opendir--打开目录句柄 
+readdir--从目录句柄中读取条目 
+closedir--关闭目录句柄 
+rewinddir--倒回目录句柄
+
+disk_free_space 返回可用空间
+disk_total_space返回总空间
+
+file_exists判断文件是否存在
+
+closedir关闭目录
+
+
+rtrim — 删除字符串末端的空白字符（或者其他字符） 
+
+/*
+	php.ini 的配置
+	file_uploads = On  是否开启文件上传
+	upload_max_filesize = 2M  在服务器设置上传大小
+	post_max_size = 8M  
+	upload_tmp_dir = '临时存放的路径' 
+*/
+
+

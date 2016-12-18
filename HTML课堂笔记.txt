@@ -1,0 +1,257 @@
+编程语言：解释型和编译型
+WEB前端：HTML+CSS+JavaScript
+
+一、 HTML介绍:
+---------------------------------------
+1. 什么是HTML？
+   超文本标记语言,  <标签名>--标记（标签、节点）
+   
+2. HTML是由：标签和内容构成
+
+3. 程序语言有两种：解释性语言（HTML、PHP、Javascript）和编译型语言（C、C++、Java
+
+4. HTML的标签组成部分、属性、实体
+
+    HTML的实体： <:&lt;  >:&gt;  空格:&nbsp;
+	
+5. HTML中注释： <!-- .... -->
+		注释的目的：1. 辅助说明  2.代码调试
+		注释中不要再嵌套注释
+		
+6. HTML标签（标记）的语法： 标签是由"<"和">"括起来
+		双标签：<标签名>....</标签名>
+		单标签：<标签名/>
+		
+7. HTML中的颜色：可以是颜色单词：red/blue/green/yellow...
+			还可以是：#000000 --- #ffffff
+            十六进制：0123456789abcdef
+			其中前两位表示红色，中间两位绿色，后两位表示蓝色。
+		
+二、 HTML中HEAD头部设置
+----------------------------------------
+	*设置网页编码：<meta charset="utf-8"/>
+    关键字：<meta name="Keywords" content="关键字" />
+    描述：  <meta name="Description" content="简介、描述" />
+    网页标题：<title>本网页标题</title>
+    导入CSS文件：<link type="text/css" rel="stylesheet" href="**.css"/>
+    CSS代码：<style type="text/css">嵌入css样式代码</style>
+    JS文件或代码： <script >。。。</script>
+    ... ...
+
+三、 HTML中的文本标签、格式化标签
+----------------------------------------
+    文本标签：
+	1. *<br/> 换行
+	2. *<hn>...</hn> 其中n为1--6的值。 标题标签（加粗、独立行）
+	3. *<p>...</p> 换段
+	4. <i>...</i> 斜体
+	5. <em>...</em> 强调斜体
+	6. <b>...</b> 加粗
+	7. *<strong>...</strong> 强调加粗
+	8. <font color='' size=''></font>(HTML5被弃用)
+	9. <cite></cite> 引用
+ 	10. <sub>... </sub> 下标<sup>...</sup>上标
+	11.*<del></del> 删除线 
+	....  
+    
+    格式化标签：
+	1. *<br/> 换行
+	2. *<p>...</p> 换段
+    3. 列表：
+        *<ul> 无序列表
+        <ol> 有序列表  其中type类型值：A a I i 1   start属性表示起始值
+        *<li> 列表项
+        
+        <dl> 自定义列表
+        <dt> 自定义列表头
+        <dd> 自定义列表内容
+
+
+    4. <div> <span>
+
+    5.其它标签
+	<bdo dir="rtl"></bdo> 定义文字的方向
+	<pre></pre>原型输出
+
+   HTML5中的新标签(了解)
+	<abbr title=""></abbr> 缩写
+	<time datetime=""></time> 时间
+		
+    
+四、*HTML中的超级链接A
+------------------------------------------------
+	*<a href=""></a> 超级链接标签
+		属性：href必须，指的是链接跳转地址
+			  target: 表示链接的打开方式：
+					_blank  新窗口
+					_parent 父窗口
+					_self   本窗口（默认）
+					_top	顶级窗口
+					framename 窗口名
+			  title：文字提示属性（详情）
+	锚点链接：
+		定义一个锚点：<a id="a1"></a> 以前使用的是 <a name="a1"></a>
+		使用锚点：	  <a href="#a1">跳到a1处</a>
+		
+		
+五、 *图片标签img
+---------------------------------------	
+	<img /> 在网页中插入一张图片
+	属性：src： 图片名及url地址
+		alt: 图片加载失败时的提示信息
+		title：文字提示属性
+		width：图片宽度
+		height：图片高度
+		border：边框线粗细
+        
+六、 多媒体标签（熟悉）
+------------------------------------
+		<audio src="./images/beidahuang.mp3" controls="controls">
+			你的浏览器不支持播放
+		</audio>
+		<br/>
+		<audio controls="controls">
+			<source src="./images/beidahuang.mp3" type="audio/mpeg" />
+			你的浏览器不支持播放
+		</audio>
+		
+		<br/><br/>
+		<video controls="controls" width="400" height="400">
+			<source src="./images/fun.mp4" type="video/mp4" />
+			<source src="movie.webm" type="video/webm">
+			你的浏览器不支持视频播放
+		</video>
+		
+		<video  controls loop poster="tiao.jpg">
+			<source src="movie.webm" type="video/webm">
+			<source src="movie.ogg" type="video/ogg">
+			<source src="movie.mp4" type="video/mp4">
+			不支持视频标签
+		</video>
+		
+		<br/><br/>
+		
+		<embed src="./images/haowan.swf" width="300" height="300" />
+
+
+
+七、 *表格标签
+------------------------------------
+	*table  表格标签
+	caption 表格标题
+	*tr	行标签
+	*th  列头标签
+	*td  列标签
+	
+	*thead  表头
+	*tbody  表体
+	tfoot  表尾
+
+八、**form表单标签
+---------------------------------------------------------
+	1. <form></form> --表单标签
+		form标签常用属性：
+
+
+			hidden掩藏
+			*action属性:提交的目标地址(URL)
+			*method属性:提交方式:get(默认)和post
+				get方式是URL地址栏可见,长度受限制(IE2k 火狐8k),相对不安全.(明文传送)
+				post方式是URL地址不可见,长度不受限制,相对安全.
+			enctype:提交类型
+			target: 在何处打开目标 URL。
+			name:属性为表单起个名字.HTML5不支持。用 id 代替。
+	
+	2. <input> 表单项标签input定义输入字段，用户可在其中输入数据。在 HTML 5 中，type 属性有很多新的值。
+		具体在下面有详解：
+		如：<input type="text" name="username">
+		
+	3. <select> 标签创建下拉列表。
+		*name属性:定义名称,用于存储下拉值的
+		 size：定义菜单中可见项目的数目，html5不支持
+		 disabled 当该属性为 true 时，会禁用该菜单。 
+		 multiple 多选
+		 *<option>  下拉选择项标签,用于嵌入到<select>标签中使用的;
+			*value属性:下拉项的值
+			*selected属性:默认下拉指定项.	
+ 
+	4. *<textarea> 多行的文本输入区域
+		 *name :定义名称,用于存储文本区域中的值。
+		 *cols ：规定文本区内可见的列数。
+		 *rows ：规定文本区内可见的行数。
+		 disabled： 是否禁用
+		 readonly： 只读
+		 ...
+		 默认值是在两个标签之间
+	
+	5. *<button> 标签定义按钮。
+		您可以在 button 元素中放置内容，比如文档或图像。这是该元素与由 input 元素创建的按钮的不同之处。
+		
+	
+	6. <fieldset> html5标签--fieldset 元素可将表单内的相关元素分组。
+		disabled属性：定义 fieldset 是否可见。
+		form属性： 定义该 fieldset 所属的一个或多个表单。
+
+	7. <legend> html5标签--<legend> 标签为 <fieldset>、<figure> 以及 <details> 元素定义标题。
+			<form>
+			  <fieldset>
+				<legend>健康信息：</legend>
+				身高：<input type="text" /><br/>
+				体重：<input type="text" /><br/>
+			  </fieldset>
+			</form>
+			
+	 8. <optgroup> html5标签--<optgroup> 标签定义选项组。此元素允许您组合选项
+		样例：
+			<select>
+			  <optgroup label="Swedish Cars">
+				<option value="volvo">Volvo</option>
+				<option value="saab">Saab</option>
+			  </optgroup>
+			  <optgroup label="German Cars">
+				<option value="mercedes">Mercedes</option>
+				<option value="audi">Audi</option>
+			  </optgroup>
+			</select>
+			
+	9. <datalist> html5标签--<datalist> 标签定义可选数据的列表。与 input 元素配合使用，就可以制作出输入值的下拉列表。
+			样例：
+				<form action="demo_form.php" method="get" method="post" enctype="multipart/form-data">
+
+					<input list="browsers" name="browser">
+					<datalist id="browsers">
+						<option value="Internet Explorer">
+						<option value="Firefox">
+						<option value="Chrome">
+						<option value="Opera">
+						<option value="Safari">
+					</datalist>
+					<input type="submit">
+				</form>
+	
+	10. **<input/>  表单项中的属性，可以提供
+		   *type属性:表示表单项的类型:值如下:
+				text:单行文本框
+				password:密码输入框
+				checkbox:多选框 注意要提供value值
+				radio:单选框   注意要提供value值
+				file:文件上传选择框
+				button:普通按钮 
+				submit:提交按钮
+				image:图片提交按钮
+				reset:重置按钮, 还原到开始(第一次打开时)的效果
+				hidden:主表单隐藏域,要是和表单一块提交的信息,但是不需要用户修改
+			*name属性:表单项名,用于存储内容值的
+			*value属性:输入的值(默认指定值)
+			size属性:输入框的宽度值
+			maxlength属性:输入框的输入内容的最大长度
+			readonly属性:对输入框只读属性
+			*disabled属性:禁用属性
+			*checked属性:对选择框指定默认选项
+			accesskey属性:指定快捷键(不常用) (IE:alt+键  火狐:alt+shift+键)
+			tabindex属性:通过数字指定tab键的切换顺序(不常用)
+	   
+			src和alt是为图片按钮设置的
+		
+			注意：reset重置按钮是将表单数据恢复到第一次打开时的状态，并不是清空
+				image图片按钮，默认具有提交表单功能。

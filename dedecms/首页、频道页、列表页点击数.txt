@@ -1,0 +1,3 @@
+¶¯Ì¬£º<script src="/plus/count.php?view=yes&aid=[field:id/]&mid=[field:mid/]" type='text/javascript' language="javascript"></script> 
+
+¾²Ì¬£º[field:click/]  

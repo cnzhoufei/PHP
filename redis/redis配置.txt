@@ -1,0 +1,23 @@
+修改redis配置文件
+daemonize  no改成yes在后台启动
+启动方式：./redis-server redis.conf
+
+
+AOF追加持久备份  每次数据发生改变是都会执行备份   #消耗服务器性能
+
+
+主从配置
+在从服务器上找到slaveof <masterip> <masterport>
+修改成主服务器的ip地址加端口 192.168.1.150 6379 #图片 主从配置1
+杀死进程重启生效
+一般情况下 从服务器 只读取 主服务器 的数据 如果要想写入数据得修改
+找到：slave-read-only yes  改成：slave-read-only no #图片 主从配置2.png
+
+
+从客服端可以用：./redis-cli -h192.168.1.150 -p密码  来操作
+
+
+
+
+
+

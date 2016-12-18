@@ -1,0 +1,99 @@
+﻿视频学习网址：
+1、猿代码            http://www.ydma.cn/
+2、慕课网            http://www.imooc.com/
+3、麦子学院          http://www.maiziedu.com/
+4、极客学院          http://www.jikexueyuan.com/
+5、CSDN网            http://edu.csdn.net/  
+6、51CTO学院         http://edu.51cto.com  //各类学习视频
+
+模拟环境学习网址：
+1、计蒜客            http://www.jisuanke.com/
+2、实验楼            https://www.shiyanlou.com/
+
+
+资源网站：
+1、什么都有的网站    https://github.com/     
+2、前端素材资源网    http://www.iguoguo.net/
+3、程序员网址大全    http://www.tnten.com/
+
+
+3、微信学习网站      http://www.cnblogs.com/txw1958/p/wechat-tutorial.html
+
+
+
+
+4、微信开发官方文档  http://mp.weixin.qq.com/wiki/home/
+5、图灵机器人        http://www.tuling123.com/openapi/cloud/home.jsp
+6、免费资源部落      http://www.freehao123.com/
+7、免费在线客服系统  http://www.54kefu.net/
+8、类似w3c的网站     http://www.runoob.com/
+
+
+前端框架网站：
+1、Bootstrap中文网   http://www.bootcss.com/
+   jquery中文文档    http://www.jquery123.com/
+2、jQuery插件网(有大量插件)      http://www.jq22.com/
+3、jQuery、HTML5     http://www.htmleaf.com/
+4、移动端的jQuery    http://zeptojs.com/
+6、实现滑动效果的JS  https://github.com/thebird/swipe
+7、实现多点触摸的JS  http://hammerjs.github.io/
+8、QUOJS             http://quojs.tapquo.com/
+9、图标绘制工具库JS  http://www.bootcss.com/p/chart.js/
+10、国内弹窗JS插件   http://lab.seaning.com/
+11、前端资源网站     http://www.js-css.cn/
+12、前端开发仓库    http://code.ciaoca.com/
+
+上传插件：
+1、http://www.dropzonejs.com/
+2、http://www.uploadify.com/
+
+程序员面试题：
+1、牛课网  http://www.nowcoder.com/
+
+翻墙软件推荐：
+1、greenvpn    http://www.greenfudi.com/  每天有一个小时免费的
+
+弹窗对话框插件：
+1、Larer  http://layer.layui.com/
+2、artDialog http://lab.seaning.com/index.html
+
+图片裁剪插件：
+1、jscrop http://jcrop.org/     http://www.cnblogs.com/xiaoyao2011/archive/2012/06/29/Jcrop.html
+
+表单验证
+1、http://validform.rjboy.cn/
+
+
+基于bootstrap后台框架:
+1、ACE    
+2、Amaze  http://www.js-css.cn/divcss/admin/Amaze/admin-table.html
+
+蘑菇街开源的一款企业办公及时通信软件：
+https://github.com/mogutt/README
+http://tt.mogu.io/
+
+使用PHP+Swoole实现的网页即时聊天工具
+https://github.com/matyhtf/php-webim
+
+PHP聊天框架：
+http://www.workerman.net/
+
+常用IDE(集成开发环境)：
+1、phpstorm          
+2、webstorm
+3、Zend Studio
+
+收集了有关互联网相关信息（RFC）
+http://oss.org.cn/man/develop/rfc/default.htm
+
+ssl证书网站
+http://www.pianyissl.com/
+
+thinkPHP 项目
+http://www.topthink.com/products.html
+
+h5 app制作
+http://www.wex5.com/wex5/?utm_source=Baidu-0815
+
+
+

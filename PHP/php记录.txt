@@ -1,0 +1,131 @@
+scandir — 列出指定路径中的文件和目录 
+
+//将普通函数注册成为__autoload   spl_autoload_register('autoload');
+serialize()将数组串行化
+unserialize()反串行化
+filemtime() 获取文件的修改时间
+global 修饰全局变量
+basename(__FILE__) — 返回路径中的文件名部分 FILE当前路径
+file_put_contents — 将一个字符串写入文件 (要写入到哪里,要写入的字符串)
+file_get_contents — 将整个文件读入一个字符串 
+echo date('Y-m-d H:i:s',strtotime('-1 day'));// week 月// year 年// hours 时// day 天 
+number_format(1234567890); 千位分组
+str_ireplace('http://','',$_POST['dizhi']);把字符串中某一窜字符串替换成想要的字符串返回替换后的字符串 1（想要替换的字符串） 2（替换成什么） 3（原字符串）
+error_reporting(0);屏蔽所有错误
+$_SERVER 服务器和执行环境信息 服务器IP地址：SERVER_ADDR  客服端的IP:REMOTE_ADDR
+phpinfo();
+var_dump();
+unset();销毁变量
+empty();判断变量是否为空
+isset();判断变量是否存在
+数据类型:
+   PHP 支持八种原始类型。 
+四种标量类型： 
+布尔型（boolean） true真  false假
+整型（integer）
+浮点型（float）（浮点数，也作double） 
+字符串（String） 
+两种复合类型： 
+数组（Array） 
+对象Object） 
+最后是两种特殊类型： 
+资源（Resource）
+NULL
+
+变量类型的测试函数：
+is_bool():判断是否是布尔型
+is_int()、is_integer()和is_long():判断是否为整型。
+is_float()、is_double()和is_real()：判断是否为浮点型
+is_string()：判断是否为字符串
+is_array()：判断是否为数组
+is_object()：判断是否为对象
+is_resource()：判断是否为资源类型
+is_null()：判断是否为null
+is_scalar()：判断是否为标量
+is_numeric()：判断是否是任何类型的数字和数字字符串
+is_callable()：判断是否是有效的函数名
+函数：bool settype ( mixed var, string type )是将变量 var 的类型设置成 type。 
+
+
+ 	// 对浮点数进行四舍五入
+	echo round(12.4);  // 12
+	echo round(12.5);  // 13
+//舍去法取整
+	echo floor(1.2);
+	echo floor(1.999);
+
+// 进一取整
+	echo ceil(1.01);
+	echo ceil(1.0); // 注意
+define('CEO','...总裁');常量的定义
+echo '行号:' . __LINE__;
+	echo '文件路径:'. __FILE__;
+	echo '系统：'.PHP_OS;
+	echo '版本' . PHP_VERSION;
+
+	echo '当前目录:' . __DIR__;
+
+	// constant — 返回一个常量的值
+	//defined — 检查某个名称的常量是否存在
+	//get_defined_constants() 
+
+整型的取值范围 -2147483648 - 2147483647 
+echo PHP_INT_MAX;
+echo PHP_INT_SIZE;// 在php中，整型占4个字节 即 32位
+
+
+while
+die() 终止脚本
+
+date( "w")星期
+
+break 跳出整个脚本
+
+continue  跳出本次
+
+
+return 返回值
+
+function 
+
+rand() 随机函数
+
+
+function_exists("pi")  判断函数是否存在
+
+
+gettype  判断类型
+
+
+echo time(); 返回一串数字(时间戳)
+
+3、PHP中都有哪些循环结构？
+
+   for、while、do…while、特殊（break、continue、exit）
+
+global  全局
+
+
+static  静态
+
+func_get_args()获取所有的实参
+
+echo func_get_arg(0);获取指定参数
+
+func_num_args();获取参数的数量
+
+include 包含文件 如果文件不存在 警告性错误 继续执行
+require 包含文件 如果文件不存在 致命性错误 终止执行
+include_once和 require_once  只包含一次
+
+array_flip()健值反转
+
+count 获取数组元素的个数
+
+foreach 传用于遍历数组foreach ($list as $key=>$val){}
+
+
+// 生成一个唯一ID
+echo uniqid();
+htmlspecialchars()html实体化
+count — 计算数组中的单元数目或对象中的属性个数 

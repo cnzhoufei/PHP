@@ -1,0 +1,219 @@
+
+
+原文地址：http://www.mahaixiang.cn/CMS/876.html
+
+1、tag标签的语法解释
+基本语法：
+{dede:tag row='30' sort='new' getall='0'}
+　　<a href='[field:link/]'>[field:tag /]</a>
+　　{/dede:tag}
+参数说明：
+row='30' 调用条数为30条
+sort='new' 排序方式month，rand，week
+getall='0' 获取类型0为当前内容页TAG标记，1为获取全部TAG标记。
+底层模板字段：link,tag
+
+
+
+
+2、最新tag标签调用
+{dede:tag row='30' sort='new'}
+　　<a href='[field:link/]'>[field:highlight/]([field:result/])</a>
+　　{/dede:tag}
+3、当月热门tag标签调用
+{dede:tag row='30' sort='month'}
+　　<a href='[field:link/]'>[field:tagname/]([field:result/])</a>
+　　{/dede:tag}
+
+
+
+
+4、随机tag标签调用
+{dede:tag row='60' sort='rand'}
+　　<a href='[field:link/]'>[field:highlight/]([field:result/])</a>
+　　{/dede:tag}
+
+
+
+
+5、采集热门Tags，刷新一次变换一次
+模板代码：
+{dede:tag row='10' sort='month' }
+　　<a class="tag" href='[field:link/]'>[field:tagname/] </a>
+　　{/dede:tag}
+　　<script language="javascript">
+　　<!--
+　　var tag_a=document.getElementsByTagName("a");
+　　for( i in tag_a){
+　　var offset=6;
+　　var num=4;
+　　if(tag_a.className=="tag"){
+　　var rnd=Math.ceil((num+offset)*Math.random());
+　　if(rnd>offset){
+　　tag_a.className="tag"+(rnd-offset);
+　　}
+　　}
+　　}
+　　//-->
+　　</script>
+CSS代码：
+.tag1 { color:#339900;font-weight:bold;}
+　　.tag2 { color:#e65730;}
+　　.tag3 { color:#00b9da;}
+　　.tag4 { color:#FE3981;font-weight:bold;font-size:14px;}
+
+
+6、文章页tag标签调用
+{dede:tag table='dede_search_keywords' sort='keyword' row='2' if=''}
+　　<a class=blue href='[field:link/]' target=_blank>[field:tag /]</a>
+　　{/dede:tag}
+或
+{dede:field name='keywords' runphp='yes' }
+　　if(!empty(@me)){
+　　$kws = explode(' ',@me);
+　　@me = "";
+　　foreach($kws as $k){
+　　@me .= "<a href='/tag.php?/$k/'>$k</a> ";
+　　}
+　　@me= str_replace('+', ' ',trim(@me));
+　　}
+　　{/dede:field}
+
+
+
+
+7、列表页调用TAG标签的两种方法
+dedecms默认在列表是无法调用tag标签的（之前，我曾在马海祥博客《DedeCMS首页列表页调用文章TAG标签的具体方法步骤》的一文中跟大家介绍过一种方法），经过马海祥再次对织梦代码的研读及收集，现给大家再提供以下不同版本的tag标签调用方法：
+（1）、dedecms5.7版本的调用方法
+首先，找到include\helpers\archive.helper.php文件（注：有朋友会疑问，主页和频道、列表应该加的是不同的调用，不过本人开始用列表页测试，成功；加入主页后测试也是成功显示的，所以我就没再继续深究下去了，另外，这个文件的内容更改，在后台文件是更改不了的，提示是注入sql，所以要在ftp中找到这个文件进行更改才行0。）
+在底部增加：
+function GetTags_list($aid)
+　　    {
+　　        global $dsql;
+　　        $tags = '';
+　　        $query = "SELECT tag FROM `ma_taglist` WHERE aid='$aid' ";
+　　        $dsql->Execute('tag',$query);
+　　        while($row = $dsql->GetArray('tag'))
+　　        {
+　　        $tags .= ($tags=='' ? "<a href='/tags.php?/".urlencode($row['tag'])."'>".$row['tag']."</a>" : ','."<a href='/tags.php?/".urlencode($row['tag'])."'>".$row['tag']."</a>");
+　　        }
+　　        return $tags;
+　　    }
+然后，在列表需要调用tag标签的位置添加：
+[field:id function=GetTags_list(@me)/]
+即可完成。
+（2）、dedecms5.6版本的调用方法
+方法一：
+直接在模板需要的位置加入以下代码即可：
+[field:id runphp=yes]
+　　$tsql = new DedeSql(false);
+　　$tags = ”;
+　　$tsql->SetQuery(“Select i.tag From dede_taglist t left join dede_tagindex i on i.id=t.tid where t.aid=’@me’”);
+　　$tsql->Execute(‘t’);
+　　while($row = $tsql->GetArray(‘t’,MYSQL_ASSOC)){
+　　$tags .= “<a href=’/tag.php?/”.urlencode($row['tag']).”‘>”.$row['tag'].”</a>”;
+　　}
+　　@me=$tags;
+　　[/field:id]
+注：这一步dede5.7版本里面实现不了。
+方法二：
+打开dedecms根目录include/common.func.php，在最底部的“?>”之前加入以下代码：
+//马海祥博客:列表页调用tag的方法
+　　function listtag($aid)
+　　{
+　　$tsql = new DedeSql(false);
+　　$tags = ”;
+　　$tsql->SetQuery(“Select i.tag From dede_taglist t left join dede_tagindex i on i.id=t.tid where t.aid=’$aid’”);
+　　$tsql->Execute(‘t’);
+　　while($row = $tsql->GetArray(‘t’,MYSQL_ASSOC)){
+　　$tags .= “<a href=’/tags.php?/”.urlencode($row['tag']).”/’>”.$row['tag'].”</a> “;
+　　}
+　　return $tags;
+　　}
+　　{dede:field.id runphp=yes}
+　　$tsql = new DedeSql(false);
+　　$tags = ”;
+　　$tsql->SetQuery(“Select i.tag From dede_taglist t left join dede_tagindex i on i.id=t.tid where t.aid=’@me’”);
+　　$tsql->Execute(‘t’);
+　　while($row = $tsql->GetArray(‘t’,MYSQL_ASSOC)){
+　　$tags .= “<a href=’/tag.php?/”.urlencode($row['tag']).”‘>”.$row['tag'].”</a>”;
+　　}
+　　@me=$tags;
+　　{/dede:field.id}
+添加代码后，在列表页可以使用：
+{dede:field.id function=”listtag(@me)”/}
+来调用tag标签。
+方法三：
+在include/inc_functions.php文件里加入：
+function listtag($aid){
+　　$tsql = new DedeSql(false);
+　　$tags = '';
+　　$tsql->SetQuery("Select i.tagname From xkzzz_tag_list t left join xkzzz_tag_index i on i.id=t.tid where t.aid='$aid'");
+　　$tsql->Execute('t');
+　　while($row = $tsql->GetArray('t',MYSQL_ASSOC)){
+　　$tags .= "<a href='/tag.php?/".urlencode($row['tagname'])."'>".$row['tagname']."</a>";
+　　}
+　　return $tags;
+　　}
+然后在列表页相应位置加入：
+[field:ID function="listtag(@me)"/]
+就可以调用出来了，只不过这个方法也需要改动程序文件，看不懂代码的朋友，慎用！
+8、首页调用文章TAG标签的方法
+如果你网站用的是dedecms v5.7版本可直接使用标签：
+[field:id function=GetTags(@me)/]
+就可以调用出来了，只不过不带连接的，要想给tag标签加上链接，还需要进行以下操作：
+首先，注释掉include/helpers/archive.helper.php文件的130行，
+$tags .= ($tags=='' ? $row['tag'] : ','.$row['tag']);
+用下面语句替换，当然你也可以加入自己的样式：
+$tags .= "<a href='/tags.php?/".urlencode($row['tag'])."/'>".$row['tag']."</a> ";
+再再下面空白处加入以下代码：
+if ( ! function_exists('GetTagk')){
+　　function GetTagk($aid) 
+　　{
+　　global $dsql; 
+　　$tagk = ''; 
+　　$query = "SELECT tag,aid FROM `ma_taglist` WHERE aid='$aid' ";
+　　$dsql->Execute('tag',$query);
+　　while($row = $dsql->GetArray('tag'))
+　　{ 
+　　$tagk .= ($tagk=='' ? $row['tag'] : ','.$row['tag']);
+　　  }
+　　  return $tagk;
+　　  }
+　　}
+然后，打开dede/article_edit.php找到：
+$tags = GetTags($aid);
+在下面加上：
+$tagk = GetTagk($aid);
+再打开dede/templets/article_edit.htm再调用tag标签那里把：
+<?php echo $tags; ?>
+改成：
+<?php echo $tagk; ?>
+这样调用的时候可以调用tag，后台显示也能正常显示。
+
+
+
+
+
+
+相关模板页面：
+tag.htm
+taglist.htm
+在内容页面显示TAG标签的代码: {dede:tag type='current'/}
+
+
+
+
+1.目标站分析
+网址: http://www.shownv.com.cn
+2.网站TAG标签区域实战仿制
+相关标签：
+{dede:tag sort='new' getall='0'}
+<a href='[field:link/]'>[field:tag /]</a>
+{/dede:tag}
+
+
+row='30' 调用条数
+sort='new' 排序方式 month，rand，week
+getall='0' 获取类型 0 为当前内容页TAG标记，1为获取全部TAG标记
+列表页调用tag显示

@@ -1,0 +1,37 @@
+下载扩展 地址：https://github.com/nicolasff/phpredis/downloads（注意所支持的php版本）
+ 
+3 将下载的php_redis.dll放在php扩展目录中（ext），并修改配置文件php.ini
+
+注意php版本号MSVC11 和 系统位数
+Compiler	MSVC11 (Visual C++ 2012)
+Architecture	x64
+ 
+添加 扩展的时候一定要
+extension=php_igbinary.dll
+extension=php_redis.dll
+这个顺序
+ 
+否则重启Apache的时候会出现，PHP startup 错误
+ 
+4 重新启动服务，查看phpinfo(),下面表示成功；
+ 
+
+ 
+5 用PHP测试
+ 
+Php代码
+ 
+[php] view plain copy
+$redis = new Redis();  
+$redis->connect("192.168.138.2","6379");  //php客户端设置的ip及端口  
+//存储一个 值  
+$redis->set("say","Hello World");  
+echo $redis->get("say");     //应输出Hello World  
+  
+//存储多个值  
+$array = array('first_key'=>'first_val',  
+          'second_key'=>'second_val',  
+          'third_key'=>'third_val');  
+$array_get = array('first_key','second_key','third_key');  
+$redis->mset($array);  
+var_dump($redis->mget($array_get));

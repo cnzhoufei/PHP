@@ -1,0 +1,71 @@
+
+http://www.cnblogs.com/roddy/p/4600067.html
+
+linux--redis的安装和配置和开启多个端口
+
+在workerman开发过程中需要安装redis来存储用户ip、端口等信息
+
+首先UBUNTU中安装redis：
+
+apt-update  //更新apt包源
+
+apt-get install redis-server //安装redis-server
+安装完毕后可以直接启动redis：
+
+redis-server
+因为后面没有加启动哪个配置文件，所以redis会自启动默认的配置文件
+
+ 
+
+然后我们来看下redis的文件分布
+
+dpkg -L redis-server
+
+
+从上往下几个关键文件：
+
+/etc/init.d/redis-server-------------redis的可执行程序
+
+/etc/redis/redis.conf----------------redis的配置文件
+
+/usr/bin/redis-server---------------redis的自启动文件
+
+如果是单实例运行redis的话，那么到这里就不需要关心了，如果你想运行多个redis的实例，那么就需要对redis文件进行操作。
+
+首先我们要知道redis一个实例就是一个节点，每个节点分配一个端口号，每个节点对应一个redis.conf配置文件。
+
+redis默认配置的端口号是6379，假设现在要多配置一个6380,我们可以直接复制redis.conf命名为redis6380.conf,并且编辑配置文件
+
+cp /etc/redis/redis.conf /etc/redis/redis6380.conf
+
+vi /etc/redis/redis6380.conf
+需要修改几个参数
+
+复制代码
+pidfile /var/run/redis/redis6380-server.pid
+port 6380
+~
+logfile /var/log/redis/redis6380-server.log
+~
+dbfilename dump6380.rdb
+复制代码
+然后保存，直接启动这个配置文件就行了
+
+redis-server /etc/redis/redis6380.conf
+我们可以查看下进程
+
+ps auxf | grep redis-server
+
+
+发现确实启动了两个redis端口，但是两个redis进程用户不一样，一个redis，一个是root。如果想用户都为redis，我们可以直接复制/etc/init.d/redis-server自启动文件并且修改参数
+
+cp /etc/init.d/redis-server /etc/init.d/redis6380
+
+vi /etc/init.d/redis6380
+
+
+然后退出重新启动redis6380.conf，查看进程
+
+
+
+现在就正常了！

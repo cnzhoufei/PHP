@@ -1,0 +1,70 @@
+
+http://www.cnblogs.com/xingmeng/p/3419558.html
+1.wget http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+    rpm -ivh epel-release-6-8.noarch.rpm
+
+    yum install redis php-redis
+
+    在CentOS下有时候用rpm安装软件是会出现下面则中错误
+    1、安装时提示：warning: *.rpm: Header V3 RSA/SHA256 Signature, keykey ID c105b9de: NOKEY
+    解决的方法就是在rpm 语句后面加上 --force --nodeps
+    即原本为 rpm -ivh *.rpm 现在改成 rpm -ivh *.rpm --force --nodeps就可以了。nodeps的意思是忽视依赖关系。因为各个软件之间会有多多少少的联系。有了这两个设置选项就忽略了这些依赖关系，强制安装或者卸载
+
+2.配置防火墙，让外网可以访问redis的6379端口
+    vim /etc/sysconfig/iptables
+    添加 -A INPUT -p tcp -m tcp --dport 6379 -j ACCEPT
+    重启服务：/etc/init.d/iptables restart(或者service iptables restart)
+    
+3.外网访问的话，就打开redis的配置文件，在bind 127.0.0.1前面加上#号
+    执行vi /etc/redis.conf进行修改,然后重启redis服务
+    service redis restart(或者/etc/init.d/redis restart)
+    
+4.为php配置文件引入redis.so。
+    1.cd  /usr/lib64/php/modules/
+        这个目录下有个redis.so
+    2.echo 'extension=redis.so' > /etc/php.d/redis.ini
+        然后vi /etc/php.d/redis.ini，去掉里面的单引号
+        
+5.重启apache
+    service httpd restart(或者/etc/init.d/httpd restart)
+复制代码
+配置文件是/etc/redis.conf
+
+测试：
+
+存值：
+./redis-cli set hx value
+取值：
+./redis-cli get hx
+  
+
+附：redis.conf配置文件：
+
+引用
+#是否作为守护进程运行 daemonize yes #配置pid的存放路径及文件名，默认为当前路径下 pidfile redis.pid #Redis默认监听端口 port 6379 #客户端闲置多少秒后，断开连接 timeout 300 #日志显示级别 loglevel verbose #指定日志输出的文件名，也可指定到标准输出端口 logfile stdout #设置数据库的数量，默认连接的数据库是0，可以通过select N来连接不同的数据库 databases 16 #保存数据到disk的策略 #当有一条Keys数据被改变是，900秒刷新到disk一次 save 900 1 #当有10条Keys数据被改变时，300秒刷新到disk一次 save 300 10 #当有1w条keys数据被改变时，60秒刷新到disk一次 save 60 10000 #当dump  .rdb数据库的时候是否压缩数据对象 rdbcompression yes #dump数据库的数据保存的文件名 dbfilename dump.rdb #Redis的工作目录 dir /var/lib/redis/ ###########  Replication ##################### #Redis的复制配置 # slaveof <masterip> <masterport> # masterauth <master-password>
+############## SECURITY ########### # requirepass foobared
+############### LIMITS ############## #最大客户端连接数 # maxclients 128 #最大内存使用率 # maxmemory <bytes>
+########## APPEND ONLY MODE ######### #是否开启日志功能 appendonly no # 刷新日志到disk的规则 # appendfsync always appendfsync everysec # appendfsync no ################ VIRTUAL MEMORY ########### #是否开启VM功能 vm-enabled no # vm-enabled yes vm-swap-file logs/redis.swap vm-max-memory 0 vm-page-size 32 vm-pages 134217728 vm-max-threads 4 ############# ADVANCED CONFIG ############### glueoutputbuf yes hash-max-zipmap-entries 64 hash-max-zipmap-value 512 #是否重置Hash表 activerehashing yes
+ 
+测试代码：
+复制代码
+<?php
+$redis = new Redis();
+$redis->connect('127.0.0.1', 6379);
+
+$redis->set('key', 'value');
+
+echo $redis->get('key')."\n";
+
+$redis->setex('key', 3600, 'value'); // sets key → value, with 1h TTL.
+
+$redis->set('key1', 'val1');
+$redis->set('key2', 'val2');
+$redis->set('key3', 'val3');
+$redis->set('key4', 'val4');
+
+$redis->delete('key1', 'key2');
+echo $redis->get('key3')."\n" ;
+
+$redis->delete(array('key3', 'key4'));
+?>

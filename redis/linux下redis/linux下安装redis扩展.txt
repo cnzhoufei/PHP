@@ -1,0 +1,59 @@
+如果是用yum安装的php会找不到phpize这个文件 需要执行以下操纵
+
+需要安装php-devel
+yum install php-devel.i686
+
+然后
+whereis  phpize
+
+
+如果是yum安装的环境就用yum安装redis  因为在yum安装的环境下用下面源码包安装方式失败了
+------------------------------------------------------------
+
+ 
+http://www.cnblogs.com/yangxia-test/p/4195198.html
+1、下载
+
+下载地址：http://pecl.php.net/package/redis
+
+文件名：phpredis-2.2.4.tar.gz
+
+文件下载成功后，上传至/usr/local
+
+ 
+
+2、安装
+
+[root@vm15 local]# tar -zxvf phpredis-2.2.4.tar.gz 　　　　　　　　　　　　　　　　　　　　　　　　　　　#解压
+[root@vm15 local]# cd phpredis-2.2.4　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#进入安装目录
+[root@vm15 phpredis-2.2.4]# /usr/local/php/bin/phpize　　　　　　　　　　　　　　　　　　　　　　#用phpize生成configure配置文件
+Configuring for:
+PHP Api Version: 20131106
+Zend Module Api No: 20131226
+Zend Extension Api No: 220131226
+[root@vm15 phpredis-2.2.4]#./configure --with-php-config=/usr/local/php/bin/php-config 　　　　 #配置
+[root@vm15 phpredis-2.2.4]# make　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 #编译
+[root@vm15 phpredis-2.2.4]# make install　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　#安装
+Installing shared extensions: /usr/local/php/lib/php/extensions/no-debug-zts-20131226/
+[root@vm15 phpredis-2.2.4]# ll /usr/local/php/lib/php/extensions/no-debug-zts-20131226/
+total 1696
+-rwxr-xr-x. 1 root root 540834 Dec 19 15:38 opcache.so
+-rwxr-xr-x. 1 root root 861055 Dec 30 16:47 redis.so
+
+安装完成之后，出现上面的安装路径，目录中的redis.so.
+
+ 
+
+3、配置支持php
+
+[root@vm15 phpredis-2.2.4]# vi + /usr/local/php/lib/php.ini 　　　　　　　　　　　　　　　　　　　　 #编辑配置文件
+在最后一行添加以下内容
+extension=redis.so
+:wq! 　　
+
+ 
+
+4、重启服务　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 
+[root@vm15 memcached-2.2.0]# /usr/local/apache2/bin/apachectl restart　　　　　　　　　　　　　#保存退出
+查看phpinfo可以看到支持了
+

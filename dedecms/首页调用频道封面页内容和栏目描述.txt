@@ -1,0 +1,82 @@
+ 1. 首页调用频道封面页 栏目描述 方法：
+{dede:sql sql='Select description from dede_arctype where id=2'}
+             [field:description/]
+ {/dede:sql}
+
+
+
+
+
+2.首页调用频道封面页 调用内容 方法：
+{dede:sql sql='Select content from dede_arctype where id=2'}
+             [field:content/]
+ {/dede:sql}
+
+
+
+
+
+3.首页调用频道封面页 栏目名称 方法
+
+{dede:sql sql='Select typename from dede_arctype where id=2'}
+       [field:typename/]
+ {/dede:sql}
+
+
+
+
+4.首页调用频道封面页 栏目名称 栏目描述 和内容 方法
+
+{dede:sql sql='Select description,typename,content from dede_arctype where id=2'}
+        [field:typename/]
+        [field:content/]
+        [field:description/]
+ {/dede:sql}
+
+
+
+
+注意
+调用的时候里面的根网址标签和其他相关标签需换成[field:**/]
+如
+{dede:global.cfg_basehost/}  为[field:global.cfg_basehost/]
+
+
+
+
+
+方法2  限制字数
+
+专家坐阵，Javascript实战分享     微信开发学习路线高级篇上线     免费公开课平台正式上线啦     有奖征文：云服务器使用初体验
+ DEDE怎样在首页调用频道封面页{dede:field:content/}内容的方法
+分类： dede 2014-06-09 14:14 4052人阅读 评论(0) 收藏 举报
+DEDE怎样在首页调用频道封面页{dede:field:content/}内容的方法,当我们用 织梦DEDECMS 做网站的时候，首页往往会加上关于我们或者企业简介之类的文字，在栏目里
+当我们用织梦DEDECMS做网站的时候，首页往往会加上“关于我们”或者“企业简介”之类的文字，在栏目里面可以把它做成一个“频道封面”，这个是很简单的，问题是，如果我也想在首页能够动态地调用{dede:field.content/} 这个内容的时候，怎么办呢？我想了一下，单单用一个标签是不行的，因为首页不是封面页。然后我想到了用Sql语句，用Sql语句可以把表里面的content 字段读出来！如下：
+{dede:sql sql="SELECT content FROM dede_arctype where id=1"}[field:content/]{/dede:sql}
+分析：SELECT content FROM dede_arctype 里面的 content 是存放封面内容的字段， id=1 是指 所要调用字段名所在的 id [field:content/] 这个是底层字段了。
+如果还想限制调用的字数可以讲“[field:content/]”内替换成
+[field:content function='cn_substr(@me,30)'/] 其中30表示30字符，大小可随意调整！
+好用吧！
+
+{dede:field.content function='htmlspecialchars(cn_substr(Html2text(@me),100))'/}
+{dede:field.content   function='cn_substr(@me,80)'/}
+ 
+[field:description /]标签如何限制字数?
+ 
+[field:description function='cn_substr(@me,80)'/]
+dedecms 里的所有标记都支持这样使用函数的
+{dede:sql sql='Select content from dede_arctype where id=20'}[field:contentfunction="cn_substr('@me',200)" /]
+{/dede:sql}
+field:content 这里的body如上，就是文章的内容，(cn_substr(@me,130) 这里的130 就是你准备让内容显示的字数，可以自己调整
+但会发现有一个问题。就是连html也被截了下来。要过滤他。就使用
+view source
+{dede:sql sql="SELECT body FROM `dede_sgpage` where aid = 1" }
+[field:body function="htmlspecialchars(cn_substr(Html2text(@me),750))"/]
+{/dede:sql}
+
+
+
+
+
+
+

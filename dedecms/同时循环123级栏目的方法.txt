@@ -1,0 +1,38 @@
+同时调取1 2 3级栏 有三级栏目的做分开调取   一级栏目指定调取   二三级用嵌套标签
+
+<div class="main">
+<span>
+         				
+<a href="{dede:global.cfg_basehost/}" >{dede:global.cfg_indexname/}</a> //首页 
+</span>
+                        
+<span>
+{dede:type typeid='1'}<a href="[field:typeurl/]">[field:typename/]</a>{/dede:type}//调取指定的一级栏目
+<ul class="nav">
+{dede:channelartlist  typeid='1'} //二级栏目标签
+<li><a href="{dede:field name='typeurl'/}">{dede:field name='typename'/}</a>//二级栏目链接和栏目名称
+<div class="nav_le">
+{dede:channel type='son'} //三级栏目标签		
+<a href="[field:typelink/]">[field:typename/]</a>//三级栏目链接和栏目名称
+{/dede:channel}//三级栏目标签结束
+</div>
+</li>
+{/dede:channelartlist} //二级栏目标签结束
+</ul>
+</span>
+
+
+
+ 剩下的栏目做正常调取                               
+{dede:channelartlist row='6' typeid='id'}   //一级栏目标签 
+<span>
+<a href="{dede:field.typeurl/}" class="hover">{dede:field name='typename'/}</a>//一级栏目链接和栏目名称
+<ul class="nav">
+{dede:channel type='son' row='11'}//二级栏目标签
+<li><a href="[field:typelink/]">[field:typename/]</a>//二级栏目链接和名称
+</li>
+{/dede:channel}//二级栏目结束
+</ul>
+</span>
+{/dede:channelartlist} //一级栏目结束          			
+</div>		

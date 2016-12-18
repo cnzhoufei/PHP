@@ -1,0 +1,15 @@
+<a href="{dede:global.arcurl/}" target="_blank"><img src="{dede:field.litpic /}" width="124" height="170"/></a>
+
+
+
+文章内容页调用缩略图方法如下两种.第一种没有大小设置.原图显示.第二种.可以设大小,
+
+{dede:field.image/}
+
+<img src="{dede:field.litpic /}">
+
+列表页.和其它频页调用,也是第一种没有大小设置.第二种自由设置大小.
+
+[field:imglink/]
+
+<img src='[field:litpic/]' alt='[field:title function='html2text(@me)'/]'/>

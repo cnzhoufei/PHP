@@ -1,0 +1,45 @@
+
+http://www.tuicool.com/articles/NzArqm7
+Windows下Redis的安装及PHP扩展使用
+时间 2014-10-28 17:47:09  CSDN博客
+原文  http://blog.csdn.net/wyqwclsn/article/details/40543485
+主题 Redis Windows PHP
+1、下载redis的windows应用程序，支持32位和64位，根据实际情况下载
+
+下载地址： https://github.com/dmajkic/redis/downloads
+
+2、将相应的程序copy到你所需要的目录中，在这里我使用的64位，放到E:\redis目录
+
+
+3、启动redis服务端：打开一个cmd窗口，先切换到redis所放目录（E:\redis），运行 redis-server.exe redis.conf 
+
+注意redis.conf为配置文件，主要配置了redis所使用的端口等信息（如果不写则默认redis.conf）
+
+有的下载的redis压缩包里没有redis.conf，我把默认的redis.conf的文件内容放在文章最后。
+
+
+注意：此窗口为redis服务端运行窗口，关闭后则redis关闭。
+
+4、启动redis客户端：另开一个cmd窗口，进入目录之后运行命令redis-cli.exe -h 127.0.0.1 -p 6379，然后就可以进行操作了
+
+
+5、下载redis的php扩展：
+
+下载地址： https://github.com/nicolasff/phpredis/downloads
+
+根据php的版本来下载相应的扩展，版本必须对应
+
+6、将php_redis.dll放入php的ext文件夹中，然后再php.ini添加代码extension=php_redis.dll
+
+7、重启web服务器
+
+8、php测试
+
+<?php
+    $redis = new Redis();
+    $redis->connect('127.0.0.1',6379);
+    $redis->set('test','hello redis');
+    echo $redis->get('test');
+?>
+
+9、附：默认redis.conf文件内容

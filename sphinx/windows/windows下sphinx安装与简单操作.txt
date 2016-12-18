@@ -1,0 +1,168 @@
+
+
+
+
+http://blog.csdn.net/whxblue/article/details/8613680
+
+1、下载地址 http://sphinxsearch.com/downloads/release/，我这里下的是“Win64 binaries w/MySQL+PgSQL+libstemmer+id64 support”，下载后文件名：sphinx-2.0.6-release-win64-id64-full.zip；
+
+2、将其解压到D: \ sphinx，并在D:\sphinx下新建目录data(用来存放索引文件)与log(用来存放日志文件)；
+
+3、将D:\sphinx\sphinx.conf.in复制到D:\sphinx\bin\sphinx.conf.in，并重命名为sphinx.conf；
+
+4、修改 D:\sphinx\bin\sphinx.conf 如下：
+    4.1、搜索source src1修改{...}中的内容
+        # 使用的数据库类型
+        type = mysql 
+        # 服务器
+        sql_host = localhost 
+        # 数据库登录名
+        sql_user = root 
+        # 数据库登录密码
+        sql_pass = root 
+        # 操作的数据库名称
+        sql_db = test 
+        # 数据库服务器端口
+        sql_port = 3306 
+        # 设置编码，如果用的是utf-8编码
+        sql_query_pre = SET NAMES utf-8 
+        （以上7条前如有#将其删除）
+    4.2、搜索index test1修改{...}中的内容
+        # 放索引的目录
+        path = D:/sphinx/data/ 
+        # 编码
+        charset_type = utf-8 
+        # 指定utf-8编码表
+        charset_table = 0..9, A..Z->a..z, _, a..z, U+410..U+42F->U+430..U+44F, U+430..U+44F 
+        # 简单分词，只有0和1，需要搜索中文必须置1
+        ngram_len = 1 
+        # 需要分词的字符，搜索中文时必须
+        ngram_chars = U+3000..U+2FA1F 
+        （以上5条前如有#将其删除）
+
+5、导入测试数据将D:\sphinx\example.sql中语句执行到test数据库中，注意：test数据库创建时需要指定为utf-8格式；
+
+6、打开cmd窗口，进入目录D:\sphinx\bin；
+
+7、建立索引，执行indexer.exe test1，test1即为sphinx.conf中index test1
+Sphinx 2.0.6-id64-release (r3473)
+Copyright (c) 2001-2012, Andrew Aksyonoff
+Copyright (c) 2008-2012, Sphinx Technologies Inc (http://sphin
+
+using config file './sphinx.conf'...
+indexing index 'test1'...
+collected 4 docs, 0.0 MB
+sorted 0.0 Mhits, 100.0% done
+total 4 docs, 222 bytes
+total 0.019 sec, 11252 bytes/sec, 202.74 docs/sec
+total 2 reads, 0.000 sec, 0.2 kb/call avg, 0.0 msec/call avg
+total 9 writes, 0.000 sec, 0.1 kb/call avg, 0.0 msec/call avg
+    成功...
+
+8、搜索'test'，执行search.exe test
+Sphinx 2.0.6-id64-release (r3473)
+Copyright (c) 2001-2012, Andrew Aksyonoff
+Copyright (c) 2008-2012, Sphinx Technologies Inc (http://sphinxsearch.com)
+
+using config file './sphinx.conf'...
+index 'test1': query 'test ': returned 3 matches of 3 total in 0.000 sec
+
+displaying matches:
+1. document=1, weight=2421, group_id=1, date_added=Tue Feb 26 10:25:31 2013
+        id=1
+        group_id=1
+        group_id2=5
+        date_added=2013-02-26 10:25:31
+        title=test one
+        content=this is my test document number one. also checking search within
+ phrases.
+2. document=2, weight=1442, group_id=3, date_added=Tue Feb 26 10:25:31 2013
+        id=2
+        group_id=3
+        group_id2=6
+        date_added=2013-02-26 10:25:31
+        title= ????
+        content=this is my test document number two ???????
+3. document=4, weight=1442, group_id=2, date_added=Tue Feb 26 10:25:31 2013
+        id=4
+        group_id=2
+        group_id2=8
+        date_added=2013-02-26 10:25:31
+        title=doc number four
+        content=this is to test groups
+
+words:
+1. 'test': 3 documents, 4 hits
+
+index 'test1stemmed': search error: failed to open D:/sphinx/data/test1stemmed.s
+ph: No such file or directory.
+
+    最后面的一句error可忽略；
+
+9、搜索中文，首先将数据库中的内容update含有中文，执行sql语句：
+UPDATE documents SET title='中文', content='this is my test document number one. also checking search within phrases.含有中文。' WHERE id=1;
+UPDATE documents SET title='中文标题', content='this is my test document number one. also checking search within phrases.含有中文内容。' WHERE id=2;
+UPDATE documents SET title='中文标题测试', content='this is my test document number one. also checking search within phrases.含有中文内容。' WHERE id=3;
+重新建立索引（执行第7步）；
+然后执行search.exe 中文
+Sphinx 2.0.6-id64-release (r3473)
+Copyright (c) 2001-2012, Andrew Aksyonoff
+Copyright (c) 2008-2012, Sphinx Technologies Inc (http://sphinxsearch.com)
+
+using config file './sphinx.conf'...
+indexing index 'test1'...
+collected 4 docs, 0.0 MB
+sorted 0.0 Mhits, 100.0% done
+total 4 docs, 349 bytes
+total 0.025 sec, 13808 bytes/sec, 158.26 docs/sec
+total 2 reads, 0.000 sec, 0.3 kb/call avg, 0.0 msec/call avg
+total 9 writes, 0.000 sec, 0.2 kb/call avg, 0.0 msec/call avg
+
+D:\sphinx\bin>search.exe 中文
+Sphinx 2.0.6-id64-release (r3473)
+Copyright (c) 2001-2012, Andrew Aksyonoff
+Copyright (c) 2008-2012, Sphinx Technologies Inc (http://sphinxsearch.com)
+
+using config file './sphinx.conf'...
+index 'test1': query '中文 ': returned 0 matches of 0 total in 0.000 sec
+
+words:
+
+index 'test1stemmed': search error: failed to open D:/sphinx/data/test1stemmed.s
+ph: No such file or directory.
+    没有搜索到，因为windows命令行中的中文时GBK编码格式，所以没有匹配内容。我们可以使用PHP程序来试试；
+
+10、进入D:\sphinx\api\目录，可以发现sphinx支持php、java、ruby调用，并提供对应的test例子，这里我们使用php来操作，首先将api复制到D:\www\下并重命名为sphinxapi，因为我本机上apache的web目录为D:\www，在D:\www\sphinxapi\下新建search.php，内容为：
+<?php
+require 'sphinxapi.php';
+$s = new SphinxClient();
+$s->SetServer('localhost', 9312);
+$result = $s->Query('中国');
+print_r($result);
+echo '<br /><br />';
+$result = $s->Query('中文');
+print_r($result);
+?>
+    然后回到cmd命令行中，开启sphinx服务，执行searchd.exe(这个必须要执行的)
+Sphinx 2.0.6-id64-release (r3473)
+Copyright (c) 2001-2012, Andrew Aksyonoff
+Copyright (c) 2008-2012, Sphinx Technologies Inc (http://sphinxsearch.com)
+
+using config file './sphinx.conf'...
+WARNING: compat_sphinxql_magics=1 is deprecated; please update your application
+and config
+WARNING: preopen_indexes=1 has no effect with seamless_rotate=0
+listening on all interfaces, port=9312
+listening on all interfaces, port=9306
+precaching index 'test1'
+precaching index 'test1stemmed'
+WARNING: index 'test1stemmed': preload: failed to open D:/sphinx/data/test1stemm
+ed.sph: No such file or directory; NOT SERVING
+precaching index 'rt'
+WARNING: index 'rt': preload: failed to open @CONFDIR@/data/rt.lock: No such fil
+e or directory; NOT SERVING
+precached 3 indexes in 0.018 sec
+    成功...
+    然后在浏览器中执行http://localhost/sphinxapi/search.php，打印出来的数组结果可以很清晰的看见搜索的结果比对。。。
+
+11、至此sphinx在windows下的简单安装与使用就完成了。。。

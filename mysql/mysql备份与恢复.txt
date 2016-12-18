@@ -1,0 +1,21 @@
+
+备份表：mysqldump -u用户名 -p密码 库名 表名1 表名2 > 地址/文件名
+mysqldump -uroot -p123 liuyan liuyan > F://vzhoufei.sql
+
+
+备份库下面的所有表：mysqldump -u用户名 -p密码 库名 > 地址/文件名
+
+备份库：mysqldump -u用户名 -p密码 -B 库名1 库名2 库名3  > 地址/文件名
+备份所有库：mysqldump -u用户名 -p密码 -A > 地址/文件名
+
+
+登录状态下恢复：
+以库为单位：source 备份文件地址
+以表为单位：进入库以后再：source 备份文件地址
+source F://vzhoufei.sql
+
+
+不登录状态下恢复：
+以库为单位：mysql -u用户名 -p密码 < 备份文件地址
+以表为单位：mysql -u用户名 -p密码 库名 表名 <备份文件地址
+

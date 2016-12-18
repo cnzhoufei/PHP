@@ -1,0 +1,10 @@
+页面版权 团队之类：/dede/templets/index_body.htm  系统帮助：inc_menu.php
+
+
+登录页  版权和广告：login.htm     右上角在线帮助：/dede/templets/index2.htm
+
+
+
+
+去除织梦底部的 powered by dedecms版权信息:
+在include/dedesql.classs.php文件中找到第588行:

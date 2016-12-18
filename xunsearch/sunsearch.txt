@@ -1,0 +1,60 @@
+xunsearch
+
+http://www.3566t.com/sell/show-8212108.html  教程
+
+
+
+
+http://blog.sina.com.cn/s/blog_775f158f010182j2.html
+迅搜xunsearch 安装心得 (2012-11-12 15:50:37)转载
+标签： 杂谈	分类： linux
+http://www.xunsearch.com/doc/php/guide/start.installation
+安装可以按照官网配置
+
+建立索引：
+require_once '/usr/local/xunsearch/sdk/php/lib/XS.php';
+$xs = new XS('zl');
+$index = $xs->index;
+$doc = new XSDocument;
+
+$conn=mysql_connect("localhost", "root", "111111") or die("Could not connect: " . mysql_error());
+mysql_select_db('zi, $conn) or die ('Can\'t use test : ' . mysql_error());
+$result=mysql_query("select id,title,time,sid,content,key from learn limit 4429 offset 3000");
+
+while($r=mysql_fetch_array($result)){
+$a["id"]=$r['id'];
+$a["title"]=$r['title'];
+$a["time"]=$r['time'];
+$a["sid"]=$r['sid'];
+$a["content"]=$r['content'];
+$a["key"]=$r['key'];
+$doc->setFields($a);
+$index->update($doc);
+}
+我是这样写的。
+
+直接用内置的scws分词，可以如下：
+    $xs = new XS('demo');// 必须先创建一个 xs 实例，否则会抛出异常  
+    $tokenizer = new XSTokenizerScws;
+    $text = '迅搜(xunsearch)是优秀的开源全文检索解决方案';
+    $words = $tokenizer->getResult($text);
+    print_r($words);
+
+
+
+    cd /usr/local/xunsearch/bin/xs-ctl.sh restart
+
+    echo /etc/rc.local /usr/local/xunsearch/bin/xs-ctl.sh restart
+
+    /usr/local/xunsearch/sdk/php/util/RequiredCheck.php /usr/local/xunsearch
+
+
+    /usr/local/xunsearch/sdk/php/util/Indexer.php --rebuild --wolf_goods=mysql://root:@localhost/wolf_goods --sql="select id,product_name,product_model from products" --project=wolf_goods
+
+    util/Indexer.php --rebuild --source=mysql://root:123@localhost/wolf --sql="SELECT id,goods_name FROM wolf_goods" --project=wolf_goods
+
+    util/Indexer.php --custom-dict --source=mysql://root:123@localhost/wolf --sql="SELECT id,goods_name FROM wolf_goods"
+
+    /usr/local/xunsearch/sdk/php/util/RequiredCheck.php /usr/local/xunsearch
+
+    /usr/local/xunsearch/sdk/php/util/Indexer.php --rebuild --source=mysql://root:123@192.168.1.112/wolf --sql="select id,goods_name from wolf_goods" --project=wolf_goods

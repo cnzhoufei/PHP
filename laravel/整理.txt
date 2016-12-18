@@ -1,0 +1,15 @@
+卸载：1.composer remove  2.删除文件
+
+
+
+
+
+
+
+https://laravist.com/
+homestead：一个开发环境http://v4.golaravel.com/docs/4.2/homestead
+
+
+
+/laravel-v5.2.15\app\Http/routes.php  路由文件
+laravel-v5.2.15\resources\views  视图

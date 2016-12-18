@@ -1,0 +1,89 @@
+
+下拉菜单实现方法1
+一下织梦DedeCMS v5.7 如何实现导航条下拉菜单。
+织梦DedeCMS v5.7 实现导航条下拉菜单
+　　首先将下面这段代码贴到templets\default\footer.htm文件里(只要在此文件里就行，位置无所谓)
+<!-- //二级子类下拉菜单 ，考虑SEO原因放置于底部 
+
+-->
+
+<script type='text/javascript' src='{dede:global.cfg_cmsurl/}/images/js/dropdown.js'></script>
+
+{dede:channelartlist typeid='top' cacheid='channelsonlist'}<ul id="dropmenu{dede:field.typeid/}" class="dropMenu">
+
+  {dede:channel type='son' noself='yes'}  <li><a href="[field:typelink/]">[field:typename/]</a></li>
+
+  {/dede:channel}
+
+</ul>
+
+{/dede:channelartlist}
+
+<script type="text/javascript">cssdropdown.startchrome("navMenu")</script>
+　　刷新网页发现已经神奇地出现了下拉菜单，但此时是透明的，因为缺少一个下拉菜单图片。，原因是没有背景图片。
+　　接下来你需要把DedeCMS5.6程序文件夹\dede\img里的mmenubg.gif(绿色背景图片，适用于绿色主题模板)或者DedeCMS5.5程 序文件夹\templets\images里的mmenubg.gif(蓝色背景图片，适用于蓝色主题模板)复制到DedeCMS5.7程序文件夹 /templets/default/images下面，现在你再看一下效果，呵呵，导航栏是不是已经出现熟悉的下拉菜单了
+　　此时，你想要的效果基本上已经完成了，如果你还想做其他的设置，比如调整位置，只需要找到/templets/default/style/dedecms.css文件，ctrl+f 寻找.dropMenu
+　　如果只是调整宽度，只用修改 ：
+　　width: 100px;/*------ //原来参数是120-，如果二级标题字数少，还可以把参数调整到80，乃至是60--------*/
+
+
+
+
+
+
+下拉菜单实现方法2    http://www.dedejs.com/html/article-649-1.html
+DedeCMS首页导航栏下拉菜单不显示的解决方法
+发布时间：2015-01-09 所属栏目：织梦技巧教程 来源：CMS资源网 内容发布：网络
+Dedecms首页导航栏下拉菜单不显示的问题是很多新手站长普遍遇到的问题，就是Dedecms首页导航栏下拉菜单不显示，但其他页面，如二级页面，文章页面等，都能正常显示，这是什么原因呢？下面跟大家分享下我的Dedecms首页导航栏下拉菜单不显示的解决方法。
+正如很多网站上都说的，首先复制下面的代码：
+
+ 
+1
+{dede:channelartlist typeid=’top’ cacheid=’channelsonlist’}
+2
+ {dede:channel type=’son’ noself=’yes’}
+3
+ [field:typename/]
+4
+ {/dede:channel}
+5
+{/dede:channelartlist}
+
+ 
+粘贴到dedecms的模板文件/templets/default/footer.htm中的顶部位置。然后你更新的主页html，效果马上就出来了，首页的导航栏已经出现下拉菜单了，只是背景是透明的，原因是没有背景图片。
+到\dede\img里找mmenubg.gif复制到/templets/default/images下面，刷新再看一下效果，呵呵，导航栏是不是已经出现熟悉的下拉菜单了。
+ 
+下拉菜单的边框还是原来蓝色的，修改/templets/default/style下的dedecms.css，找到如下代码：
+ 
+01
+.dropMenu {
+02
+ position:absolute;
+03
+ top: 0;
+04
+ z-index:100;
+05
+ width: 120px;
+06
+ visibility: hidden;
+07
+ filter: progid:DXImageTransform.Microsoft.Shadow(color=#CA CACA, direction=135, strength=4);
+08
+ margin-top: -1px;
+09
+ border: 1px solid #669933;
+10
+ border-top: 0px solid #3CA2DC;
+11
+ background-color: #FFF;
+12
+ background:url(../images/mmenubg.gif);
+13
+ padding-top:6px;
+14
+ padding-bottom:6px;
+15
+ }
+ 
+把最后一行的颜色代码#93E1EB修改为#669933即可（可改成自己喜欢的颜色）。

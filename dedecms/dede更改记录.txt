@@ -1,0 +1,18 @@
+﻿/dede/config.php 注释了35行到39行
+
+
+
+/include/common.func.php  最后加上了 html()方法
+
+
+/dede/makehtml_all.php  将ShowMsg() 方法改成了html()
+/dede/makehtml_list_action.php  将ShowMsg() 方法改成了html()
+/dede/makehtml_archives_action.php  将ShowMsg() 方法改成了html()
+/include/userlogin.class.php  注释掉62行到65行
+
+
+/plus/task/   添加了 post.php 
+
+都改好了 你改了dede后只需要改
+common.func.php 第285行 $url = "http://www.tpshop.com/dede/".$url;
+post.php 中的第三行 $url = "http://www.tpshop.com/dede/makehtml_all.php";

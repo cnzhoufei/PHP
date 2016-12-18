@@ -1,0 +1,91 @@
+安装redis  如果没有安装gcc 会报错
+/usr/local/redis   希望将安装包下载到此目录 
+mkdir /usr/local/redis
+
+cd /usr/local/src/lamp
+
+tar -zvxf redis-3.0.2.tar.gz #解压
+
+ln -s redis-3.0.2 redis  #建立一个链接
+
+cd redis-3.0.2
+
+make PREFIX=/usr/local/redis install  #安装到指定目录中
+
+在安装redis成功后，你将可以在/usr/local/redis看到一个bin的目录，里面包括了以下文件：
+ Redis-server              Redis服务器
+ Redis-cli                Redis命令行客户端
+ Redis-benchmark          Redis性能测试工具 
+redis-benchmark  
+redis-check-aof  
+redis-check-dump 
+
+
+
+复制配置文件
+cp /usr/local/src/lamp/redis/redis.conf /usr/local/redis/bin/
+
+修改redis配置文件
+vi /usr/local/redis/bin/redis.conf
+daemonize  no改成yes在后台启动
+启动方式：/usr/local/redis/bin/redis-server redis.conf
+
+Redis服务器默认会使用6379端口，通过 --port参数可以自动以端口号redis-server  --port 6380
+
+vi /etc/rc.local
+#加入/usr/local/bin/redis-server &  #开机启动
+
+考虑到Redis有可能正在将内存中的数据同步到硬盘中，强行终止Redis进程可能会导致数据丢失。正确停止Redis的方式应该是向Redis发送SHUTDOWN命令：
+redis-cli  SHUTDOWN
+
+或者在redis命令中：
+	redis>shutdown
+
+
+AOF追加持久备份  每次数据发生改变是都会执行备份   #消耗服务器性能
+
+主从配置
+在从服务器上找到slaveof <masterip> <masterport>
+修改成主服务器的ip地址加端口 192.168.1.150 6379 #图片 主从配置1
+
+ps -A | grep redis #查看进程
+#kill-9 6379 杀死进程重启生效
+
+一般情况下 从服务器 只读取 主服务器 的数据 如果要想写入数据得修改
+找到：slave-read-only yes  改成：slave-read-only no #图片 主从配置2.png
+
+
+从客服端可以用：./redis-cli -h192.168.1.150 -p密码  来操作
+
+
+
+
+
+
+
+
+
+
+
+安装phpredis扩展
+需要安装两个软件  autoconf-2.62.tar.gz这个是依赖软件 和phpredis.tar.gz 
+
+解压phpredis  进入
+执行：/usr/local/php/bin/phpize     作用：可以把reids扩展反过来安装到php里面  做一些配置
+如果提示autoconf软件依赖问题  请安装autoconf依赖软件 #提示如图 安装php扩展依赖问题.png
+
+安装autoconf：
+cd autoconf
+./configure && make && make install
+
+
+在执行：cd phpredis
+/usr/local/php/bin/phpize
+./configure --help   执行这句会有提示  #如图：安装php扩展2.png
+./configure --with-php-config=/usr/local/php/bin/php-config
+make && make install
+安装好后 会提示扩展文件路径
+
+打开php.ini配置文件
+添加：extension="redis.so"   #如图：在php.ini中添加扩展文件.png
+重启Apache  apachectl restart  打印phpinfo();查看

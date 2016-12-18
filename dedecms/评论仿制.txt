@@ -1,0 +1,89 @@
+mk vip4  17课
+1.评论常用相关模板介绍 
+
+ 
+
+页面模板 
+
+Article_article.htm (内容页模板) 
+
+Ajaxfeedback.htm (内容页评论模板) 
+
+ 
+
+插件模板 
+
+feedback_templet.htm (评论详细页面模板) 
+
+feedback_quote.htm (评论引用回复页面模板) 
+
+ 
+
+CSS文件 
+
+Dedecms.css 
+
+layout.css 
+
+page.css 
+
+ 
+
+JS文件 
+
+dedeajax2.js 
+
+ 
+
+2.评论基本标签讲解 
+
+
+1.头像显示 
+
+<a href='<?php echo $spaceurl; ?>' class='plpic'><img src='<?php echo 
+$fields['mface'];?>' height='40' width='40'/></a> 
+
+ 
+
+2.姓名显示 
+
+{dede:field.username/} 
+
+ 
+
+3.发布时间 
+
+{dede:field.dtime function="MyDate('m-d H:i',@me)" /} 
+
+ 
+
+4.内容显示 
+
+{dede:field.msg function="Quote_replace(@me)"/} 
+
+ 
+
+5.表情显示 
+
+<imgsrc="{dede:global.cfg_templets_skin/}/images/mood/<?php 
+if($fields['face']>0) echo "ico-mood-{$fields['face']}.gif"; ?>" /> 
+
+ 
+
+6.支持 
+
+ 
+
+7.反对 
+
+ 
+
+8.引用 
+
+ 
+
+9.评价 
+
+ 
+
+

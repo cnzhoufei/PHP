@@ -1,0 +1,197 @@
+标签名称：channelartlist
+
+功能说明：嵌套标签，获取当前频道的下级栏目的内容列表标签，更多可用于channel标签的嵌套，直接调用一级导航包含二级导航的栏目调用
+
+应用代码：
+
+{dede:channelartlist row='' typeid='id'}               或typeid='channelsonlist'
+
+{dede:field.typeurl/} 一级栏目链接
+
+{dede:field name='typename'/} 一级栏目名称
+
+{dede:channel type='son' row=''} 调用对应一级栏目下的二级栏目
+
+[field:typelink/] 二级栏目链接
+
+[field:typename/] 二级栏目名称
+
+{/dede:channel}
+
+{/dede:channelartlist}
+
+
+参数信息（属性='值'）
+
+row = '' 调用栏目数
+col = '' 分多少列显示（默认为单列）
+type ='' son表示下级栏目,self表示同级栏目,top顶级栏目
+
+
+
+
+其他标签：http://www.xinshou5.com/dedetag/
+
+
+调取指定栏目： {dede:type typeid=23}
+<li class="selected"><span>0</span>[field:typename /]</li>
+        {/dede:type}
+        
+
+
+同时循环一级导航和二级导航实现方法
+
+
+<!--导航开始-->
+<div id="navv">
+
+<div class="nv r"> 
+      <ul class="fix r">
+      
+      <div class="nav2"></div>
+        <li class="cur"><a href="{dede:global.cfg_basehost/}">网站首页</a></li>
+        <div class="nav2"></div>
+        
+        
+        
+         {dede:channelartlist typeid='top' row='8' cacheid='channelsonlist'}
+        <li ><a href="{dede:field.typeurl/}">{dede:field name='typename'/}</a>
+        
+          <div class="subnav"> 
+          {dede:channel   type ='son' noself='yes'  currentstyle="<li><a href='~typelink~' class='thisclass'>~typename~</a> </li>" }
+         
+            <a href="[field:typelink/]">[field:typename/]</a> 
+            {/dede:channel}
+            </div>
+        </li> <div class="nav2"></div>
+        {/dede:channelartlist}
+        
+      </ul>
+    </div>
+ </div> 
+
+
+
+导航实现方法百度来源代码
+dedecms自带导航下拉二级菜单调用方法  
+
+
+    
+下载LOFTER客户端
+dedecms自带有下拉菜单的功能，而且调用起来也非常的简单，之前每次用织梦做后台的时候，遇到关于导航菜
+单下拉的问题，都要重新去弄一段 JS代码，使用dedecms自带的下拉导航菜单还不要自己去另外找标签，我们只要简单的修改一下相应的/templets/style/dedecms.css这里面的几行CSS代码就行了
+先打开/templets/default/head.htm找到dedecms的导航菜单调用那一段
+
+
+<div id="navMenu">
+<ul>
+<li><a href='{dede:global.cfg_cmsurl/}/'><span>主页</span></a></li>
+
+{dede:channel type='top' row='10' currentstyle="<li class='hover'><a href='~typelink~' ~rel~><span>~typename~</span></a></li>"}
+<li><a href='[field:typeurl/]' [field:rel><span>[field:typename/]</span></a></li>
+{/dede:channel}
+</ul>
+</div>
+
+
+其中 type='top'  表示调用顶级栏目  row='10' 表示调用10个栏目数量  [field:rel/] 等同于dropmenu加上栏目id。
+此标签是dedecms5.5加的，主要用于导航栏中显示下级栏目，在使用下拉菜单的时候千万不能去掉
+{dede:channel type='top' row='10' currentstyle="<li class='hover'><a href='~typelink~' ~rel~><span>~typename~</span></a></li>"}
+可以根据自己的需求去掉currentstyle="<li class='hover'><a href='~typelink~' ~rel~><span>~typename~</span></a></li>"
+应该样式这一部分然后我们打开/templets/default/footer.htm找到调用dedecms调用二级下拉菜单的代码<!-- //二级子类下拉菜单，考虑SEO原因放置于底部  -->
+<script type='text/javascript' src='{dede:global.cfg_cmsurl/}/images/js/dropdown.js'></script>
+{dede:channelartlist typeid='top' cacheid='channelsonlist'}<ul id="dropmenu{dede:field.typeid/}"class="dropMenu">
+{dede:channel type='son' noself='yes'} <li><a href="[field:typelink/]">[field:typename/]</a></li>
+{/dede:channel}
+</ul>
+{/dede:channelartlist}
+<script type="text/javascript">cssdropdown.startchrome("navMenu")</script>基本不要再去修改它了，想要改变二级菜单的样式只要修改相应的/templets/style/dedecms.css这里面的几行CSS代码就行了
+
+
+
+
+
+
+
+
+
+
+同时循环栏目和文章的嵌套标签
+
+ {dede:channelartlist  typeid='2' }
+    <div class="right_title"><span class="more"><a href="{dede:field name='typeurl'/}" target="_blank">更多...</a></span>
+       <h2><a href="{dede:field name='typeurl'/}" title="{dede:field name='typename'/}">{dede:field name='typename'/}</a></h2>
+   
+    </div>
+    
+    
+    <div class="right_body">
+      <ul class="textlist">
+        <!--循环开始-->
+        
+      {dede:arclist titlelen='60' row='5' }
+        <li><span class="InfoTime">[field:pubdate function="MyDate('y-m-d',@me)"/]</span><a  href="[field:arcurl/]" target="_blank" title="[field:title/]">[field:title/]</a></li>
+         {/dede:arclist}
+        
+        <!--循环结束-->
+      </ul>
+      
+      
+    </div>
+    
+    <div class="right_bottom"></div>
+    
+    {/dede:channelartlist}
+
+
+
+
+
+循环二级和三级  参考方法 原文地址：http://www.jb51.net/cms/103015.html
+
+{dede:channelartlist typeid=3 } 
+<dd> 
+<dl> 
+<dt><a href="{dede:field name='typeurl'/}">{dede:field name='typename'/}</a></dt> 
+<dd> 
+<ul> 
+{dede:sql sql='Select * from `lzz_arctype` where reid=~id~ ORDER BY id'} 
+<li>&middot;&nbsp;<a href="[field:typedir function="cn_substr(@me,200,9) " /]">[field:typename/]</a></li> 
+{/dede:sql} 
+</ul> 
+</dd> 
+</dl> 
+</dd> 
+{/dede:channelartlist} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

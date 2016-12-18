@@ -1,0 +1,68 @@
+﻿===================================
+    PHP_MySQL的操作
+===================================
+一、操作步骤：
+	1. 连接MySQL数据库
+	2. 判断是否连接成功
+	3. 选择数据库
+	4. 设置字符集
+	5. 准备SQL语句
+	6. 向MySQL服务发送SQL语句
+	7. 解析处理结果集
+	8. 释放结果集，关闭数据库连接
+	
+二、常用操作：
+   1. mysql_connect();--连接数据库，并返回一个连接资源
+	  格式： mysql_connect(主机名，用户，密码); 
+		--其中参数可选，若不写则参考php.ini中默认配置
+		
+   2. mysql_error(); --获取刚刚（最后）执行数据库操作的错误信息
+   
+   3. mysql_errno(); --获取刚刚（最后）执行数据库操作的错误号
+		错误号为0表示没有错误
+   
+   4. mysql_select_db(数据库名[,数据库连接])； 
+		选择一个数据库，等同于"use 库名"语句
+		
+   5. mysql_set_charset(字符编码)；  --设置字符编码
+	  例如：mysql_set_charset("utf8"); 等同于：mysql_query("set names utf8");
+   
+   6. mysql_query(sql语句[，数据库连接])； -- 发送一条sql语句
+         sql语句若是查询，则返回结果集，其他则返回boolean值表示执行是否成功。
+		
+   7. 解析结果集函数：
+		mysql_fetch_array();  --以关联和索引两种方式数组解析结果集
+		  也可以指定第二参数来定义返回格式：
+			 MYSQL_BOTH(0关联和索引)/MYSQL_NUM(2索引)/MYSQL_ASSOC(1关联)
+			
+		mysql_fetch_row();	  --以索引式数组解析结果集
+		*mysql_fetch_assoc(); --以关联式数组解析结果集
+		mysql_fetch_object(); --以对象方式解析结果集
+	
+   8. mysql_free_result(结果集名)； --释放结果集
+    
+   9. mysql_close(数据库连接); --关闭数据库连接
+   
+   10. mysql_num_rows(结果集); --获取结果集中的数据条数
+   
+   11. mysql_num_fields(结果集); --获取结果集中的列数（字段数量）
+   
+   12. mysql_result(); --定位取结果
+			echo mysql_result($result,0,3)."<br/>"; //获取第1条数据的第4列中的值
+			echo mysql_result($result,1,2)."<br/>"; //获取第2条数据的第3列中的值
+			echo mysql_result($result,5,4)."<br/>"; //获取第6条数据的第5列中的值
+			
+   13.mysql_affected_rows — 取得前一次 MySQL 操作所影响的记录行数
+		关联的 INSERT，UPDATE 或 DELETE 查询所影响的记录行数。
+		
+   14. mysql_insert_id — 取得上一步 INSERT 操作产生的 ID 
+
+		
+
+
+
+		
+		
+   
+   
+		

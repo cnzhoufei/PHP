@@ -1,0 +1,31 @@
+修改分页文字：include/arc.listview.class.php   或者arc.archives.class.php 
+原文地址：http://www.qdexun.cn/jsp/news/shownews.domethod=GetqtnewsdetailAction&id=1346
+
+首页：Home
+上一页：Previous page
+下一页：The next page
+末页：The last page
+
+A total of 1page5records
+共1页5条结果
+
+登陆：login
+注册： register
+尊敬的客户你好!
+：Respect of customer hello!
+
+用户名： name
+
+密码：password
+
+验证码：Verification
+点击更换：Click to change
+
+
+
+上一篇  下一篇
+/include/arc.archives.class.php
+上一篇：The previous article
+下一篇：The next article
+  
+没有了：Without the

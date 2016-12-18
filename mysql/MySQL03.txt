@@ -1,0 +1,38 @@
+MySQL03 SQL语句设计
+======================================================
+一 	操作数据表中的数据记录（DML语句）
+		1.	使用INSERT语句向数据表中添加数据
+			格式：
+			INSERT INTO 表名 [(字段名1,字段名2,…字段名n)] VALUES(‘值1’,‘值2’,…,’值n’);
+			或者
+			INSERT INTO 表名 [(字段名1,字段名2,…字段名n)] VALUES(‘值1’,‘值2’，…，‘值n’),VALUES(‘值1’,‘值2’,…,’值n’);
+			
+		2.	使用UPDATE语句更新数据表中已存在的数据
+			格式：
+			UPDATE 表名 SET 字段名=表达式 [,…][WHERE 条件]
+			[ORDER BY 字段][LIMIT 行数]
+
+		3.	使用DELETE语句删除数据表中不需要的数据记录
+			格式：
+			DELETE FROM 表名 [WHERE 条件][ORDER BY 字段][LIMIT 行数]
+			
+二		通过DQL命令查询数据表中的数据
+		1. 格式
+			SELECT [ALL|DISTINCT]{*|table.*|[table.]field1[AS alias1][,[table.]field2[AS alias2][,…]]}FROM 表名
+			 [WHERE子句]
+			[GROUP BY..][HAVING..][ORDER BY..][LIMIT count];
+			
+		2. 选择特定的字段
+			
+		使用AS子句为字段取别名
+		DISTINCT关键字的使用
+		在SELECT语句中使用表达式的列
+		使用WHERE子句按条件检索
+		根据空值（NULL）确定检索条件
+		使用BEETWEEN AND进行范围比较查询
+		使用IN进行范围比对查询
+		使用LIKE进行模糊查询
+		多表查询（连接查询）
+		嵌套查询（子查询）
+		使用ORDER BY对查询结果排序
+		使用LIMIT

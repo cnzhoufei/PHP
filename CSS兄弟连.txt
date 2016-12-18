@@ -1,0 +1,352 @@
+﻿
+========================
+   CSS层叠样式表
+========================
+
+命名规则：使用字母、数字或下划线和减号构成，不要以数字开头
+
+一、css的语法
+-----------------------------
+	格式： 选择器{属性:值;属性:值;属性:值;....}
+	
+	其中选择器也叫选择符  
+   
+    CSS中注释：/* ... */
+	
+二、在HTML中如何使用css样式（html中嵌入css的方式）；
+----------------------------------------------------
+	1. 内联方式（行内样式）
+		就是在HTML的标签中使用style属性来设置css样式
+		格式： <html标签 style="属性:值;属性:值;....">被修饰的内容</html标签>
+	
+		<p style="color:blue;font-family:隶书">在HTML中如何使用css样式</p>
+		特点：仅作用于本标签。
+		
+		
+	2. 内部方式（内嵌样式）
+		就是在head标签中使用<style type="text/css">....</style>标签来设置css样式
+		格式：<style type="text/css">
+					....css样式代码
+			  </style>
+			  
+		特点：作用于当前整个页面
+		
+		
+	3. 外部导入方式（外部链入）
+		3.1 （推荐）就是在head标签中使用<link/>标签导入一个css文件，在作用于本页面，实现css样式设置
+			格式：<link href="文件名.css" type="text/css" rel="stylesheet"/>
+		
+		3.2 还可以使用import在style标签中导入css文件。
+			如：<style type="text/css">
+					@import "style.css";
+				</style>
+				
+		特点：作用于整个网站
+		
+	他们的优先级：当样式冲突时，就是采用就近原则，是值css属性离被修饰的内容最近的为主。
+		若没有样式冲突则采用叠加效果。
+		
+	
+三、**css2的选择符：
+---------------------------------------------------------------
+	1. html选择符（标签选择器）
+		就是把html标签作为选择符使用
+		如 p{....}  网页中所有p标签采用此样式
+		   h2{....}  网页中所有h2标签采用此样式
+	
+	2. class类选择符 (使用点.将自定义名（类名）来定义的选择符)
+		定义： 			  .类名{样式....}    匿名类
+			  其他选择符名.类名{样式....}
+		使用：<html标签 class="类名">...</html标签>
+		
+		.mc{color:blue;} /* 凡是class属性值为mc的都采用此样式 */
+	
+		p.ps{color:green;}  /*只有p标签中class属性值为ps的才采用此样式*/
+	
+		注意：类选择符可以在网页中重复使用
+	
+	3. Id选择符
+		定义： #id名{样式.....}
+		使用：<html标签 id="id名">...</html标签>
+		
+		注意：id选择符只在网页中使用一次.
+	
+	选择符的优先级：从大到小 [ID选择符]->[class选择符]->[html选择符]->[html属性]
+	
+	
+	4. 关联选择符（包含选择符）
+		格式： 选择符1 选择符2 选择符3 ...{样式....}
+		例如： table a{....} /*table标签里的a标签才采用此样式*/
+				h1 p{color:red} /*只有h1标签中的p标签才采用此样式*/
+		
+	5. 组合选择符（选择符组）
+		格式： 选择符1,选择符2,选择符3 ...{样式....}
+				h3,h4,h5{color:green;} /*h3、h4和h5都采用此样式*/
+				
+	6. 伪类选(伪元素)择符：
+		格式： 标签名:伪类名{样式....}
+		
+				a:link {color: #FF0000; text-decoration: none} 	    /* 未访问的链接 */
+				a:visited {color: #00FF00; text-decoration: none} 	    /* 已访问的链接 */
+				a:hover {color: #FF00FF; text-decoration: underline} /* 鼠标在链接上 */
+				a:active {color: #0000FF; text-decoration: underline} /* 激活链接 */
+				
+	7. 属性选择器：
+		...
+		
+	8. 其他伪类选择器
+		... 
+        
+四、  CSS3中的选择器（了解）
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－				
+	1. 关系选择器：
+		div>p 选择所有作为div元素的子元素p
+		div+p 选择紧贴在div元素之后p元素
+		div~p 选择div元素后面的所有兄弟元素p
+	2. 属性选择器：
+		[attribute]选择具有attribute属性的元素。
+		[attribute=value]选择具有attribute属性且属性值等于value的元素。
+		[attribute~=value]选择具有attribute属性且属性值为一用空格分隔的字词列表，其中一个等于value的元素。 
+		[attribute|=value]选择具有att属性且属性值为以val开头并用连接符"-"分隔的字符串的E元素。
+		[attibute^=value]匹配具有attribute属性、且值以valule开头的E元素
+		[attribute$=value]匹配具有attribute属性、且值以value结尾的E元素
+		[attribute*=value]匹配具有attribute属性、且值中含有value的E元素
+        
+	3. 结构性伪类选择器：
+		::first-letter设置对象内的第一个字符的样式。 
+		::first-line设置对象内的第一行的样式。 
+		:before设置在对象前（依据对象树的逻辑结构）发生的内容。
+		:after设置在对象后（依据对象树的逻辑结构）发生的内容。
+		:lang(language)匹配使用特殊语言的E元素。 
+		:element1~element2:
+		:first-of-type匹配同类型中的第一个同级兄弟元素
+		:last-of-type匹配同类型中的最后一个同级兄弟元素
+		:only-of-type匹配同类型中的唯一的一个同级兄弟元素
+		:only-child匹配父元素仅有的一个子元素
+		:nth-child(n)匹配父元素的第n个子元素
+		:nth-last-child(n)匹配同类型中的倒数第n个同级兄弟元素
+		:last-child()匹配父元素的最后一个子元素
+		:root匹配元素在文档的根元素。在HTML中，根元素永远是HTML 
+		:empty匹配没有任何子元素（包括text节点）的元素
+
+	4. *状态伪类选择器
+		:link 设置超链接a在未被访问前的样式。
+		:visited 设置超链接a在其链接地址已被访问过时的样式
+		:active	 设置元素在被用户激活（在鼠标点击与释放之间发生的事件）时的样式
+	   *:hover	设置元素在其鼠标悬停时的样式
+	   *:focus	设置元素在其获取焦点时的样式
+		:target	匹配相关URL指向的E元素
+		:enabled   匹配用户界面上处于可用状态的元素
+		:disabled   匹配用户界面上处于禁用状态的元素
+		:checked   匹配用户界面上处于选中状态的元素
+		:not(selector)匹配不含有selector选择符的元素
+		::selection  设置对象被选择时的样式
+
+		
+	5. 其他伪类选择器
+		E:not(s) ： {attribute}
+		匹配所有不匹配简单选择符s的元素E
+		p:not(.bg) {background-color:#00FF00;}
+
+======================================================================================
+
+五、CSS中常用的属性：
+---------------------------------------------------------------------------------------
+	1. color颜色属性：
+		a. HSL颜色:  通过对色调(H)、饱和度(S)、亮度(L)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色.
+			background-color: hsl(240,100%,50%);color:white；
+		b. HSLA颜色: 色调(H)、饱和度(S)、亮度(L)、透明度(A)；
+			background-color: hsla(0,100%,50%,0.2);
+		*c. RGB颜色: 红(R)、绿(G)、蓝(B)三个颜色通道的变化
+			background-color: rgba(200,100,0);
+		d. RGBA颜色: 红(R)、绿(G)、蓝(B)、透明度(A)
+			background-color: rgba(0,0,0,0.5);
+		*e. 图片透明度的设置  img.opacity{ opacity:0.25;}
+		
+	2. 字体属性： font
+		font
+	   *font-size: 		字体大小：20px，60%基于父对象的百分比取值
+	   *font-family：	字体：宋体，Arial
+		font-style：	normal正常；italic斜体； oblique倾斜的字体 
+	   *font-weight：	字体加粗 ：bold
+		font-variant:	small-caps 小型的大写字母字体
+		font-stretch:	[了解]文字的拉伸是相对于浏览器显示的字体的正常宽度（大部分浏览器不支持）。		
+							
+		
+	3. 文本属性：
+		text-indent:	首行缩进：text-indent:30px;
+		text-overflow：	文本的溢出是否使用省略标记（...）。clip|ellipsis（显示省略标记）
+		*text-align: 	文本的位置：left center right
+		text-transform：对象中的文本的大小写：capitalize(首字母)|uppercase大写|lowercase小写
+		*text-decoration: 字体画线：none无、underline下画线，line-through贯穿线
+		text-decoration-line：[了解]文本装饰线条的位置（浏览器不兼容）
+		
+		*text-shadow: 文本的文字是否有阴影及模糊效果
+		vertical-align: 文本的垂直对齐方式
+		direction：文字流方向。ltr | rtl
+		
+		white-space:nowrap; /* 强制在同一行内显示所有文本*/
+
+		*letter-spacing: 文字或字母的间距
+		word-spacing：单词间距
+		*line-height：行高
+		*color： 字体颜色
+		
+	*4. 边框：
+		border:宽度 样式 颜色;
+		border-color;
+		border-style; 边框样式：solid实现，dotted点状线，dashed虚线
+		border-width:
+		border-left-color;
+		border-left-style;
+		border-left-width:
+		...
+		CSS3的样式
+		border-radius：圆角处理
+		box-shadow:	设置或检索对象阴影
+		
+	5. 背景属性：background
+		*background-color: 背景颜色
+		*background-image: 背景图片
+		*background-repeat：是否重复，如何重复?(平铺)
+		*background-position：定位
+		background-attachment： 是否固定背景，
+						scroll:默认值。背景图像是随对象内容滚动
+						fixed:背景图像固定 
+                        
+        css3的属性                
+		*background-size: 背景大小，如 background-size:100px 140px;
+		多层背景：
+        background:url(test1.jpg) no-repeat scroll 10px 20px,url(test2.jpg) no-repeat scroll 50px 60px,url(test3.jpg) no-repeat scroll 90px 100px;
+        background-origin:content-box,content-box,content-box;
+        background-clip:padding-box,padding-box,padding-box;
+        background-size:50px 60px,50px 60px,50px 60px;
+			
+	6. *内补白（内补丁）
+		padding：		检索或设置对象四边的内部边距,如padding:10px; padding:5px 10px;
+		padding-top：	检索或设置对象顶边的内部边距
+		padding-right：	检索或设置对象右边的内部边距
+		padding-bottom：检索或设置对象下边的内部边距
+		padding-left：	检索或设置对象左边的内部边距
+	
+	7. *外补白（外补丁）
+		margin：		检索或设置对象四边的外延边距,如 margin:10px;  margin:5px auto;
+		margin-top：	检索或设置对象顶边的外延边距
+		margin-right：	检索或设置对象右边的外延边距
+		margin-bottom： 检索或设置对象下边的外延边距
+		margin-left：	检索或设置对象左边的外延边距	
+		
+	8. Position定位
+		*position:	定位方式：absolute(绝对定位)、fixed(固定)（relative定位参考，可对内部相对absolute定位）
+		*z-index:	层叠顺序，值越大越在上方。
+		*top:		检索或设置对象与其最近一个定位的父对象顶部相关的位置
+		right:		检索或设置对象与其最近一个定位的父对象右边相关的位置
+		bottom:		检索或设置对象与其最近一个定位的父对象下边相关的位置
+		*left:		检索或设置对象与其最近一个定位的父对象左边相关的位置
+	
+	9. Layout布局
+		*display：	是否及如何显示：none隐藏，block块状显示...
+		*float:		指出了对象是否及如何浮动:值none | left | right
+		*clear：		清除浮动：none | left | right | both两侧
+		visibility：设置或检索是否显示对象。visible|hidden|collapse。
+					与display属性不同，此属性为隐藏的对象保留其占据的物理空间 
+		clip:		检索或设置对象的可视区域。区域外的部分是透明的。 rect(上-右-下-左)
+					如：clip:rect(auto 50px 20px auto);上和左不裁剪，右50，下20.
+		*overflow:	超出隐藏：hidden，visible：不剪切内容
+		overflow-x：内容超过其指定宽度时如何管理内容: visible | hidden | scroll | auto
+		overflow-y：内容超过其指定高度时如何管理内容
+		
+	10.Flexible Box 弹性盒子(了解见手册)				
+		  box-orient: 设置或检索弹性盒模型对象的子元素的排列方式。horizontal(水平)|vertical(纵向)
+		  box-pack	设置或检索弹性盒模型对象的子元素的对齐方式。
+		  box-align	设置或检索弹性盒模型对象的子元素的对齐方式。
+		  box-flex	设置或检索弹性盒模型对象的子元素如何分配其剩余空间。
+		  box-flex-group	设置或检索弹性盒模型对象的子元素的所属组。
+		  box-ordinal-group	设置或检索弹性盒模型对象的子元素的显示顺序。
+		  box-direction	设置或检索弹性盒模型对象的子元素的排列顺序是否反转。
+		  box-lines	设置或检索弹性盒模型对象的子元素是否可以换行显示。
+
+	11. 用户界面 User Interface
+			*cursor	鼠标指针采用何种系统预定义的光标形状。pointer小手，url自定义
+			zoom	设置或检索对象的缩放比例： normal|5倍|200%百分比
+			box-sizing	设置或检索对象的盒模型组成模式。content-box | border-box
+						content-box： padding和border不被包含在定义的width和height之内。
+						border-box： padding和border被包含在定义的width和height之内。
+					
+			resize	设置或检索对象的区域是否允许用户缩放，调节元素尺寸大小。
+						none： 不允许用户调整元素大小。 
+						both： 用户可以调节元素的宽度和高度。 
+						horizontal： 用户可以调节元素的宽度 
+						vertical： 用户可以调节元素的高度。
+						
+			outline 	复合属性：设置或检索对象外的线条轮廓
+			outline-width	设置或检索对象外的线条轮廓的宽度
+			outline-style	设置或检索对象外的线条轮廓的样式
+			outline-color	设置或检索对象外的线条轮廓的颜色
+			outline-offset	设置或检索对象外的线条轮廓偏移位置的数值
+			nav-index	设置或检索对象的导航顺序。
+			nav-up	设置或检索对象的导航方向。
+			nav-right	设置或检索对象的导航方向。
+		
+	12. 多栏 Multi-column
+			columns 		设置或检索对象的列数和每列的宽度
+			column-width 	设置或检索对象每列的宽度
+			column-count 	设置或检索对象的列数
+			column-gap 		设置或检索对象的列与列之间的间隙
+			column-rule 	设置或检索对象的列与列之间的边框
+			column-rule-width 	设置或检索对象的列与列之间的边框厚度
+			column-rule-style 	设置或检索对象的列与列之间的边框样式
+			column-rule-color 	对象的列与列之间的边框颜色
+			column-span 	象元素是否横跨所有列
+			column-fill 	对象所有列的高度是否统一
+			column-break-before 对象之前是否断行
+			column-break-after 	对象之后是否断行
+			column-break-inside 对象内部是否断行
+		
+	13. 表格相关属性：
+		table-layout	设置或检索表格的布局算法	
+		border-collapse	设置或检索表格的行和单元格的边是合并在一起还是按照标准的HTML样式分开	separate | collapse
+		border-spacing	设置或检索当表格边框独立时，行和单元格的边框在横向和纵向上的间距	
+		caption-side	设置或检索表格的caption对象是在表格的那一边	top | right | bottom | left
+		empty-cell	设置或检索当表格的单元格无内容时，是否显示该单元格的边框	hide | show
+		
+		
+	14. 过渡 Transition:
+		transition 	检索或设置对象变换时的过渡效果
+		transition-property	检索或设置对象中的参与过渡的属性
+		transition-duration	检索或设置对象过渡的持续时间
+		transition-timing-function	检索或设置对象中过渡的类型
+		transition-delay	检索或设置对象延迟过渡的时间
+	
+	15. 动画 Animation
+		animation 	检索或设置对象所应用的动画特效
+		animation-name	检索或设置对象所应用的动画名称
+		animation-duration	检索或设置对象动画的持续时间
+		animation-timing-function	检索或设置对象动画的过渡类型
+		animation-delay	检索或设置对象动画延迟的时间
+		animation-iteration-count	检索或设置对象动画的循环次数
+		animation-direction	检索或设置对象动画在循环中是否反向运动
+		animation-play-state	检索或设置对象动画的状态
+		animation-fill-mode	检索或设置对象动画时间之外的状态
+		
+	16. 2D变换 2D Transform:
+		transform 	检索或设置对象的变换
+		transform-origin	检索或设置对象中的变换所参照的原点
+		
+	17. Media Queries Properties媒体查询
+		width	定义输出设备中的页面可见区域宽度
+		height	定义输出设备中的页面可见区域高度
+		device-width	定义输出设备的屏幕可见宽度
+		device-height	定义输出设备的屏幕可见高度
+		orientation	定义'height'是否大于或等于'width'。值portrait代表是，landscape代表否
+		aspect-ratio	定义'width'与'height'的比率
+		device-aspect-ratio	定义'device-width'与'device-height'的比率。如常见的显示器比率：4/3, 16/9, 16/10
+	
+		device-aspect-ratio	定义'device-width'与'device-height'的比率。如常见的显示器比率：4/3, 16/9, 16/10
+		color	定义每一组输出设备的彩色原件个数。如果不是彩色设备，则值等于0
+		color-index	定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0
+		monochrome	定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0
+		resolution	定义设备的分辨率。如：96dpi, 300dpi, 118dpcm
+		scan	定义电视类设备的扫描工序
+		grid	用来查询输出设备是否使用栅格或点阵。只有1和0才是有效值，1代表是，0代表否
+	

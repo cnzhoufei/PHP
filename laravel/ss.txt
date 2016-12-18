@@ -1,0 +1,22 @@
+﻿
+
+在项目文件夹中打开命令窗
+composer
+composer create-project laravel/laravel your-project-name --prefer-dist "5.1.*"
+
+composer -V
+
+执行安装
+composer coreate-project laravel/larvel --prefer-dist
+
+启动：php laravelstudy
+
+
+启动：php artisan serve  一定要进入项目文件夹
+
+
+使用mysql
+进入mysql bin目录
+
+
+
