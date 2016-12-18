@@ -1,3 +1,0 @@
-cmd打开命令窗口执行下面代码  然后去启动服务  注意文件位置
-
-sc create redis binPath= F:\wamp\Redis\redis-server.exe start= auto

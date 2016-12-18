@@ -1,1 +1,0 @@
-[field:global.autoindex/-1] 这个排序标签默认从1开始  后面加个-1就从0开始了

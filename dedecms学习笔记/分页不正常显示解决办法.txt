@@ -1,5 +1,0 @@
-    
-    
-     以后列表页调用文章用这个标签{dede:list pagesize='9'}{/dede:list}    (pagesize='9' 这个是调用条数）
-
-      和 {dede:pagelist listitem="index,pre,next,end,pageno,option,info" listsize="8"/}    这两个标签共存分页标签才能正常显示。

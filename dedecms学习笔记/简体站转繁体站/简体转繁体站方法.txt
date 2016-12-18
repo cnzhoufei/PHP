@@ -1,6 +1,0 @@
-1.繁体网站实现方法
-小问题 ：繁体网站如何实现？
-我们需要一个js文件来实现
-第一步：Language.js文件放在根目录\include\Language.js
-第二步：打开模版文件，在页面合适的位置粘贴下面的代码。
-<li><a name="StranLink">繁体</a><script src="http://127.0.0.1/include/Language.js"></script></li>

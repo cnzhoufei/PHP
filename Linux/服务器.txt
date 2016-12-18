@@ -1,6 +1,0 @@
-airenxiao.com
-IP:202.10.79.95
-端口：22
-用户名：root
-密码：Ef#l0wNi%x0l
-mysql密码：$mysql_osdf

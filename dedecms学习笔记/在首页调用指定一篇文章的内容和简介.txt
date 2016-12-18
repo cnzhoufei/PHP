@@ -1,9 +1,0 @@
-{dede:arclist idlist='指定文章ID号' limit='0,1'  titlelen='24' infolen='200'}
-
- <</SPAN>a  href="[field:arcurl/]" target="_blank">[field:title/]</</SPAN>a> 
-  
-  [field:infos/]<</SPAN>a href="[field:arcurl/]"  target="_blank">[详细]</</SPAN>a>
-
-{/dede:arclist}
-
-用上idlist='指定文章ID号'就行  其他一样

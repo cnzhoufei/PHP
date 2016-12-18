@@ -1,52 +1,0 @@
-在首页调取字段必须加上也下两个标签
-addfields='这里填写字段名  多个字段名用英文下的逗号隔开'
-channelid='这里填写字段的id号'
-
-
-
-
-
-栏目页dede自定义字段用在列表页里
- listdede:list pagesize='10' addfields='trueprice‘  channelid='6'}
-
-
-<ul class="p_pic">
-<li class="li1">
-
-<a href="[field:arcurl/]"><img src="[field:litpic/]" height="74" width="127" /></a>
-
-</li>
-
-<li class="li2">名称：
-
-<a href="[field:arcurl/]">[field:title/]</a></li><li class="li3">价格：<a href="/">[field:trueprice/]元</a>
-
-
-</li></ul>
-{/dede:list}调用自定义定段的方法{dede:arclist addfields='add1,add2,需要查询出来的自定义字段名' channelid='自定义内容模型的ID' row='10' orderby='pubdate''}（add1,add2为自字义的字段名）字段名1 调用：   [field:add1 /]字段名2 调用：   [field:add2 /]{/dede:arclist}
-
-
-
-
-文章页
-字段格式：{dede:field.gmjg/}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

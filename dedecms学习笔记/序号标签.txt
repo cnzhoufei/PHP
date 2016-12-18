@@ -1,8 +1,0 @@
-arclist            标签下使用 [field:global.autoindex/] 默认从1开始
-channel         标签下使用 [field:global.autoindex/] 默认从0开
-channelartlist 标签下使用 {dede:global.itemindex/}  默认从1开始
- 
-arclist  从0开始 [field:global name=autoindex runphp="yes"]@me=@me-1;[/field:global]
-channel  从1开始 [field:global name=autoindex runphp="yes"]@me=@me+1;[/field:global]         0开始：[field:typename/]
-channelartlist  从0开始 {dede:global name=itemindex runphp='yes'}@me=@me-1;{/dede:global}
- 

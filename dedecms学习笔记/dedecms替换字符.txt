@@ -1,1 +1,0 @@
-  {dede:field.body function="str_replace('Î¢²©','ÖÜ·ÉµÄÎ¢²©',@me)"/}
