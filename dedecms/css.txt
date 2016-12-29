@@ -411,7 +411,7 @@ tr:first-child td:first-child{
             width:150px;
           }
 
-
+解决字母不还行:word-break:break-all;
 
 
 
