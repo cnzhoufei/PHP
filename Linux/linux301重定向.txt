@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+//url重写
+  Options +FollowSymlinks
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+//301重定向
+Options +FollowSymLinks 
+RewriteEngine on 
+RewriteCond %{HTTP_HOST} ^yundi88.com 
+RewriteRule ^(.*)$ http://www.yundi88.com/$1 [R=permanent,L]
+</IfModule>

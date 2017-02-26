@@ -665,3 +665,21 @@ document.forms  获取页面上所有form表单的集合
      $("#editors:radio").click(function(){
       alert(1)
   });
+
+
+
+//打开一个新窗口
+function SelectTemplets(tpl)
+{
+    // 
+   var posLeft = 200;
+   var posTop = 300;
+   window.open("{{:U('SelectTemplets')}}?path=./Templates/Pc&tplname="+tpl, "poptempWin", "scrollbars=yes,resizable=yes,statebar=no,width=600,height=400,left="+posLeft+", top="+posTop);
+}
+//将此窗口的值写入到另一个窗口 
+  function gb(filename)
+{
+    window.opener.document.form.<?php echo $tplname;?>.value=filename;//将此窗口的值写入到另一个窗口 name等于form下的name等于tpl的表单
+    if(document.all) window.opener=true;
+    window.close();//关闭窗口
+}

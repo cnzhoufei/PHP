@@ -41,3 +41,7 @@ rtrim — 删除字符串末端的空白字符（或者其他字符）
 */
 
 
+file_put_contents();将字符串写入文件中
+file_get_contents — 将整个文件读入一个字符串 
+scandir — 列出指定路径中的文件和目录
+

@@ -1,5 +1,5 @@
 scandir — 列出指定路径中的文件和目录 
-
+保留两位小数：echo sprintf("%.2f", $num);
 //将普通函数注册成为__autoload   spl_autoload_register('autoload');
 serialize()将数组串行化
 unserialize()反串行化

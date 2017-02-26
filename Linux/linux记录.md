@@ -1,3 +1,8 @@
+
+linux下最强大的搜索命令为”find“。它的格式为”find <指定目录> <指定条件> <指定动作>“；比如使用find命令搜索在根目录下的所有interfaces文件所在位置，命令格式为”find / -name  'interfaces'
+
+
+
 lsof -i:80 查看端口是否被使用
 
 df -hl  查看磁盘

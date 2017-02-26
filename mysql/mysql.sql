@@ -8,6 +8,7 @@ rename命令用于修改表名。
 
 rename命令格式：rename table 原表名 to 新表名;
 
+truncate table 表名  索引从新归零
 
 --一次添加多条数据
 insert into user(name) values('zhoufei'),('zhoufei2');
@@ -81,7 +82,7 @@ select * from shop_category order by concat(`path`,`id`) 栏目排序
 create table `现创建的表名` like `要继承表字段的表名`  新建一张表 继承另一张表的字段
 
 insert into `本表名` select * from `有数据的表名` 把一张表的数据导入到另一张表里 查询哪些就是导入哪些 条件是字段要一样
-
+insert into yd_shouji select null,store_id from yd_store; 将一张表中的某个字段添加到另一张表
 truncate `表名` 清空一张表的所有数据
 
 
