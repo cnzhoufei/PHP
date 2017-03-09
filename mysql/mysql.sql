@@ -10,6 +10,17 @@ rename命令格式：rename table 原表名 to 新表名;
 
 truncate table 表名  索引从新归零
 
+FLUSH TABLES WITH READ LOCK;锁住所有表 只可以读
+lock table 表名 read; 锁住表
+unlock tables; 解除锁
+
+SHOW FULL COLUMNS FROM 表名 查询表结构
+SHOW CREATE TABLE 表名 查询表结构--建表语句
+SHOW TABLE STATUS 查询所有表及表信息
+OPTIMIZE TABLE
+REPAIR TABLE
+
+
 --一次添加多条数据
 insert into user(name) values('zhoufei'),('zhoufei2');
 
@@ -57,6 +68,7 @@ inner join 内连接
 select Persons.LastName, Persons.FirstName, Orders.OrderNo from Persons inner join Orders on Persons.Id_P = Orders.Id_P order by Persons.LastName
 多表联查 把前面查询的结果当成一个表 后面继续 inner join 
 select .... from t1 inner join t2 on t1.id = t2.id inner join t3 
+select store.store_id from yd_store as store inner join yd_shouji on store.store_id = yd_shouji.userid where store.tpl like '%shuma%' and store.store_id > 9 ;
 
 
 
@@ -83,7 +95,7 @@ create table `现创建的表名` like `要继承表字段的表名`  新建一�
 
 insert into `本表名` select * from `有数据的表名` 把一张表的数据导入到另一张表里 查询哪些就是导入哪些 条件是字段要一样
 insert into yd_shouji select null,store_id from yd_store; 将一张表中的某个字段添加到另一张表
-truncate `表名` 清空一张表的所有数据
+truncate `表名` 清空一张表的所有数据 
 
 
 --修改字段类型
