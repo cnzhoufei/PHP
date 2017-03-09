@@ -21,6 +21,34 @@ OPTIMIZE TABLE
 REPAIR TABLE
 
 
+select database(); 查看当前使用的数据库
+show variables  like 'port'; 查看数据库使用端口
+select concat(round(sum(data_length)/(1024*1024),2) + round(sum(index_length)/(1024*1024),2),'MB') as 'DB Size' from tables where table_schema='库名'; 查看数据库大小
+select concat(round(sum(data_length)/(1024*1024),2),'MB') as 'DB Size' from tables where table_schema='库名'; 查看数据所占的空间大小
+select concat(round(sum(index_length)/(1024*1024),2),'MB') as 'DB Size' from tables where table_schema='库名';查看索引所占的空间大小
+
+SELECT VERSION() as version; 查看数据库版本
+show variables like 'character%';查看数据库编码
+character_set_client      为客户端编码方式；
+character_set_connection  为建立连接使用的编码；
+character_set_database    为数据库的编码；
+character_set_results     为结果集的编码；
+character_set_server      为数据库服务器的编码；
+show variables like 'collation%';
+status; 也可以查看数据库的编码
+
+select distinct concat('user: ''',user,'''@''',host,''';') as query from mysql.user;查看数据库的所有用户信息
+show grants for 'root'@'localhost';查看某个具体用户的权限
+show variables like '%max_connections%';查看数据库的最大连接数
+
+show status like 'Threads%';查看数据库当前连接数，并发数。
+Threads_cached : 代表当前此时此刻线程缓存中有多少空闲线程。
+Threads_connected :代表当前已建立连接的数量，因为一个连接就需要一个线程，所以也可以看成当前被使用的线程数。
+Threads_created :代表从最近一次服务启动，已创建线程的数量。
+Threads_running :代表当前激活的（非睡眠状态）线程数。并不是代表正在使用的线程数，有时候连接已建立，但是连接处于sleep状态，这里相对应的线程也是sleep状态。
+
+show variables like '%datadir%';查看数据文件存放路径
+
 --一次添加多条数据
 insert into user(name) values('zhoufei'),('zhoufei2');
 
