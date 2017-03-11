@@ -1,3 +1,6 @@
+array_unique 去除数组中重复的值
+array_values（）数组下标从新从零开始
+implode() 数组转化成字符串
 scandir — 列出指定路径中的文件和目录 
 保留两位小数：echo sprintf("%.2f", $num);
 //将普通函数注册成为__autoload   spl_autoload_register('autoload');

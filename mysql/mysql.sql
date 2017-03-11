@@ -60,11 +60,21 @@ SELECT SUM(income - expenses) as "Net Income" FROM gl_transactions;
 select count(uid),sum(total),avg(total) from wolf_orders;总共多少条，总数，平均数
 select *  from wolf_orders where (select count(uid) from wolf_orders) order by total limit 2; 查销量最好的产品
 
--- 创建数据库   
+-- 创建数据库 
+CREATE DATABASE IF NOT EXISTS 库名 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;  
 create database `g14_shop`;
 选库 use 库名
 修改字符集   set names utf8;
 删除表       drop table 表名
+删除库       drop database 库名
+
+ 修改库名   rename database db_name to new_db_name;--5.17可以改
+
+重命名所有的表
+CREATE DATABASE new_db_name;
+RENAME TABLE db_name.table1 TO new_db_name.table1,
+db_name.table2 TO new_db_name.table2;
+DROP DATABASE db_name;
 
 --取之间值
 select * from `表名` where `字段` between 20 and 30;
