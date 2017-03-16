@@ -1,4 +1,4 @@
-                           css网站  http://www.divcss5.com/rumen/r350.shtml
+﻿                           css网站  http://www.divcss5.com/rumen/r350.shtml
 宽度：width:8px;   高度：height:8px;  
 ------------------------------------------------------------------------------------------------------------------
 
@@ -445,7 +445,7 @@ tr:first-child td:first-child{
   background: rgba(0,0,0,0.4)
 }
 
-
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
 
 
 

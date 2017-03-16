@@ -2,6 +2,7 @@
 http://www.yiibai.com/mysql/mysql-numeric-functions.html  mysql教程
 
 systeminfo  查看windows的系统信息 
+msinfo32
 
 
 rename命令用于修改表名。
@@ -14,6 +15,7 @@ FLUSH TABLES WITH READ LOCK;锁住所有表 只可以读
 lock table 表名 read; 锁住表
 unlock tables; 解除锁
 
+DESC 表名;查看表字段
 SHOW FULL COLUMNS FROM 表名 查询表结构
 SHOW CREATE TABLE 表名 查询表结构--建表语句
 SHOW TABLE STATUS 查询所有表及表信息
@@ -187,8 +189,15 @@ create table if not exists `shop_users`(
 	`grade` tinyint unsigned default 3,--会员级别
 	`status` tinyint unsigned default 1,--状态
 	`addtime` int unsigned not null --注册时间
-)engine=innodb default charset=utf8;
 
+)engine=innodb default charset=utf8;
+create table if not exists `tests`(
+                    `id` int unsigned not null auto_increment primary key,
+                    `type` varchar(255) COMMENT '表单类型',
+                    `instructions` varchar(255) COMMENT '中文说明',
+                    `field` varchar(255) COMMENT '字段名称',
+                    `value` varchar(255) COMMENT '值'
+                    )engine=innodb default charset=utf8;
 --添加会员表字段
 --name 用户名
 --sex性别

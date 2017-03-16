@@ -1,3 +1,5 @@
+system("nslookup  www.baidu.com");//执行外部命令
+ob_get_contents() 获取缓冲区类容
 array_unique 去除数组中重复的值
 array_values（）数组下标从新从零开始
 implode() 数组转化成字符串
