@@ -462,7 +462,9 @@ alert(window.history.length);
             keypress  键盘事件
         *  onkeydown   按下
         *   keyCode   键盘编码 返回按键码数字
-
+        $(document).keydown(function(event){ 
+        console.log(event.keyCode); 
+        }); 
 
 
         图片事件

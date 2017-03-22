@@ -119,6 +119,7 @@ min() 求最小
 sum() 求总和  
 count() 求总行数
 concat() 连接字段
+group_concat(id) 用逗号链接某一个字段(结果是所有记录)
 select sn_id,concat(sn_id,'_',sn_sort) as aa  from yd_store_navigation;
 
 group by 分组
