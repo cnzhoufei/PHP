@@ -30,6 +30,11 @@ file_exists判断文件是否存在
 closedir关闭目录
 
 
+$fh = fopen($filename, "a");//以写方式打开
+                $fwrite = fwrite($fh, $word); //写入类容
+                fclose($fh);//关闭
+
+
 rtrim — 删除字符串末端的空白字符（或者其他字符） 
 
 /*

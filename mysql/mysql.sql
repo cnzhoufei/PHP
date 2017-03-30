@@ -58,6 +58,11 @@ insert into user(name) values('zhoufei'),('zhoufei2');
 SELECT SUM(income - expenses) as "Net Income" FROM gl_transactions;
 
 
+两个字段相加
+select c1 + c2 from table where Id = 1  
+如果其中有一个字段有可能为空 那用也下方法
+select IFNULL(c1,0) + IFNULL(c2,0) from table where Id = 1
+
 
 select count(uid),sum(total),avg(total) from wolf_orders;总共多少条，总数，平均数
 select *  from wolf_orders where (select count(uid) from wolf_orders) order by total limit 2; 查销量最好的产品
@@ -110,8 +115,8 @@ select Persons.LastName, Persons.FirstName, Orders.OrderNo from Persons inner jo
 select .... from t1 inner join t2 on t1.id = t2.id inner join t3 
 select store.store_id from yd_store as store inner join yd_shouji on store.store_id = yd_shouji.userid where store.tpl like '%shuma%' and store.store_id > 9 ;
 
-
-
+select * from yundi88 where store_id not in(1,2);
+IFNULL(字段,0) 如果为空就给0
 not 是取反
 avg()求平均数
 max() 求最大
@@ -173,6 +178,7 @@ alter table [约束所在表] drop constraint XXXX
  
 --最后删除你的索引 
 drop index stu_limit_table.sub_number_unique on tbname(column)
+
 
 
 
@@ -464,3 +470,6 @@ longtext 可变长度，最多2的32次方-1个字符
 auto_increment能为新插入的行赋一个唯一的整数标识符。为列赋此属性将为每个新插入的行赋值为上一次插入的ID+1。
 
 MySQL要求将auto_increment属性用于作为主键的列。此外，每个表只允许有一个auto_increment列
+
+
+
