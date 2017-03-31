@@ -387,11 +387,23 @@ create table if not exists `shop_liuyan`(
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO root@"%" IDENTIFIED BY "123456";
-flush privileges;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'd$js*pwjq&qpj@' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
+flush privileges;--更新权限
 
 
+--权限 *.*(库名.表名)
+create user yundi88@'localhost'  IDENTIFIED by '$mysql_osdf'; --创建用户 先设置该用户只有show database权限
+grant select,insert,update,delete on *.* to yundi888@localhost identified by '$mysql_osdf';--给定指定权限
+grant all privileges on *.* to yundi88@localhost identified by '$mysql_osdf';--给予所有权限 *.*(库名.表名)星号代表所有
+revoke select on mysql.* from yundi88@localhost; --回收权限 如果权限不存在会报错
+update  mysql.user  set  password=password('xxxx')  where user='otheruser';更改密码
 
+-- 案例
+grant insert on linfei.* to yundi888@localhost identified by '$mysql_osdf';
+grant all privileges on linfei.* to yundi888@localhost identified by '$mysql_osdf';
+revoke insert on linfei.* from yundi888@localhost; --回收权限 如果权限不存在会报错
 
 
 

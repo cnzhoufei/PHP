@@ -185,9 +185,39 @@ setfacl -x  u:用户名  文件名		删除指定用户的ACL权限
     mount /dev/cdrom   /mnt/cdrom
 
 
-
-
 如果挂载不了去插入光盘那里 勾选已连接
+
+
+挂载数据盘
+1、查看数据盘
+
+在没有分区和格式化数据盘之前,使用 “df –h”命令,是无法看到数据盘的,可以使用“fdisk -l”命令查看。如下图:
+
+友情提示:若您执行fdisk -l命令,发现没有 /dev/xvdb 标明您的云服务无数据盘,那么您无需进行挂载,此时该教程对您不适用
+
+2、 对数据盘进行分区
+
+执行“fdisk -S 56 /dev/xvdb”命令,对数据盘进行分区;
+
+根据提示,依次输入“n”,“p”“1”,两次回车,“wq”,分区就开始了,很快就会完成。
+
+3、 查看新的分区
+使用“fdisk -l”命令可以看到,新的分区xvdb1已经建立完成了。
+
+ 4、格式化新分区
+
+使用“mkfs.ext3 /dev/xvdb1”命令对新分区进行格式化,格式化的时间根据硬盘大小有所不同。
+
+(也可自主决定选用 ext4 格式)
+
+5、挂载
+mount /dev/vdb1 /www
+
+卸载
+umount /dev/vdb1
+
+
+
 
 
 光盘作为yum源：
@@ -492,3 +522,13 @@ chmod u+s httpd
 
 
 
+
+
+
+<VirtualHost *:80> 
+   ServerAdmin yd@admin.com 
+  DocumentRoot '/www/web/yundi88_com/public_html' 
+    ServerName www.yundi88.com 
+   ErrorLog 'logs/dummy-host2.example.com-error_log' 
+  CustomLog 'logs/dummy-host2.example.com-access_log' common 
+</VirtualHost> 
