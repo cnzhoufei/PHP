@@ -16,11 +16,11 @@ lock table 表名 read; 锁住表
 unlock tables; 解除锁
 
 DESC 表名;查看表字段
-SHOW FULL COLUMNS FROM 表名 查询表结构
-SHOW CREATE TABLE 表名 查询表结构--建表语句
-SHOW TABLE STATUS 查询所有表及表信息
-OPTIMIZE TABLE
-REPAIR TABLE
+SHOW FULL COLUMNS FROM 表名 --查询表结构
+SHOW CREATE TABLE 表名 --查询表结构--建表语句
+SHOW TABLE STATUS ---查询所有表及表信息
+OPTIMIZE TABLE 表名 --优化表
+REPAIR TABLE  表名   --修复表
 
 
 select database(); 查看当前使用的数据库
@@ -124,7 +124,17 @@ min() 求最小
 sum() 求总和  
 count() 求总行数
 concat() 连接字段
-group_concat(id) 用逗号链接某一个字段(结果是所有记录)
+group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024
+group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
+SET GLOBAL group_concat_max_len=102400; #sql语句修改 作用域全局
+SET SESSION group_concat_max_len=102400;#作用域session
+
+
+
+
+
+
+
 select sn_id,concat(sn_id,'_',sn_sort) as aa  from yd_store_navigation;
 
 group by 分组
@@ -482,6 +492,3 @@ longtext 可变长度，最多2的32次方-1个字符
 auto_increment能为新插入的行赋一个唯一的整数标识符。为列赋此属性将为每个新插入的行赋值为上一次插入的ID+1。
 
 MySQL要求将auto_increment属性用于作为主键的列。此外，每个表只允许有一个auto_increment列
-
-
-
