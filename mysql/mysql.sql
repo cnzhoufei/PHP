@@ -126,8 +126,20 @@ count() 求总行数
 concat() 连接字段
 group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024
 group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
-SET GLOBAL group_concat_max_len=102400; #sql语句修改 作用域全局
+SET GLOBAL group_concat_max_len=10240000; #sql语句修改 作用域全局
 SET SESSION group_concat_max_len=102400;#作用域session
+ESCAPE --用于转移特殊字符如下划线
+SELECT * FROM `yd_goods_category` WHERE ( parent_id_path like '0#_1#_2#_%' ESCAPE '#' )
+
+--sql语句不严谨时 无法使用insert 
+将：sql-mode="STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_DATE,NO_ZERO_IN_DATE,NO_AUTO_CREATE_USER"
+改成：sql-mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+或者用sql语句：set @@sql_mode="NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION";
+
+REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ANSI
+
+--不排序
+select * From `goods` where id in (178,171,176,188,189) order by field(id,178,171,176,188,189)
 
 
 
@@ -379,6 +391,12 @@ create table if not exists `shop_detail`(
 `price` float(8,2) not null,--商品价格
 `name` varchar(255) not null--商品名
 )engine=innoDB default charset=utf8;
+
+
+
+
+
+
 
 
 mysqli_insert_id($link);//获取上一个影响行数的id
