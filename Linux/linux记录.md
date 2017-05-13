@@ -3,6 +3,16 @@ linux下最强大的搜索命令为”find“。它的格式为”find <指定�
 
 
 
+环境安装 wdlinux
+wget http://dl.wdlinux.cn/files/lanmp_v3.1.tar.gz
+tar zxvf lanmp_v3.1.tar.gz
+sh lanmp.sh 默认安装
+sh lanmp.sh cus 自定义安装
+卸载方法
+sh lanmp.sh un
+
+
+
 lsof -i:80 查看端口是否被使用
 
 df -hl  查看磁盘
@@ -160,6 +170,9 @@ setfacl -x  u:用户名  文件名		删除指定用户的ACL权限
     bz2  gz
 
 压缩    tar -zcvf 压缩文件名    需要压缩的文件1  需要压缩的文件2....
+		 tar -cvf /tmp/etc.tar /etc <==仅打包，不压缩！
+		 tar -zcvf /tmp/etc.tar.gz /etc <==打包后，以 gzip 压缩
+		 tar -jcvf /tmp/etc.tar.bz2 /etc <==打包后，以 bzip2 压缩
         tar -jcvf       gz2后缀类型
 
     	zip    压缩：zip -r 压缩文件名.zip 要压缩的文件

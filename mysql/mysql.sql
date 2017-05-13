@@ -5,6 +5,12 @@ systeminfo  查看windows的系统信息
 msinfo32
 
 
+/etc/init.d/mysqld restart
+
+
+show variables like '%dir%';查看mysql目录
+
+
 rename命令用于修改表名。
 
 rename命令格式：rename table 原表名 to 新表名;
