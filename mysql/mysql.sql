@@ -136,6 +136,7 @@ SET GLOBAL group_concat_max_len=10240000; #sql语句修改 作用域全局
 SET SESSION group_concat_max_len=102400;#作用域session
 ESCAPE --用于转移特殊字符如下划线
 SELECT * FROM `yd_goods_category` WHERE ( parent_id_path like '0#_1#_2#_%' ESCAPE '#' )
+SELECT * FROM `yd_navigation` WHERE ( url like '%Goods%');
 
 --sql语句不严谨时 无法使用insert 
 将：sql-mode="STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_DATE,NO_ZERO_IN_DATE,NO_AUTO_CREATE_USER"
@@ -148,6 +149,8 @@ REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE,ANSI
 select * From `goods` where id in (178,171,176,188,189) order by field(id,178,171,176,188,189)
 
 
+distinct --查询去重 
+select distinct name,id from table group by name
 
 
 
@@ -421,7 +424,7 @@ create table if not exists `shop_liuyan`(
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'd$js*pwjq&qpj@' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
@@ -439,6 +442,10 @@ grant insert on linfei.* to yundi888@localhost identified by '$mysql_osdf';
 grant all privileges on linfei.* to yundi888@localhost identified by '$mysql_osdf';
 revoke insert on linfei.* from yundi888@localhost; --回收权限 如果权限不存在会报错
 
+
+修改密码
+UPDATE user SET password=PASSWORD('j$ass&aDg9DaSk5') WHERE user='root';
+FLUSH PRIVILEGES;
 
 
 MySQL数据类型 含义 

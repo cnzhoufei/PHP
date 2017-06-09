@@ -4,6 +4,7 @@ linux下最强大的搜索命令为”find“。它的格式为”find <指定�
 
 
 环境安装 wdlinux
+http://www.wdlinux.cn/bbs/forum-5-1.html
 wget http://dl.wdlinux.cn/files/lanmp_v3.1.tar.gz
 tar zxvf lanmp_v3.1.tar.gz
 sh lanmp.sh 默认安装
@@ -22,6 +23,10 @@ vim /etc/inittab   系统启动方式在这里修改
 
 find / -name httpd.conf
 sudo
+
+设置临时ip: ifconfig eth0 192.168.0.111
+连通外网要把：/etc/sysconfig/network-scripts/ifcfg-eth0
+BOOTPROTO=no  no改成dhcp
 
 配置静态ip
 1.setup -> 选择 Network configuration 回车 再选择 dcvicc configuration 回车 再选择第一个 
@@ -119,6 +124,7 @@ ACL权限
 setfacl  -m  u:用户名:权限   文件名
 setfacl -m u:zhoufei:rwx -R /www
 
+
 setfacl  -m  g:组名：权限   文件名
 
 setfacl  -m u:aa:rwx  /test		给test目录赋予aa是读写执行的acl权限
@@ -131,6 +137,24 @@ setfacl -x  u:用户名  文件名		删除指定用户的ACL权限
 3	setfacl  -m d:u:aa:rwx -R /test		acl默认权限。		注意：默认权限只能赋予目录
 
 
+
+groups 查看当前登录用户的组内成员
+groups gliethttp 查看gliethttp用户所在的组,以及组内成员
+whoami 查看当前登录用户名
+
+/etc/group文件包含所有组
+/etc/shadow和/etc/passwd系统存在的所有用户名
+
+
+
+
+useradd -d /usr/local/apache2/htdocs/sjyzjy -m www_sjyzjy_com --指定家目录创建用户
+setfacl -m u:yzjy:777 -R /usr/local/apache2/htdocs/sjyzjy
+
+
+setfacl -m u:yzjy:000 -R /usr/local/apache2/htdocs/sjyzjy
+
+rwx
 
 
 进程查看		

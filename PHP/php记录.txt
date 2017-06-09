@@ -1,5 +1,12 @@
-﻿
+﻿数组排序
+	 sort() 函数用于对数组单元从低到高进行排序。
+ 　　rsort() 函数用于对数组单元从高到低进行排序。
+ 　　asort() 函数用于对数组单元从低到高进行排序并保持索引关系。
+ 　　arsort() 函数用于对数组单元从高到低进行排序并保持索引关系。
+ 　　ksort() 函数用于对数组单元按照键名从低到高进行排序。
+ 　　krsort() 函数用于对数组单元按照键名从高到低进行排序。
 
+array_filter();过略 默认去除空值
 ini_set('session.cookie_domain', ".yundi88.com"); 子域名共享session
 trim 去除一个字符串两端空格， 
 rtrim 是去除一个字符串右部空格， 
@@ -22,6 +29,7 @@ system("nslookup  www.baidu.com");//执行外部命令
 ob_start ();开启 ob_get_contents() 获取缓冲区类容 用ob_start();开启才能拿到  用ob_end_clean ();结束后的拿不到了
 array_unique 去除数组中重复的值
 array_values（）数组下标从新从零开始
+in_array  检查数组中是否存在某个值 
 implode() 数组转化成字符串
 scandir — 列出指定路径中的文件和目录 
 保留两位小数：echo sprintf("%.2f", $num);

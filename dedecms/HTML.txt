@@ -4,6 +4,12 @@
        ÍøÕ¾µÄ½á¹¹
 
 
+<video width="100%" height="100%" controls  poster="img/poster.jpg"/>
+	<source src="img/video.mp4" type="video/mp4">					
+</video>	
+
+
+
 
 <html>
 <head>

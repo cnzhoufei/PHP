@@ -61,7 +61,7 @@ ssh-keygen -t rsa -C "youremail@example.com"
 推送到远程仓库： git push -u origin master
 由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
 后面修改后推送：git push origin master
-拉取命令：git pull origin master
+拉取命令：git pull origin master 如果拉取失败用git reset --hard FETCH_HEAD 回到上一次pull后
 
 
 克隆
@@ -88,6 +88,44 @@ git pull
 git stash pop stash@{0}
 
 解决文件中冲突的的部分
+
+删除stash
+git stash drop stash@{0}  
+
+
+
+
+
+第一步点击：Pull request
+第二步点击：Create pull request
+第三步点击：Create pull request
+下一步去主账号合并即可
+
+
+
+
+
+
+
+git 服务器安装  用yum安装好git后 执行 git init --bare sample.git等命令就可以了
+yum install -y git
+
+2. 生成公钥
+
+Mac/Linux 打开命令行终端, Windows 打开 Git Bash 。 输入ssh-keygen -t rsa -C “username@example.com”,( 注册的邮箱)，接下来点击enter键即可（也可以输入密码）。
+
+$ssh-keygen -t rsa -b 4096 -C "your_email@example.com"            // 按回车enter
+# Creates a new ssh key, using the provided email as a label
+# Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]  
+
+// 推荐使用默认地址,如果使用非默认地址可能需要配置 .ssh/config ，在前面标下划的对应目录下可以看到生成的公钥文件
+成功之后
+
+Your identification has been saved in /Users/you/.ssh/id_rsa.
+# Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+# The key fingerprint is:
+# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
 
 
 

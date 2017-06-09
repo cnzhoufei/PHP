@@ -54,3 +54,6 @@ function html($url,$data){
 
 　　//打印获得的数据
 　　print_r($output);
+
+
+// http://www.site-digger.com/html/articles/20151227/114.html

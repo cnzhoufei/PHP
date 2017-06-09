@@ -703,3 +703,13 @@ insertBefore() //插入
 getElementsByTagName() //通过标签名称
 getElementsByName() //通过元素的Name属性的值
 getElementById() //通过元素Id，唯一性
+
+
+
+在父窗口中获取iframe中的元素
+格式：$("#iframe的ID").contents().find("#iframe中的控件ID").click();//jquery 方法1  
+实例：$("#ifm").contents().find("#btnOk").click();//jquery 方法1  
+
+在iframe中获取父窗口的元素
+格式：$('#父窗口中的元素ID', parent.document).click();  
+实例：$('#btnOk', parent.document).click();  
