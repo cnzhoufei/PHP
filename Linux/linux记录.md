@@ -148,13 +148,19 @@ whoami 查看当前登录用户名
 
 
 
-useradd -d /usr/local/apache2/htdocs/sjyzjy -m www_sjyzjy_com --指定家目录创建用户
-setfacl -m u:yzjy:777 -R /usr/local/apache2/htdocs/sjyzjy
-
-
-setfacl -m u:yzjy:000 -R /usr/local/apache2/htdocs/sjyzjy
+useradd -d /usr/local/apache2/htdocs/sjyzjy -m yzjy --指定家目录创建用户
+passwd yzjy --更改密码
+setfacl -m u:yzjy:777 -R /usr/local/apache2/htdocs/sjyzjy 
+chown -R yzjy /mnt/web/yundi88_com/public_html/Merchants_tpl --将此目录下所有文件所属主改为yzjy
+setfacl -m u:yzjy:000 -R /usr/local/apache2/htdocs/sjyzjy --其他目录不给权限
 
 rwx
+setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/Application
+setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/plugins
+setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/Public
+setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/Template 
+setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/ThinkPHP 
+
 
 
 进程查看		
@@ -577,3 +583,12 @@ chmod u+s httpd
    ErrorLog 'logs/dummy-host2.example.com-error_log' 
   CustomLog 'logs/dummy-host2.example.com-access_log' common 
 </VirtualHost> 
+
+
+防火墙
+1) 重启后生效
+        开启： chkconfig iptables on
+        关闭： chkconfig iptables off
+        2) 即时生效，重启后失效
+        开启： service iptables start
+        关闭： service iptables stop
