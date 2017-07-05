@@ -235,7 +235,7 @@ setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/ThinkPHP
 挂载数据盘
 1、查看数据盘
 
-在没有分区和格式化数据盘之前,使用 “df –h”命令,是无法看到数据盘的,可以使用“fdisk -l”命令查看。如下图:
+在没有分区和格式化数据盘之前,使用 “df -h”命令,是无法看到数据盘的,可以使用“fdisk -l”命令查看。如下图:
 
 友情提示:若您执行fdisk -l命令,发现没有 /dev/xvdb 标明您的云服务无数据盘,那么您无需进行挂载,此时该教程对您不适用
 
@@ -256,6 +256,7 @@ setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/ThinkPHP
 
 5、挂载
 mount /dev/vdb1 /www
+mount -t ext3 /dev/sda /www 指定类型
 
 卸载
 umount /dev/vdb1

@@ -365,59 +365,10 @@ update `shop_guanggao` set `url` = './list.php'
 
 
 
---创建友情链接表
-create table if not exists `shop_youqing`(
-`id` int unsigned not null auto_increment primary key,
-`name` varchar(255) not null,
-`dizhi` varchar(255) not null,
-`xianshi` tinyint(1) default 1,
-`addtime` int unsigned 
-)engine=innoDB default charset=utf8;
-
-
---创建订单表
-create table if not exists `shop_orders`(
-`id` int unsigned not null auto_increment primary key,--订单id（订单号）
-`uid` int unsigned not null, --用户id
-`linkman` varchar(50) not null, --收货人
-`phone` char(11) not null, --手机号
-`code` char(6) not null, --邮编
-`total` float(8,2) not null,--总价
-`addtime` int unsigned not null, --下单时间
-`status` tinyint not null default 0,--订单状态
-`address` varchar(255) not null--收货地址
-)engine=innoDB default charset=utf8;
-
-insert into `shop_orders` values(1000000,1,'周飞','13539993040','000000',1000000,1460981035,3)
-
-
---订单详情表
-create table if not exists `shop_detail`(
-`id` int unsigned not null auto_increment primary key,
-`oid` int unsigned not null,--订单号 (就是订单表的id)
-`cid` int unsigned not null,----商品id
-`num` int unsigned not null,-- 商品数量
-`price` float(8,2) not null,--商品价格
-`name` varchar(255) not null--商品名
-)engine=innoDB default charset=utf8;
-
-
-
-
-
-
 
 
 mysqli_insert_id($link);//获取上一个影响行数的id
 
---创建评论表
-create table if not exists `shop_liuyan`(
-`id` int unsigned not null auto_increment primary key,
-`uid` int unsigned not null,--用户id
-`goodsid` int unsigned not null,--商品id
-`liuyan` varchar(255),--留言类容
-`time` int unsigned--留言时间
-)engine=innoDB default charset=utf8;
 
 
 

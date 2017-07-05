@@ -450,7 +450,8 @@ tr:first-child td:first-child{
 
 -webkit-box-reflect: below 1px -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(white));倒影
 
-
+qq链接
+http://wpa.qq.com/msgrd?v=3&uin=43204370&site=qq&menu=yes
 
 
 
