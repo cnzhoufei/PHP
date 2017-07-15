@@ -152,7 +152,8 @@ select * From `goods` where id in (178,171,176,188,189) order by field(id,178,17
 distinct --查询去重 
 select distinct name,id from table group by name
 
-
+随机查询数据 简单但效率不高
+select typename,id from dede_arctype ORDER BY RAND() limit 7;
 
 
 
