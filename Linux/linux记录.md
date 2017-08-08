@@ -1,6 +1,11 @@
 
 linux下最强大的搜索命令为”find“。它的格式为”find <指定目录> <指定条件> <指定动作>“；比如使用find命令搜索在根目录下的所有interfaces文件所在位置，命令格式为”find / -name  'interfaces'
 
+ssh 链接命令
+ssh -l 用户名 ip -p 端口
+ssh -l root 124.172.136.69 -p 16589
+
+
 
 
 环境安装 wdlinux

@@ -130,7 +130,7 @@ min() 求最小
 sum() 求总和  
 count() 求总行数
 concat() 连接字段
-group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024
+group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024 GROUP_CONCAT(`key` SEPARATOR '_') ;两个字段相连
 group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
 SET GLOBAL group_concat_max_len=10240000; #sql语句修改 作用域全局
 SET SESSION group_concat_max_len=102400;#作用域session
