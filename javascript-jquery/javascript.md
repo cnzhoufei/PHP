@@ -713,3 +713,35 @@ getElementById() //通过元素Id，唯一性
 在iframe中获取父窗口的元素
 格式：$('#父窗口中的元素ID', parent.document).click();  
 实例：$('#btnOk', parent.document).click();  
+
+
+
+1, window.location.href
+整个URl字符串(在浏览器中就是完整的地址栏)
+本例返回值: http://www.maidq.com/index.html?ver=1.0&id=6#imhere
+
+2,window.location.protocol
+URL 的协议部分
+本例返回值:http:
+
+3,window.location.host
+URL 的主机部分
+本例返回值:www.maidq.com
+
+4,window.location.port
+URL 的端口部分
+如果采用默认的80端口(update:即使添加了:80)，那么返回值并不是默认的80而是空字符
+本例返回值:""
+
+5,window.location.pathname
+URL 的路径部分(就是文件地址)
+本例返回值:/fisker/post/0703/window.location.html
+
+6,window.location.search
+查询(参数)部分
+除了给动态语言赋值以外，我们同样可以给静态页面,并使用javascript来获得相信应的参数值
+本例返回值:?ver=1.0&id=6
+
+7,window.location.hash
+锚点
+本例返回值:#imhere

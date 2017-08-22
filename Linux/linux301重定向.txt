@@ -1,14 +1,23 @@
+
+//.htaccess 鏂规硶
 <IfModule mod_rewrite.c>
-//url重写
+//url脰脴脨麓
   Options +FollowSymlinks
   RewriteEngine On
 
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
-//301重定向
+//301脰脴露篓脧貌
 Options +FollowSymLinks 
 RewriteEngine on 
 RewriteCond %{HTTP_HOST} ^yundi88.com 
 RewriteRule ^(.*)$ http://www.yundi88.com/$1 [R=permanent,L]
 </IfModule>
+
+
+//鐩存帴閰嶇疆鏂规硶
+<VirtualHost *:80>
+  ServerName  www.linuxidc.ne#闇�瑕佽烦杞殑鍩熷悕
+  RedirectMatch  permanent ^/(.*)  http://www.linuxidc.com/$1#璺宠浆www.linuxidc.com
+</VirtualHost>

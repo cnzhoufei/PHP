@@ -1,0 +1,3 @@
+{dede:channel   type ='son'    }
+							<li><a class="link" href="[field:typelink/]">[field:typename/]</a></li>
+							{/dede:channel}
