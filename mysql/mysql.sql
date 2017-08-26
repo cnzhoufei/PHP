@@ -122,6 +122,7 @@ select .... from t1 inner join t2 on t1.id = t2.id inner join t3
 select store.store_id from yd_store as store inner join yd_shouji on store.store_id = yd_shouji.userid where store.tpl like '%shuma%' and store.store_id > 9 ;
 
 select * from yundi88 where store_id not in(1,2);
+select unix_timestamp(now()) ;获取当前时间戳
 IFNULL(字段,0) 如果为空就给0
 not 是取反
 avg()求平均数
