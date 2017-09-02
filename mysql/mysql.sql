@@ -63,6 +63,9 @@ insert into user(name) values('zhoufei'),('zhoufei2');
 
 SELECT SUM(income - expenses) as "Net Income" FROM gl_transactions;
 
+--获取下一条自增id方法
+SHOW TABLE STATUS;--取对应表中的auto_increment字段
+
 
 两个字段相加
 select c1 + c2 from table where Id = 1  
@@ -132,6 +135,7 @@ sum() 求总和
 count() 求总行数
 rand()   随机函数
 concat() 连接字段
+
 group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024 GROUP_CONCAT(`key` SEPARATOR '_') ;两个字段相连
 group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
 SET GLOBAL group_concat_max_len=10240000; #sql语句修改 作用域全局
