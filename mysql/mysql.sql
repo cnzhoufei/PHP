@@ -15,7 +15,7 @@ rename命令用于修改表名。
 
 rename命令格式：rename table 原表名 to 新表名;
 
-truncate table 表名  索引从新归零
+truncate table  表名  索引从新归零
 
 FLUSH TABLES WITH READ LOCK;锁住所有表 只可以读
 lock table 表名 read; 锁住表
@@ -135,6 +135,8 @@ sum() 求总和
 count() 求总行数
 rand()   随机函数
 concat() 连接字段
+mysql_real_escape_string()--防止sql注入 php函数
+
 
 group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024 GROUP_CONCAT(`key` SEPARATOR '_') ;两个字段相连
 group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
@@ -143,6 +145,9 @@ SET SESSION group_concat_max_len=102400;#作用域session
 ESCAPE --用于转移特殊字符如下划线
 SELECT * FROM `yd_goods_category` WHERE ( parent_id_path like '0#_1#_2#_%' ESCAPE '#' )
 SELECT * FROM `yd_navigation` WHERE ( url like '%Goods%');
+
+--替换 
+update yd_goods set name=REPLACE(name, '测试', '') where status = 1;--将状态等于1的name字段中的测试替换成空字符
 
 --sql语句不严谨时 无法使用insert 
 将：sql-mode="STRICT_ALL_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_DATE,NO_ZERO_IN_DATE,NO_AUTO_CREATE_USER"
@@ -410,7 +415,8 @@ MySQL数据类型 含义
 date 3字节，日期，格式：2014-09-18 
 time 3字节，时间，格式：08:42:30 
 datetime 8字节，日期时间，格式：2014-09-18 08:42:30 
-timestamp 4字节，自动存储记录修改的时间 
+timestamp 4字节，自动存储记录修改的时间 TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+
 year 1字节，年份 
 
 

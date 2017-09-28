@@ -745,3 +745,30 @@ URL 的路径部分(就是文件地址)
 7,window.location.hash
 锚点
 本例返回值:#imhere
+
+
+
+        <script language="javascript" type="text/javascript">
+                function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                        "SymbianOS", "Windows Phone",
+                        "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+                }
+                var flag = IsPC(); //true为PC端，false为手机端
+                if(flag == true){
+
+                        window.setTimeout("window.location='pc/index.html'");
+
+                }if(flag == false){
+                        window.setTimeout("window.location='mobile/index.html'");
+                }
+        </script>

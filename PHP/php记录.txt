@@ -19,6 +19,8 @@ urlencode -- 编码 URL 字符串
  　　arsort() 函数用于对数组单元从高到低进行排序并保持索引关系。
  　　ksort() 函数用于对数组单元按照键名从低到高进行排序。
  　　krsort() 函数用于对数组单元按照键名从高到低进行排序。
+array_shift 移除数组中第一个值
+array_pop移除数组中最后一个值
 
 array_filter();过略 默认去除空值
 ini_set('session.cookie_domain', ".yundi88.com"); 子域名共享session

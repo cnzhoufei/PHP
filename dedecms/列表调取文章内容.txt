@@ -1,0 +1,1 @@
+[field:id runphp='yes'] $aid = @me; $row = $GLOBALS['dsql']->GetOne("Select body From `dede_addonarticle` where aid='$aid' "); @me = cn_substr(("{$row['body']}"),300);[/field:id]

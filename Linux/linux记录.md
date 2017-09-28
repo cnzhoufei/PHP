@@ -598,3 +598,33 @@ chmod u+s httpd
         2) 即时生效，重启后失效
         开启： service iptables start
         关闭： service iptables stop
+
+
+
+
+
+
+
+
+  1.首先把网站的的目录和文件的所有者设置为demo,所属组设置为www-data ，对与Linux命令不熟悉的，可以到网上查询。
+
+chown -R demo:www-data /var/www/html/demo
+2.设置网站目录权限为750，750是demo这个用户对目录拥有读写执行的权限，这样demo用户可以在任何目录下创建文件，用户组有有读执行权限，这样就有进入目录的权限，其它用户没有任何权限。
+
+chmod 750 /var/www/html/demo
+cd  /var/www/html/demo
+find -type d -exec chmod 750 {} \;
+3.设置网站文件权限为640，640指只有demo用户对网站文件有更改的权限，apache服务器只有读取文件的权限，无法更改文件，其它用户无任何权限。
+
+find -not -type d -exec chmod 640 {} \;
+4.需要针对个别目录来设置权限，以Thinkphp为例，它的Runtime 目录存储的有日志文件，还有与数据库做ORM映射的数据库表信息，这说明apache服务器要对这些目录
+
+有访问的权限，并且对于线面的日志文件有写入的权限，那么这样就需要对于这些特殊目录设置。
+
+cd /var/www/html/demo
+find . -name "Runtime" -type d -exec chmod -R 770 {} \;
+执行上面的命令请注意 “{}”与 “\”之间是有空格的，上面的-R参数是递归给Runtime 目录下面的目录和文件赋予 770 权限，当然了你会说日志文件是不需要执行权限的，
+
+不过这里没关系，当你把日志文件删除掉之后，生成出来的文件是没执行权限的。因为当你把日志文件删除掉之后，那么生成日志文件的的用户和所有者都是www-data,
+
+所以新的日志文件权限就会变成下面这样：
