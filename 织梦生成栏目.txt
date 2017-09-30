@@ -1,0 +1,54 @@
+ini_set('memory_limit','100000M');
+
+        $data1 = M('','','mysql://root:123@localhost/dedecmsv57utf8sp2#utf8')->query("select distinct typedir from dede_arctype group by typedir");//
+        foreach($data1 as $vv){
+            $data[] = $vv['typedir'];
+        }
+
+
+        $data2 = M('dedecmsv57utf8sp2.dede_arctype')->getField('id,typedir',true);
+        foreach($data as $v){
+            foreach ($data2 as $key => $value) {
+                if($v == $value){
+                    // $str .= $v.'=>'.$value."\r\n";
+                    $arr[$v][] = str_replace('{cmspath}/', '', $value.'_'.$key);
+                }
+            }
+        }
+
+
+        foreach($arr as $vvv){
+            foreach($vvv as $kkkk=>$vvvv){
+
+                if($kkkk){
+                    $a = explode('_', $vvvv);
+                    $array[] = $a[0].$kkkk.'_'.$a[1];
+                }else{
+                    $array[] = $vvvv;
+                }
+            }
+        }
+
+
+
+          include 'ThinkPHP/Library/Org/Pingyi/py_class.class.php';
+     $py = new \py_class();
+        $str = "";
+        foreach($array as $v){
+            $typedir_id = explode('_', $v);
+            $typename = M('dedecmsv57utf8sp2.dede_arctype')->where(array('id'=>$typedir_id[1]))->getField('typename');
+            $typename = $typename;
+            $typedir = "{cmspath}/".$typedir_id[0];
+            $tempindex = '{style}/list_article.htm';//封面模板名称
+            $templist = '{style}/list_article.htm';//列表模板名称
+            $temparticle = '{style}/article_article.htm';//文章模板名称
+            $namerule = '{typedir}/{Y}/article_{aid}.html';//文章命名规则
+            $namerule2 = '{typedir}/list_{page}.html';//列表命名规则
+            $description = $typename;
+            $keywords = $typename;
+            $seotitle = $typename;
+            $sitepath = "{cmspath}/".$typedir_id[0];//路径
+            $str .= "
+insert into dede_arctype(typename,typedir,isdefault,tempindex,templist,temparticle,namerule,namerule2,description,keywords,seotitle,sitepath) values('{$typename}','{$typedir}',1,'{$tempindex}','{$templist}','{$temparticle}','{$namerule}','{$namerule2}','{$description}','{$keywords}','{$seotitle}','{$sitepath}');";
+        }
+        file_put_contents('./zhoulin.sql',$str);

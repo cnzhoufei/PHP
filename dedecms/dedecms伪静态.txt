@@ -1,10 +1,10 @@
-第一步
+﻿第一步
 建立一个 .htaccess 文件 内容为
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks
   RewriteEngine On
 
-  RewriteRule ^([A-Za-z0-9]+)\/?$ plus/list.php?tid=$1
+  RewriteRule ^([A-Za-z0-9]+)\/?$ plus/list.php?tid=$1&TotalResult=10&PageNo=1 --TotalResult每页显示多少条（和模板保持一致）PageNo第几页 
   RewriteRule ^([A-Za-z0-9]+)\/([0-9]+).html$ plus/view.php?aid=$2
   RewriteRule ^([A-Za-z0-9]+)/list_([0-9]+)_([0-9]+)\.html$ plus/list.php?tid=$1&TotalResult=$2&PageNo=$3
   RewriteRule ^([A-Za-z0-9]+)\/$ plus/list.php?tid=$1

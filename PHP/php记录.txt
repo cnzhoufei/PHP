@@ -1,4 +1,8 @@
-﻿找出中文
+﻿临时设置php内存大小 消耗的最大内存默认是为8M 
+ini_set('memory_limit','100000M');
+
+
+找出中文
 //GBK/GB2312使用： 
 // preg_match_all("/[\x80-\xff]+/", $str, $chinese);
 //UTF-8 使用：
