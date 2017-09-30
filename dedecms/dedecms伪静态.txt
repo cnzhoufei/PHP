@@ -1,0 +1,26 @@
+第一步
+建立一个 .htaccess 文件 内容为
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+  RewriteEngine On
+
+  RewriteRule ^([A-Za-z0-9]+)\/?$ plus/list.php?tid=$1
+  RewriteRule ^([A-Za-z0-9]+)\/([0-9]+).html$ plus/view.php?aid=$2
+  RewriteRule ^([A-Za-z0-9]+)/list_([0-9]+)_([0-9]+)\.html$ plus/list.php?tid=$1&TotalResult=$2&PageNo=$3
+  RewriteRule ^([A-Za-z0-9]+)\/$ plus/list.php?tid=$1
+</IfModule>
+
+第二部打开 /plus/list.php 在require_once(dirname(__FILE__)."/../include/common.inc.php");这个后面加上以下代码
+
+$where = '{cmspath}/'.$tid;
+$tid = $dsql->GetOne("SELECT id FROM `#@__arctype` where typedir = '{$where}'")['id'];
+
+第三步
+/include/arc.listview.class.php
+把 GetPageListST 这个方法里面的内容 复制到 GetPageListDM 这个方法里面 不包括方法名
+
+
+
+--------------------------------不要设置伪静态 一切按静态方式处理------------------------------------
+
+    

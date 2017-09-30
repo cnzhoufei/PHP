@@ -1,0 +1,10 @@
+{dede:field.id runphp='yes'}
+global $dsql;
+$typeid = @me;
+$sql="select typename from #@__arctype where id = $typeid";
+$row=$dsql->getone($sql);
+
+$sql2="select value from dede_sysconfig where varname = 'cfg_webname'";
+$row2=$dsql->getone($sql2);
+@me = str_replace('广州', $row['typename'], $row2['value']);
+{/dede:field.id}
