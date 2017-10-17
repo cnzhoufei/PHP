@@ -1,0 +1,15 @@
+http://www.haorooms.com/post/grunt_css_html_bs  图片压缩
+
+图片处理
+
+mysql 索引
+
+分布式 数据库
+
+负载均衡
+
+tp5
+
+shell 
+
+python

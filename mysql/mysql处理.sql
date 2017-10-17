@@ -1,0 +1,5 @@
+--解决数据库Operation not allowed when innodb_forced_recovery > 0 
+--请修改my.cnf
+--innodb_force_recovery = 1 
+--修改为
+--innodb_force_recovery = 0

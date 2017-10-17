@@ -1,0 +1,22 @@
+{dede:php runphp='yes'}
+//随机调取关键词
+$num = mt_rand(0,390); //文件个数
+$str = file_get_contents('http://'.$_SERVER['HTTP_HOST'].'/文件夹/文件夹'.$num.'.txt');
+$arr = explode("\r\n", $str);//用换行符分割成数组
+$array = array_rand($arr,50); //随机获取arr数组的50个键 调取条数
+//随机获取链接
+global $dsql;
+$sql="select a.id,t.typedir from #@__archives as a inner join #@__arctype as t on a.typeid = t.id  order by rand() limit 50";
+$dsql->SetQuery($sql);//将SQL查询语句格式化
+$dsql->Execute();//执行SQL操作
+while($row = $dsql->GetArray()){
+  $article[] = $row;
+}
+
+foreach($array as $k=>$v){
+
+  $str2 .=    "<a arget='_blank' href='".str_replace('{cmspath}','',$article[$k]['typedir']).'/'.$article[$k]['id'].'.html'."'>".$arr[ $v ]."</a>";
+
+  }
+@me = $str2;
+{/dede:php}

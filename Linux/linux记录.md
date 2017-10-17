@@ -8,7 +8,7 @@ ssh -l root 124.172.136.69 -p 16589
 
 
 
-环境安装 wdlinux
+环境安装 wdlinux 3.1
 http://www.wdlinux.cn/bbs/forum-5-1.html
 wget http://dl.wdlinux.cn/files/lanmp_v3.1.tar.gz
 tar zxvf lanmp_v3.1.tar.gz
@@ -17,6 +17,15 @@ sh lanmp.sh cus 自定义安装
 卸载方法
 sh lanmp.sh un
 
+环境安装 wdlinux 3.2
+http://www.wdlinux.cn/bbs/thread-57643-1-1.html
+yum install -y wget
+wget http://dl.wdlinux.cn/files/lanmp_v3.2.tar.gz
+tar zxvf lanmp_v3.2.tar.gz
+sh lanmp.sh 默认安装
+sh lanmp.sh cus 自定义安装
+卸载方法
+sh lanmp.sh un
 
 
 lsof -i:80 查看端口是否被使用
@@ -151,13 +160,13 @@ whoami 查看当前登录用户名
 /etc/shadow和/etc/passwd系统存在的所有用户名
 
 
+qi8Y5H4H0U3I9O6ch8SeS
 
-
-useradd -d /usr/local/apache2/htdocs/sjyzjy -m yzjy --指定家目录创建用户
-passwd yzjy --更改密码
-setfacl -m u:yzjy:777 -R /usr/local/apache2/htdocs/sjyzjy 
-chown -R yzjy /mnt/web/yundi88_com/public_html/Merchants_tpl --将此目录下所有文件所属主改为yzjy
-setfacl -m u:yzjy:000 -R /usr/local/apache2/htdocs/sjyzjy --其他目录不给权限
+useradd -d /www/web/qiche/public_html -m qiche --指定家目录创建用户
+passwd qiche --更改密码
+setfacl -m u:qiche:777 -R /www/web/qiche/public_html 
+chown -R qiche /www/web/qiche/public_html --将此目录下所有文件所属主改为yzjy
+setfacl -m u:qiche:000 -R /www/web/qiche/public_html --其他目录不给权限
 
 rwx
 setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/Application
@@ -263,6 +272,8 @@ setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/ThinkPHP
 mount /dev/vdb1 /www
 mount -t ext3 /dev/sda /www 指定类型
 
+echo '/dev/xvdb1  /www ext3 defaults 1  2' >> /etc/fstab  写入自动挂载
+
 卸载
 umount /dev/vdb1
 
@@ -349,6 +360,13 @@ yum  -y  install  gcc  还有确保这个包已安装
 
  4、关闭防火墙 
 setup
+
+关闭linux防火墙
+service iptables stop
+chkconfig iptables off
+
+启动ssh服务
+service sshd start
  5、vim /etc/selinux/config
 修改这个为 SELINUX=disabled  
 //SELINUX这个选项开启后，你这个linux非常安全。这个开启后linux会非常安全 但就不能访问了  所以要改成disabled
@@ -628,3 +646,5 @@ find . -name "Runtime" -type d -exec chmod -R 770 {} \;
 不过这里没关系，当你把日志文件删除掉之后，生成出来的文件是没执行权限的。因为当你把日志文件删除掉之后，那么生成日志文件的的用户和所有者都是www-data,
 
 所以新的日志文件权限就会变成下面这样：
+
+
