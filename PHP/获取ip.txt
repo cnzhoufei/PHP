@@ -1,0 +1,45 @@
+客户端的ip变量：
+
+$_SERVER['REMOTE_ADDR'] :客户端IP，也有可能是代理IP
+
+$_SERVER['HTTP_CLIENT_IP']:代理端的IP，可能存在，也可能伪造
+
+$_SERVER['HTTP_X_FORWARD_FOR'] ：用户在哪个ip上使用的id，可能存在，也可能伪造
+
+服务端的ip变量:
+
+$_SERVER['SERVER_NAME'] ：需要使用函数gethostname()来获得，这个无论是服务器端还是客户端都能正常显示。
+
+$_SERVER['SERVER_ADDR']:服务器端的ip地址，在服务器端测试ip地址，在客户端测试正常
+
+getnev 获得系统的环境变量：
+
+例子：
+
+
+<?php
+class getIp(){
+     function ClientIp(){
+   if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown"))
+$ip = getenv("HTTP_CLIENT_IP");
+else if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+$ip = getenv("HTTP_X_FORWARDED_FOR");
+else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+$ip = getenv("REMOTE_ADDR");
+else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+$ip = $_SERVER['REMOTE_ADDR'];
+else
+$ip = "unknown";
+return($ip);
+}
+     function serverIP(){
+       return gethostbyname($_SERVER['SERVER_NAME']);
+}
+}
+$getIP  = new getIP();  
+$clientIp = getIP::clientIP();  
+$serverIp = getIP::serverIP();  
+     
+ 
+?>
+　　

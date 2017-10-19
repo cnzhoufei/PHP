@@ -50,6 +50,14 @@ BOOTPROTO=no  no改成dhcp
 3.service network restart 重启网络服务
 
 
+链接外网的一种方法 来自百度链接 https://jingyan.baidu.com/album/b907e627b12dbb46e7891c87.html?picindex=4
+1.网络链接模式改为桥接同时勾选启动时自动链接
+2.点击编辑->虚拟机网络编辑->设置第0块网卡为自动同时勾选 桥接模式将虚拟机直接链接到外部网络
+
+
+
+
+
 修改端口：
 改Linux SSH的默认端口（22），那么你只要修改：/etc/ssh/sshd_config中Port 22，这里把22改成自己要设的端口就行了，不过千万别设和现已有的端口相同哦，以防造成未知后果。
 
@@ -648,3 +656,19 @@ find . -name "Runtime" -type d -exec chmod -R 770 {} \;
 所以新的日志文件权限就会变成下面这样：
 
 
+安装sendmail
+下载安装mailutils
+wget ftp://ftp.gnu.org/gnu/mailutils/mailutils-2.2.tar.gz
+解压进入
+./configure
+make && make install
+yum install -y sendmail
+yum install sharutils   # 使用带附件功能
+service sendmail start 
+查看sendmail启动没：   ps aux |grep sendmail
+测试：    echo 'content test' | mail -s "title test"  -t aaa@b.com
+此时发觉只能给公司内部发邮件， 如果需要还能给外面的邮箱（比如我的qq邮箱）发邮件则还需要
+vi  /etc/mail/sendmail.mc
+找到包含Addr的这一行：    
+DAEMON_OPTIONS(`Family=inet,  Name=MTA-v4, Port=smtp, Addr=127.0.0.1')dnl
+修改Addr=0.0.0.0  ，表明可以连接到任何服务器
