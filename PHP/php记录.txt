@@ -9,6 +9,9 @@ ini_set('memory_limit','100000M');
 $a = preg_match_all("/[\x{4e00}-\x{9fa5}]+/u", $str, $chinese);
 
 
+编码转换
+mb_convert_encoding($str,'UTF-8','GBK');//GBK 转换成 UTF-8
+
 rawurldecode -- 对已编码的 URL 字符串进行解码
 rawurlencode -- 按照 RFC 1738 对 URL 进行编码
 urldecode -- 解码已编码的 URL 字符串
