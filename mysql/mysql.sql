@@ -21,7 +21,11 @@ FLUSH TABLES WITH READ LOCK;锁住所有表 只可以读
 lock table 表名 read; 锁住表
 unlock tables; 解除锁
 
-DESC 表名;查看表字段
+--查看建表语句
+use information_schema
+select * from columns where table_name='表名';
+select group_concat(column_name) from columns where table_name = '表名';--将所有字段用逗号链接起来
+DESC 表名;--查看表字段
 SHOW FULL COLUMNS FROM 表名 --查询表结构
 SHOW CREATE TABLE 表名 --查询表结构--建表语句
 SHOW TABLE STATUS ---查询所有表及表信息
