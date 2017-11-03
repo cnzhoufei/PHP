@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>images</title>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div style="width:100%;margin:0 auto;text-align: center;">
+<canvas  id="myChart3" width="1800" height="600"></canvas>
+</div>
+</body>
+<script type="text/javascript">
+
+/**
+*统计图1
+*canvas标签id名称
+*画布宽 width
+*画布高  height
+*背景颜色 bgColor
+*数据 data 一维数组 [1,2,3]
+*柱子颜色 pillarsColor
+*柱子宽度 piwidth
+*/
+function statistical1(canvasid,width,height,bgColor,data,pillarsColor,piwidth)
+{
+
+	var c=document.getElementById(canvasid);//查找对象
+		// c.style.width = width+'px';
+		// c.style.height = height+'px';
+	var cxt=c.getContext("2d");//创建2d
+	cxt.fillStyle=bgColor;//画布背景颜色
+	cxt.fillRect(0,0,width,height);//创建画布
+
+
+	// 画边框线
+	cxt.fillStyle="#000";
+	cxt.moveTo(1,1);
+	cxt.lineTo(1,height-1);
+
+	cxt.moveTo(1,1);
+	cxt.lineTo(width-1,1);
+
+	cxt.moveTo(width-1,1);
+	cxt.lineTo(width-1,height-1);
+
+	cxt.moveTo(1,height-50);
+	cxt.lineTo(width-1,height-50);
+
+//画数值
+var n_average = width / (data.length + 1);//平均值
+cxt.font= '10px';
+for(var i = 1;i < data.length+1;i++){
+	//线
+	cxt.moveTo(i * n_average,height-50);
+	cxt.lineTo(i * n_average,height-40);
+	cxt.strokeText(i,i*n_average-2,height-30);//数字
+
+}
+
+function max(data) { 
+	var max = data[0];
+	var len = data.length; 
+	for (var i = 1; i < len; i++){ 
+		if (data[i] > max) { 
+			max = data[i]; 
+		} 
+	} 
+	return max;
+}
+
+//画虚线
+for(var i = 0;i < width;i++){
+	if(i % 10 == 0){
+		cxt.font= '1px';
+		cxt.strokeText('.',i,50);
+	}
+}
+
+
+//画柱子
+cxt.fillStyle=pillarsColor;//柱子颜色
+for(var i = 0; i < data.length;i++){
+	var v = n_average * (i + 1) - (piwidth / 2);
+	var h = ((height -100) / max(data));//
+		h = (height - 100) - ((data[i] * h) - 50);
+	if(data[i] < 50){
+		cxt.fillStyle="#f00";
+		
+	}else if(data[i] >= 50 && data[i] < 80){
+		cxt.fillStyle="#00f";
+
+	}else{
+		cxt.fillStyle="#4FB628";
+	}
+	cxt.strokeText(data[i]+'%',v,h);
+	cxt.fillRect(v,h ,piwidth,height-50 - h);
+
+}
+cxt.stroke();
+
+
+}
+
+statistical1('myChart3',1800,600,'#ccc',[1,2,3,4,5,6,7,8,99,100,30,50,60,10,23,45,67,89,12,34,20,14,15,78,98,36,65,64,58,59,23,30,2,5,88,66,44,51,2,3,4,5,6,7,8,99,100,30,50,60,10,23,45,67,89,12,34,20,14,15,78,98,36,65,64,58,59,23,30,2,5,88,66,44,55],'#00f',5);
+
+
+
+// $('#myChart,#myChart2').mousemove(function(e){
+//   $(document).find('title').text((e.pageX - width3));
+
+
+
+//     var c=document.getElementById("myChart2");
+// 	var cxt=c.getContext("2d");
+
+// 	// var grd=cxt.createLinearGradient(0,0,1200,550);
+// 	// grd.addColorStop(0,"#FF0000");
+// 	// grd.addColorStop(1,"#00FF00");
+// 	// cxt.fillStyle=grd;
+// 	// cxt.fillRect(0,0,175,50);
+
+	
+// 	cxt.fillStyle="#fff";
+// 	// cxt.globalAlpha = 0.9;
+// 	// cxt.fillRect(0, 0, 100, 100);
+// 	cxt.strokeRect(0,0,1200,550);//创建画布
+
+//   var x = (e.pageX - width3) + '';
+//   var n = x.substr(-2,2);
+//   console.log(n +'+' + x)
+//   if(n > 50){
+
+//   	x = x + (100 - n);
+//   }else{
+//   	x = x - n;
+
+//   }
+//   console.log(x)
+//   if(x % 100 == 0){
+// 		cxt.clearRect(0,0,1200,550); //清空矩形
+// 	  	cxt.fillRect(x,1,2,499);//画矩形
+
+// 	  	cxt.fillStyle="#FF0000";
+// 		cxt.beginPath();
+// 		cxt.arc(x,495,5,0,Math.PI*2,true);
+// 		cxt.closePath();
+// 		cxt.fill();
+//   }else{
+
+//   	if(x - 50 > 50){
+
+//   	}
+//   }
+	
+//   // $(document).find('title').text((e.pageX - width3) + ", " + (e.pageY - height3));
+// });
+
+</script>
+</html>

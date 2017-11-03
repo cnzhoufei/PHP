@@ -21,7 +21,12 @@ class MsgController extends Controller
 		$msg = $GLOBALS['HTTP_RAW_POST_DATA'];//接收微信服务器推送的消息 --用户发的
 		$json = json_decode($msg,true);
 		if(!$json){return;}
-		$str = '{"ToUserName":"'.$json['FromUserName'].'","FromUserName":"gh_b443ea71004c","CreateTime":"'.$json['CreateTime'].'","MsgType":"transfer_customer_service"}';
+		if($json['MsgType'] == 'event' && $json['Event']=='user_enter_tempsession'){
+			dump($this->postmsg($json['FromUserName'],'您好，有什么能帮助你?'));
+			echo 'success';exit;
+			
+		}
+		$str = '{"ToUserName":"'.$json['FromUserName'].'","FromUserName":"'.$json['ToUserName'].'","CreateTime":"'.$json['CreateTime'].'","MsgType":"transfer_customer_service"}';
 		echo $str;
 	}
 

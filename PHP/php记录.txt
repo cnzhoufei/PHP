@@ -10,7 +10,7 @@ $a = preg_match_all("/[\x{4e00}-\x{9fa5}]+/u", $str, $chinese);
 
 
 输出多个字符
-str_repeat（10，‘--’）
+str_repeat（‘--’,10）
 
 编码转换
 mb_convert_encoding($str,'UTF-8','GBK');//GBK 转换成 UTF-8

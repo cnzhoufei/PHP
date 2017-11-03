@@ -1,4 +1,4 @@
-http://www.haorooms.com/post/grunt_css_html_bs  图片压缩
+﻿http://www.haorooms.com/post/grunt_css_html_bs  图片压缩
 
 图片处理
 
@@ -13,3 +13,10 @@ tp5
 shell 
 
 python
+
+canvas 画图
+
+
+wx.setNavigationBarTitle({
+          title: res.data.goods.goods_name//页面标题为路由参数
+        })

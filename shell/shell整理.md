@@ -37,6 +37,8 @@ grep -E "^[^210]" a --在a文件中查找不包含210的行
 grep -E "h*p" a --查找a文件中包含h和p的行
 grep -E "[5-8][6-9][0-3]" a --查找大于560小于893的行
 
+删除除了某个文件外的所有文件
+ls | grep -E "[^xiaochengxu.zip]"|xargs rm -rf
 
 第2章 Shell文件权限和脚本执行
 linux权限:
