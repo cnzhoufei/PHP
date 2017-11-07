@@ -714,7 +714,8 @@ getElementById() //通过元素Id，唯一性
 格式：$('#父窗口中的元素ID', parent.document).click();  
 实例：$('#btnOk', parent.document).click();  
 
-
+iframe 中给父窗口传值
+$('#urlss', window.parent.document).val('sssssssssssssssss');
 
 1, window.location.href
 整个URl字符串(在浏览器中就是完整的地址栏)

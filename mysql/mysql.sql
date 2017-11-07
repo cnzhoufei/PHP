@@ -130,6 +130,13 @@ select store.store_id from yd_store as store inner join yd_shouji on store.store
 
 select * from yundi88 where store_id not in(1,2);
 select unix_timestamp(now()) ;获取当前时间戳
+UNIX_TIMESTAMP(datetime)
+FROM_UNIXTIME(unixtime)
+比如运行SELECT UNIX_TIMESTAMP('2010-03-01 00:00:00')
+返回1267372800
+运行SELECT FROM_UNIXTIME(1267372800)
+返回'2010-03-01 00:00:00'
+
 IFNULL(字段,0) 如果为空就给0
 not 是取反
 avg()求平均数

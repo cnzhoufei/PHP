@@ -2,6 +2,9 @@ vim /etc/sysoconfig/network-scripts/ifcfg-eth0 --ip修改
 who  查看当前登录的用户数量
 who | wc -l
 
+重载配置文件
+pkill -1 httpd 
+pkill -1 nginx
 
 命令历史  
 查看历史命令:history
