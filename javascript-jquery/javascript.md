@@ -716,6 +716,8 @@ getElementById() //通过元素Id，唯一性
 
 iframe 中给父窗口传值
 $('#urlss', window.parent.document).val('sssssssssssssssss');
+//跳转到顶层窗口
+top.location='/AdultSupplies/index3.html
 
 1, window.location.href
 整个URl字符串(在浏览器中就是完整的地址栏)

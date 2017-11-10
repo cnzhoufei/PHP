@@ -1,40 +1,40 @@
 
-imagecreatetruecolor  ´´½¨»­²¼
+imagecreatetruecolor  åˆ›å»ºç”»å¸ƒ
 
-imagecolorallocate($img,123,123,123) ´´½¨ÑÕÉ«
+imagecolorallocate($img,123,123,123) åˆ›å»ºé¢œè‰²
 
 imagefill($img,0,0,$color)
 
-imageline»­Ïß
+imagelineç”»çº¿
 
-imagesetpixel($img,50,30,$color) »­µã
+imagesetpixel($img,50,30,$color) ç”»ç‚¹
 
-imagepolygon »­¶à±ßĞÎ
+imagepolygon ç”»å¤šè¾¹å½¢
 
-imagefilledpolygon  Ìî³ä¶à±ßĞÎ
+imagefilledpolygon  å¡«å……å¤šè¾¹å½¢
 
-imageellipse »­Ô²
+imageellipse ç”»åœ†
 
-imagefilledellipse Ìî³äÔ²
+imagefilledellipse å¡«å……åœ†
 
-imagearc »­»¡Ïß
+imagearc ç”»å¼§çº¿
 
-imagefillenarc  Ìî³ä»¡ĞÎ
+imagefillenarc  å¡«å……å¼§å½¢
 
-imagttftext Ğ´×Ö
+imagttftext å†™å­—
 
-imagestring  ´¹Ö±Ğ´×Ö
+imagestring  å‚ç›´å†™å­—
 
-getimagesize »ñÈ¡Í¼Æ¬ĞÅÏ¢
+getimagesize è·å–å›¾ç‰‡ä¿¡æ¯
 
 imagecreatefromjpeg 
 
-imagecopymerge¿½±´²¢ºÏ²¢Í¼ÏñµÄÒ»²¿·Ö
+imagecopymergeæ‹·è´å¹¶åˆå¹¶å›¾åƒçš„ä¸€éƒ¨åˆ†
 
-imagecopyresampledÖØ²ÉÑù¿½±´²¿·ÖÍ¼Ïñ²¢µ÷Õû´óĞ¡
+imagecopyresampledé‡é‡‡æ ·æ‹·è´éƒ¨åˆ†å›¾åƒå¹¶è°ƒæ•´å¤§å°
  
 header('content-type:image/png');
 
-imagepng($img)Êä³ö
+imagepng($img)è¾“å‡º
 
-imagedestroy Ïú»Ù
+imagedestroy é”€æ¯

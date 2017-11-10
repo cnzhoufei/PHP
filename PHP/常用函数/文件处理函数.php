@@ -142,3 +142,5 @@ move_uploaded_file()	将上传的文件移动到新位置	"if(is_uploaded_file($
  }else{
   exit('不是上传文件');
  }"
+
+
