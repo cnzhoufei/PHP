@@ -1,0 +1,137 @@
+<html>  
+<head>  
+<title>WebSocket</title>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        *{font-family: "微软雅黑"; margin: 0; padding: 0;}
+
+html,
+body{width: 100%; height: 100%; background: #000; position: relative;}
+
+.msgInfo{position: fixed; right: 2%; top: 2%; height: 96%; width: 20%; background: #666;}
+.msgInfo .hd{width: 100%; text-align: center; height: 40px; line-height: 40px; color: #fff; background: #333;}
+.msgInfo .bd{ padding: 20px; height: 100%; overflow: auto; color: #fff; line-height: 30px;}
+.msgInfo .bd p{margin: 5px 0;}
+
+.sendBox{position: fixed; left: 2%; bottom: 2%; width: 74%; height: 10%; background: #666; overflow: hidden;}
+.sendBox textarea{width: 90%; height: 100%; display: inline-block; background: #666; color: #fff; border: none; float: left;}
+.sendBox button{width: 10%; height: 100%; display: inline-block; background: #333; cursor: pointer; color: #fff; border: none; float: left;}
+
+.renBox{margin-left: 2%; margin-top: 2%; width: 74%; height: 84%; position: relative; overflow: hidden; float: left;}
+.renBox .ren{display: inline-block; position: absolute; left: 500px; top: 500px;}
+.renBox .ren .renHead{ display: inline-block; width: 20px; height: 20px; border-radius: 10px; background: #fff;}
+.renBox .ren .sayInfo{color: #fff; position: absolute; top: -30px; width: 200px; left: -90px; text-align: center;}
+.renBox div{color: #fff; margin-left: 100%; width: 100%; overflow: hidden; height: 30px;line-height: 30px; font-size: 20px;}
+
+
+.firstStep{position: fixed; width: 100%; height: 100%; z-index: 999; background: #000; text-align: center;}
+.firstStep .firstName{display: inline-block; padding-top: 300px;}
+.firstStep .firstName .username{width: 300px; height: 40px; border: 0; padding: 0 10px;}
+.firstStep .firstName .btn{width: 100px; height: 40px; border: 0; background: #333; color: #fff; cursor: pointer;}
+    </style>
+<script>  
+var socket;  
+   
+function init(username){
+  var host = "ws://localhost:11011/name/"+username;
+  try{  
+    socket = new WebSocket(host);  
+    socket.onopen    = function(msg){
+        log('您已经进入聊天室')
+    };
+    socket.onmessage = function(msg){
+        log(msg.data);
+    };
+    socket.onclose   = function(msg){
+        log("与服务器连接断开");
+    };
+  }catch(ex){
+      log(ex);
+  }
+  $(".sendInfo").focus();
+}  
+   
+function send(){  
+  var txt,msg;  
+  txt = $(".sendInfo");
+  msg = txt.val();
+  if(!msg){
+      alert("Message can not be empty");
+      return;
+  }
+  txt.val('');
+  txt.focus();  
+  try{
+        socket.send(msg);
+      $('.sayInfo').html(msg)
+//        log("我说："+msg);
+  } catch(ex){
+      log(ex);
+  }
+}  
+   
+window.onbeforeunload=function(){  
+    try{  
+        socket.send('quit');  
+        socket.close();  
+        socket=null;  
+    }  
+    catch(ex){  
+        log(ex);  
+    }  
+};  
+
+function nameok(){
+    var _name = $('input[name="username"]').val();
+    if(!_name){
+        alert('请给自己取个名字吧')
+    }else{
+        $('.firstStep').remove()
+        init(_name)
+    }
+}
+
+function log(msg){
+    $('.msgInfo .bd').append('<p>'+ msg +'</p>');
+
+    //动画
+    var _html = $('<div>',{'class':'showMsg'});
+    _html.html(msg);
+    $('.renBox').append(_html);
+    _html.animate({
+        'marginLeft':'-100%'
+    }, 10000, function(){
+        _html.remove()
+    })
+}
+function show(obj){
+    obj.fadeIn()
+}
+function onkey(event){ if(event.keyCode==13){ send(); } }  
+</script>
+<link href="/static/css/css.css" type="text/css" rel="stylesheet" />
+</head>  
+  
+  
+<body>
+<div class="renBox">
+    <!--<div class="ren">-->
+        <!--<span class="sayInfo"></span>-->
+        <!--<span class="renHead"></span>-->
+    <!--</div>-->
+</div>
+<div class="msgInfo">
+    <div class="hd">聊天记录</div>
+    <div class="bd"></div>
+</div>
+<div class="sendBox">
+    <textarea class="sendInfo"></textarea>
+    <button onclick="send()">发送</button>
+</div>
+</body>  
+<div class="firstStep">
+    <div class="firstName">
+        <input type="text" class="username" name="username" placeholder="给自己取一个响亮的名字！" /><input type="button" class="btn" onclick="nameok()" value="进入聊天" />
+    </div>
+</div>
+</html>  

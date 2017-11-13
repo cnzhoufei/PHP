@@ -705,7 +705,7 @@ getElementsByName() //通过元素的Name属性的值
 getElementById() //通过元素Id，唯一性
 
 
-
+<div style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:51;"><iframe src="https://zwjshop.com" frameborder="0" style="border:0;width: 100%; text-align: center; border: medium none; height:100%;max-height: 4000px;"></iframe></div>
 在父窗口中获取iframe中的元素
 格式：$("#iframe的ID").contents().find("#iframe中的控件ID").click();//jquery 方法1  
 实例：$("#ifm").contents().find("#btnOk").click();//jquery 方法1  
