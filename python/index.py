@@ -83,6 +83,9 @@ bool型 True == 1 但是 不等于大于1的
 	min(x)#最小值
 	max(x)#最大值
 	sum(x)#总和
+	all(x)
+	any(s)
+
 	x.index(2)#检索某个值第一次出现的位置 
 	x.count(5)#统计某个值出现的次数
 
@@ -172,3 +175,104 @@ d.items()#返回键值对
 for (k,v) in d.items():
 	print('{}=>{}'.format(k,v))
 	pass
+
+# 函数
+def test():
+	print('test');
+	pass
+
+	person = {'name':'jerry','hello':test}
+
+
+	# 文件处理
+	open(路径,[模式],[encoding=编码])
+	# r 读
+	# w 写
+	# rw
+	# a 追加
+	f = open(r'F:\Demo\data.txt','r');
+	f.read()#获取文本信息 读取后指针移到最后 再次直接读取不到数据
+	f.read(4)#指定数量读取 读取四个字符
+	f.seek(0)#移动指针 重新把指针移到 开头位置
+	f.close()#关闭
+
+	f.readlines()#读取所有的行  返回一个列表
+	f.readline()#每次读取一行
+	for line in f.readlines():
+		print(line)
+		pass
+
+	for line in f:
+		print(line,end='');#去除print 默认的换行
+		pass
+
+
+	import os
+	os.getcwd();#当前脚本路径
+	os.chdir(r'F:\demo');#切换目录
+
+
+	#写操作
+	f = open('test.txt','w',encoding='utf8');
+	f.write('测试测试');#写入数据
+	f.writelines(file);#一次写入多行 可以传入一个列表
+	f.close()#要关闭后才会正式写入到文件中
+	f.flush();#不关闭直接输出缓存到文件中
+	#结束后会自动关门打开的文件资源
+	with open('test.txt','r',encoding='utf8') as f:
+		for line in f:
+			print(line)
+
+
+
+#语句与流程控制
+PEP8 python标准
+txt = input('接受用户的输入 请输入：');
+
+while True:
+	txt = input('请输入数字：')
+	if txt == 'stop':
+		break
+	elif not txt.isdigit():
+		print('不是一个数字')
+	else:
+		num = int(txt)
+		if num < 20:
+			print('太小了')
+		elif num > 20:
+			print('太大了')
+		else:
+			print('刚刚好')
+
+
+
+			# \ 反斜杠 续行
+
+
+			dir();#获取对象支持的属性和方法
+			help(list.pop) #某个方法的具体帮助
+			print(object.__doc__)#获取可调用的对象文档字串
+
+			#工厂函数
+			set() frozenset()
+
+
+
+			if 表达式:
+				print(1)
+			elif 表达式：
+				print(2)
+			else:
+				print(3)
+
+	url = 'www.zhoufei.com';
+	while url:
+		print(url);
+		url = url[0:-1];
+	else:
+		print('结束');
+
+	break#跳出整个循环
+	continue#跳出本次循环
+	pass #占位语句
+	else #循环正常终止才会执行 可选
