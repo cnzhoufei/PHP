@@ -6,6 +6,10 @@ ssh -l 用户名 ip -p 端口
 ssh -l root 124.172.136.69 -p 16589
 
 
+netstat -ntlp   //查看当前所有tcp端口·
+　　netstat -ntulp |grep 80   //查看所有80端口使用情况·
+　　netstat -an | grep 3306   //查看所有3306端口使用情况·
+
 
 
 环境安装 wdlinux 3.1

@@ -2,6 +2,15 @@ vim /etc/sysoconfig/network-scripts/ifcfg-eth0 --ip修改
 who  查看当前登录的用户数量
 who | wc -l
 
+
+让程序在后台执行
+Ctrl+z  #[1]+ Stopped /root/bin/rsync.sh
+bg 1 #在后台执行
+fg #查看后台运行的命令
+
+
+
+
 重载配置文件
 pkill -1 httpd 
 pkill -1 nginx

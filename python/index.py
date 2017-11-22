@@ -1,3 +1,12 @@
+对于Python 2，简单搭建Web服务器，只需在需要搭建Web服务器的目录（如C:/ 或 /home/klchang/）下，输入如下命令：
+python -m SimpleHTTPServer 8080
+含义为使用 8080端口的创建Web服务器，可以使用浏览器 http://127.0.0.1:8080 或 将 127.0.0.1 替换为本机的外部IP地址，进行访问。
+
+对于Python 3，其创建Web服务器的等价命令，如下：
+python3 -m http.server 8080
+
+
+
 test = 100;
 test = 'sssss';
 if 5 > 3:

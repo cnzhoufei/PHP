@@ -237,6 +237,13 @@ drop index stu_limit_table.sub_number_unique on tbname(column)
 
 
 
+NOT NULL - 指示某列不能存储 NULL 值。
+UNIQUE - 保证某列的每行必须有唯一的值。
+PRIMARY KEY - NOT NULL 和 UNIQUE 的结合。确保某列（或两个列多个列的结合）有唯一标识，有助于更容易更快速地找到表中的一个特定的记录。
+FOREIGN KEY - 保证一个表中的数据匹配另一个表中的值的参照完整性。
+CHECK - 保证列中的值符合指定的条件。
+DEFAULT - 规定没有给列赋值时的默认值。
+
 
 
 
@@ -500,3 +507,80 @@ longtext 可变长度，最多2的32次方-1个字符
 auto_increment能为新插入的行赋一个唯一的整数标识符。为列赋此属性将为每个新插入的行赋值为上一次插入的ID+1。
 
 MySQL要求将auto_increment属性用于作为主键的列。此外，每个表只允许有一个auto_increment列
+
+
+
+处理重复数据
+查询重复数据
+select count(*) as repetitions, last_name, first_name from person_tbl group by last_name, first_name having repetitions > 1;
+查询时过虐重复数据 distinct
+select distinct last_name, first_name from person_tbl;
+select last_name, first_name from person_tbl group by (last_name, first_name);
+
+删除重复数据
+如果你想删除数据表中的重复数据，你可以使用以下的sql语句：
+create table tmp select last_name, first_name, sex from person_tbl group by (last_name, first_name, sex);--创建临时表把查出去重后的数据写入
+drop table person_tbl;--删除原表
+alter table tmp rename to person_tbl;--将临时表改名为原表名
+
+
+正则表达式
+select name from person_tbl where name regexp '^st';
+
+
+select title from yd_store_art where title like '%1%';
+select title from yd_store_art where title REGEXP '1';
+
+
+mysql> select count(1) from yd_store_art;
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    15
+Current database: yundi88_com
+
++----------+
+| count(1) |
++----------+
+|  1553344 |
++----------+
+1 row in set (0.07 sec)
+
+
+mysql> select title from yd_store_art where title like '%00%';
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    16
+Current database: yundi88_com
+
+58912 rows in set (37.76 sec)
+
+
+mysql> select title from yd_store_art where title REGEXP '00';
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    17
+Current database: yundi88_com
+
+58912 rows in set (36.31 sec)
+
+
+
+mysql> select title from yd_store_art where title REGEXP '韩国服务器';
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    18
+Current database: yundi88_com
+928 rows in set (37.13 sec)
+
+
+
+mysql> select title from yd_store_art where title like '%韩国服务器%';
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    19
+Current database: yundi88_com
+928 rows in set (36.76 sec)
+
+
+
+

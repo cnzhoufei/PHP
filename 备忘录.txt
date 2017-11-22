@@ -14,6 +14,8 @@ shell
 
 python
 
+深入学习 mysql redis memcached
+
 canvas 画图
 
 
