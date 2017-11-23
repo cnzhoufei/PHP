@@ -1,0 +1,31 @@
+﻿{dede:field.id runphp='yes'}
+    global $dsql;//获取数据库模型
+    $id = @me;//将当前文章的id 赋值给变量
+    $sql = "select tag from dede_taglist where aid = $id";//查询当前文章的自定义关键词 
+    $tag=$dsql->getone($sql)['tag'];//查询到的tag关键词
+    $tag = trim($tag);//去除空格
+
+
+    //生成随机调取的 文章id  因为直接用rand函数会影响速度
+    $randsql = "select id from dede_archives order by rand() limit 16";
+    $dsql->SetQuery($randsql);//将SQL查询语句格式化
+    $dsql->Execute();//执行SQL操作
+    $randid = '';
+    while($row = $dsql->GetArray()){//把查询出来的id用逗号链接成字符串
+      $randid .= $row['id'].',';
+    }
+    $randid = substr($randid,0,-1);//去除最后一个逗号
+
+
+  //查询文字
+    $sql2="select id,title,typeid from dede_archives where(title like '%{$tag}%' and id in({$randid}))";
+    $dsql->SetQuery($sql2);//将SQL查询语句格式化
+  $dsql->Execute();//执行SQL操作
+  $tags = '';
+  while($row = $dsql->GetArray()){
+    $sql = "select typedir from #@__arctype where id = ".$row['typeid'];
+    $typedir=$dsql->getone($sql)['typedir'];
+    $tags .= "<a href='".str_replace('{cmspath}','',$typedir).$row['id'].".html' target='_blank'>{$row['title']}</a><br>";
+  }
+  @me = $tags;
+{/dede:field.id}
