@@ -63,6 +63,41 @@ Threads_running :代表当前激活的（非睡眠状态）线程数。并不是
 
 show variables like '%datadir%';查看数据文件存放路径
 
+
+
+index 普通索引  仅仅加快查询速度
+unique index 唯一索引  加快查询速度 and 行上的值不能重复
+primary key 主键索引 
+fulltext index 全文索引
+
+查看表的所有索引
+show index from 表名 
+
+
+建立索引
+alter table 表名 add index/unique/fulltext/primary key [索引名](列名);
+alter table dede_article add index (aid)
+
+alter table dede_article add primary key (id);
+
+删除索引
+alter table 表名 drop index 索引名;
+删除主键索引
+alter table 表名 drop primary key; 
+
+全文索引的查询方法
+select * from 表名 where match(全文索引的字段名称) against ('要搜索的关键词')
+
+
+
+
+
+
+
+
+
+
+
 --一次添加多条数据
 insert into user(name) values('zhoufei'),('zhoufei2');
 
