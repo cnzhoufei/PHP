@@ -1,12 +1,3 @@
-对于Python 2，简单搭建Web服务器，只需在需要搭建Web服务器的目录（如C:/ 或 /home/klchang/）下，输入如下命令：
-python -m SimpleHTTPServer 8080
-含义为使用 8080端口的创建Web服务器，可以使用浏览器 http://127.0.0.1:8080 或 将 127.0.0.1 替换为本机的外部IP地址，进行访问。
-
-对于Python 3，其创建Web服务器的等价命令，如下：
-python3 -m http.server 8080
-
-
-
 test = 100;
 test = 'sssss';
 if 5 > 3:
@@ -94,7 +85,7 @@ bool型 True == 1 但是 不等于大于1的
 	sum(x)#总和
 	all(x)
 	any(s)
-
+	x.isdigit()#判断是否是数字
 	x.index(2)#检索某个值第一次出现的位置 
 	x.count(5)#统计某个值出现的次数
 
@@ -119,6 +110,10 @@ bool型 True == 1 但是 不等于大于1的
 	for x in range(5):
 		print('sssss' + str(i));
 		pass
+
+	#相当于php foreach
+	for key,val in enumerate(data):
+		print(key,val)
 
 
 #字符串 和php 差不多
@@ -195,15 +190,25 @@ def test():
 
 	# 文件处理
 	open(路径,[模式],[encoding=编码])
-	# r 读
+	# r 读 
 	# w 写
 	# rw
 	# a 追加
 	f = open(r'F:\Demo\data.txt','r');
+	f.tell()#查看指针位置
 	f.read()#获取文本信息 读取后指针移到最后 再次直接读取不到数据
 	f.read(4)#指定数量读取 读取四个字符
 	f.seek(0)#移动指针 重新把指针移到 开头位置
+	f.encoding()#文件编码
+	f.fileno()#系统对文件编号
+	f.flush()# 刷新到文件
+	f.truncate()#截取
 	f.close()#关闭
+
+	open('ssss','r+')#读写
+	open('sssss','w+')#写读
+	open('sss','rb')#二进制读取
+	open('sssss','wb').write('hello'.encode())#写二进制
 
 	f.readlines()#读取所有的行  返回一个列表
 	f.readline()#每次读取一行
@@ -211,6 +216,7 @@ def test():
 		print(line)
 		pass
 
+	#推荐使用
 	for line in f:
 		print(line,end='');#去除print 默认的换行
 		pass
@@ -233,6 +239,8 @@ def test():
 			print(line)
 
 
+import time
+time.sleep(1)#睡一秒
 
 #语句与流程控制
 PEP8 python标准
@@ -285,3 +293,38 @@ while True:
 	continue#跳出本次循环
 	pass #占位语句
 	else #循环正常终止才会执行 可选
+
+
+
+# 集和
+set()#可以去除列表的重复值  返回一个集合
+list_ = [1,2,3,4,5,1,2,3]
+list_2 = [1,2,3,4,5,1,2,3,7,8,90,0]
+list_3 = set(list_)
+
+list_.intersection(list_2) #求交集 &
+list_.union(list_2)#求并集 |
+list_.difference(list_2)#求差集 -
+list_1.issubset(list_2)#子集 
+list_1.issuperset(list_2)#父集
+list_1.symmetric_difference(list_2)#对称差集 ^
+list_.add('1');#添加一个值
+list_.update([1,2,3,4])#添加多个
+list_.remove('h')#删除一个值
+list_.discard('dd')#不存在不报错
+x in s #测试 x 是否是 s 的成员
+x not in s #测试 x 是否不是 s 的成员
+
+
+文件处理
+
+
+
+
+
+
+
+
+
+
+	
