@@ -1,0 +1,109 @@
+不妨仔细看一下我们系统环境的几个关键文件。你的文件应该类似或对应于下列：
+
+默认的Web服务器：Apache
+
+DocumentRoot：/var/www/html
+
+PHP配置文件：/etc/php.ini
+
+扩展配置目录：/etc/php.d/
+
+安全文件：/etc/php.d/security.ini
+
+这些技巧将保护你的网站，避免不同类型的常见攻击，比如SQL注入、XSS、跨站请求伪造攻击、eval()和文件上传等攻击。可在此(https://www.sitepoint.com/top-10-php-security-vulnerabilities/)查看常见攻击列表。
+
+1. 删除不必要的模块
+
+PHP随带内置的PHP模块。它们对许多任务来说很有用，但是不是每个项目都需要它们。只要输入下面这个命令，就可以查看可用的PHP模块：
+
+# php - m
+
+一旦你查看了列表，现在可以删除不必要的模块。减少模块的数量有助于提高你所处理的Web应用程序的性能和安全。
+
+2. 限制PHP信息泄露
+
+平台泄露关键信息司空见惯。比如说，PHP会泄露一些信息，比如版本以及它安装到服务器上的事实。这可以通过expose_php命令来实现。为了防止泄露，你需要在/etc/php.d/security.ini中将该命令设成off。
+
+expose_php=Off
+
+如果你需要了解版本及其状态，只要针对网站地址运行一个简单的Curl命令就可以获得该信息。
+
+curl -I https://www.livecoding.tv/index.php
+
+之前的命令会返回下列信息：
+
+HTTP/1.1 200 OK
+
+X-Powered-By: PHP/7.0.10
+
+Content-type: text/html; charset=UTF-8
+
+3. 禁用远程代码执行
+
+远程代码执行是PHP安全系统方面的常见安全漏洞之一。默认情况下，远程代码执行在你的系统上已被启用。“allow_url_fopen”命令允许请求(require)、包括(include)或可识别URL的fopen包装器等函数可以直接访问PHP文件。远程访问通过使用HTTP或FTP协议来实现，会导致系统无力防御代码注入安全漏洞。
+
+为了确保你的系统安全可靠、远离远程代码执行，你可以将该命令设成“Off”，如下所示：
+
+Allow_url_fopen=Off
+
+allow_url_include=Off
+
+4. 将PHP错误记入日志
+
+加强Web应用程序安全的另一个简单方法就是，不向访客显示错误。这将确保黑客根本无法危及网站的安全性。需要在/etc/php.d/security.ini文件里面进行编辑。
+
+display_errors=Off
+
+现在你可能会想：完成这一步后，“开发人员在没有错误信息的帮助下如何调试?”开发人员可以使用log_errors命令来用于调试。他们只需要在security.ini文件中将log_errors命令设成“On”。
+
+log_errors=On
+
+error_log=/var/log/httpd/php_scripts_error.log
+
+5. 合理控制资源
+
+为了确保应用程序的安全，控制资源很重要。为了确保适当的执行和安全，你就要对PHP脚本执行予以限制。此外，还应该对花在解析请求数据上的时间予以限制。如果执行时间受到控制，脚本使用的内存等其他资源也应该会得到相应配置。所有这些度量指标可通过编辑security.ini文件来加以管理。
+
+# set in seconds
+
+max_execution_time = 25
+
+max_input_time = 25
+
+memory_limit = 30M
+
+6. 禁用危险的PHP函数
+
+PHP随带用于开发的实用函数，但是也有可能被黑客用来闯入Web应用程序的大量函数。禁用这些函数可以提高总体安全性，并确保你没有受到危险的PHP函数的影响。
+
+为此，你先要编辑php.ini文件。一旦进入该文件，找到disable_functions命令，禁用里面的危险函数。为此，你只要拷贝/粘贴下列代码。
+
+disable_functions =exec,passthru,
+
+shell_exec,system,proc_open,popen,curl_exec,
+
+curl_multi_exec,parse_ini_file,show_source
+
+你可以在此(https://www.eukhost.com/blog/webhosting/dangerous-php-functions-must-be-disabled/)进一步了解禁用危险的PHP函数。
+
+7. 上传文件
+
+如果你的应用程序不需要上传任何文件，禁用上传文件的功能有助于提高安全。想禁止用户上传文件，只需要编辑/etc/php.d/目录下的security.ini文件，将file_uploads命令设成OFF。
+
+file_uploads=Off
+
+8. 保持版本最新
+
+开发人员在24/7不间断地工作，给你使用的技术打上补丁。PHP也是一样。由于它有一个开源社区，补丁和修正版定期发布。更新版还为首日漏洞及其他安全漏洞提供了安全补丁。如果你注重应用程序的安全性，就要始终确保你的PHP解决方案是最新版本。另外，给其他相关技术打上最新的补丁可以确保最大限度的安全。
+
+9.控制文件系统访问
+
+默认情况下，PHP可使用fopen()等函数来访问文件。open_basedir命令提供了访问。首先，始终要将open_basedir命令设成/var/www/html目录。将它设成其他任何目录会导致安全问题。
+
+open_basedir="/var/www/html/"
+
+10. 控制POST大小
+
+我们的最后一个PHP安全要点是控制POST大小函数。HTTP POST函数使用客户端的浏览器，将数据发送到Web服务器。比如说，用户可能上传证书，然后发送到Web浏览器以便处理。一切都运行顺畅，直到有一天黑客企图发送庞大的文件来耗尽服务器资源。这很可能会导致服务器崩溃或响应缓慢。为了保护服务器远离这个漏洞，就需要设置POST大小。POST大小可以在/etc/php.d/security.ini文件里面加以设置。
+
+post_max_size=1k
