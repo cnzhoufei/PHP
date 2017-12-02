@@ -1,0 +1,6 @@
+1.dede/templets/content_list.htm 增加复制按钮
+<img src='images/copy2.png' title="复制" alt="复制" onClick="window.location.href='article_copy.php?id={dede:field.id/}'" style='cursor:pointer' border='0' width='16' height='16' />
+
+2. 将article_copy.php  放到dede下
+
+3.将copy2.png 图片放到 dede/images 下

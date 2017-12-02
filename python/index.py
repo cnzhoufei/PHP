@@ -318,9 +318,20 @@ x not in s #测试 x 是否不是 s 的成员
 
 文件处理
 
+#可以打开多个文件  with执行完成后会自动关闭释放内存
+with open('ssssssss','r') as f:
+	f.readline()
 
 
+with open('1.txt') as f1,open('2.txt','r') as f2:
 
+
+s = '你好'
+a = s.encode();#编码成unicode 默认utf-8
+b = a.decode()#解码
+#如果编码是GBK
+a = s.encode('gbk')
+b = a.edcode('gbk')
 
 
 
