@@ -81,8 +81,20 @@ fulltext index --全文索引
 show index from 表名 --查看表的所有索引
 --建立索引
 alter table 表名 add index/unique/fulltext/primary key [索引名](列名);
-alter table dede_article add index (aid)
-alter table dede_article add primary key (id);
+alter table dede_article add index (aid);#创建普通索引
+alter table dede_article add primary key (id);#创建主键索引
+#创建表时创建索引
+create table if not exists g(
+	`gid` int(11) unsigned not null auto_increment comment '商品id',
+	`gname` char(200) not null default '' comment '商品名称',
+	`title` char(200) not null default '' comment '商品title',
+	`much` int(11) unsigned not null default 0 comment '商品库存',
+	PRIMARY KEY (`gid`) comment '主键索引',
+  	KEY `gname` (`gname`) comment '普通索引',
+  	UNIQUE KEY `title` (`title`) comment '唯一索引'
+)engine=innodb default charset=utf8 comment '商品表';
+
+
 alter table 表名 drop index 索引名;--删除索引
 alter table 表名 drop primary key; --删除主键索引
 select * from 表名 where match(全文索引的字段名称) against ('要搜索的关键词');--全文索引的查询方法
@@ -307,3 +319,9 @@ source F://vzhoufei.sql
 不登录状态下恢复：
 以库为单位：mysql -u用户名 -p密码 < 备份文件地址
 以表为单位：mysql -u用户名 -p密码 库名 表名 <备份文件地址
+
+
+
+-----------------------------------------------触发器----------------------------------------------------------
+
+

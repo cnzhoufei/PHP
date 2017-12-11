@@ -85,7 +85,7 @@ $filedsqlstrs2 = '';
 $archivesdata2 = '';
 foreach($data3 as $kk=>$vv){
 		$filedsqlstrs2 .= "`{$kk}`,";
-		$archivesdata2 .= '"'.$vv.'",';
+		$archivesdata2 .= '"'.str_replace('"', "'", $vv).'",';
 }
 $filedsqlstrs2 = substr($filedsqlstrs2, 0,-1);
 $archivesdata2 = substr($archivesdata2, 0,-1);

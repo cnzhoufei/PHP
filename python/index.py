@@ -1,3 +1,13 @@
+www.python.org
+www.pycharm.com #开发工具
+ldea.lanyus.com #获取pycharm 的秘钥
+
+sublimeREPL插件
+1.sublimeREPL->python
+2.sublimeREPL->shell
+
+
+
 test = 100;
 test = 'sssss';
 if 5 > 3:
@@ -205,6 +215,8 @@ def test():
 	f.truncate()#截取
 	f.close()#关闭
 
+	remove() 同 unlink() 的功能是一样的 删除文件
+
 	open('ssss','r+')#读写
 	open('sssss','w+')#写读
 	open('sss','rb')#二进制读取
@@ -331,11 +343,58 @@ a = s.encode();#编码成unicode 默认utf-8
 b = a.decode()#解码
 #如果编码是GBK
 a = s.encode('gbk')
-b = a.edcode('gbk')
+b = a.edcode('gbk') 
+
+# 函数
+def test(x,y,z):
+	print(x)
+	print(y)
+	print(z)
+	return x,y,z#可以返回多个值  返回格式是一个元祖
+
+test(1,2,3)#传位置参数
+test(z=1,y=2,x=3)#指定形参
+
+#接收所有参数 parameter接收到的是一个元祖
+def test(*args):
+	print(args)
+test(1,2,3,4,5,65,6)
+test(*[1,2,3,4,5,65,6])
+
+#前面对应该 多余的参数wkargs接收
+def test(name,*args):
+	print(name)
+	print(args)
+test('alex',age=18,sex='0')
+
+
+#接收字典方式传值 接收到的是一个字典
+def test(**kwargs):
+	print(kwargs)
+
+test(name='zhoufei',age=18,sex=1)
+test(**{'name'='zhoufei','age'=18,'sex'=1})
+
+#前面对应该 多余的参数wkargs接收
+def test(name,**wkargs):
+	print(name)
+	print(wkargs)
+test('alex',age=18,sex='0')
 
 
 
 
+#变量作用域和php 一样 在函数体里修改全局变量用 global声明(只要字符串和整型有局部变量)
+def test(name):
+	global name
+	name = '2222'
+	print(name)
 
+name = '1111'
+test(name)
+print(name)	
 
-	
+#生成器
+#只有在调用时才会生成
+# 用for循环调取或者用c.__next__()(下一个)
+c = (i * 2 for i in range(10))
