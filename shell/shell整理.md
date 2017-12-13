@@ -1,7 +1,8 @@
 vim /etc/sysoconfig/network-scripts/ifcfg-eth0 --ip修改
 who  查看当前登录的用户数量
 who | wc -l
-
+watch -n1 ls -lh#动态查看目录的变化 
+tail -f file #动态查看文件的变化 
 
 让程序在后台执行
 Ctrl+z  #[1]+ Stopped /root/bin/rsync.sh

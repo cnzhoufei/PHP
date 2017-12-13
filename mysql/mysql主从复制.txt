@@ -1,0 +1,84 @@
+1.授权用户
+
+mysql bin-log日志
+vim /etc/my.cnf
+[mysqld]
+log-show-queries=mysql-slow.log#慢查询日志
+log-error=mysql.err#错误日志
+log=mysql.log #访问日志
+log-bin=mysql-bin#binlog日志 --
+
+查看binlog日志：show variables like "%bin%";
+flush logs;刷新日志 会生成一个新的日志
+show master status; 查看最后一个日志
+reset master;清空所有日志
+mysqlbinlog --no-defaults mysql-00001.bin;//查看binlog日志
+bin/mysqlbinlog --no-defaults mysql-bin.00001 | /bin/mysql -uroot -p123 库名;恢复binlog日志文件直接用导入
+
+指定位置恢复参数
+--start-position="50"#指定起始位置
+--stop-position='100'#指定终指位置
+指定时间段恢复
+--start-date="2017-01-04 21:17:50"#指定起始时间
+--stop-date="2017-10-11 19:10:10"#指定终止时间
+
+主从配置
+1. 开启log-bin=mysql-bin #开启binlog日志
+2. server-id=1 #这个id要保持唯一
+3. 在主服务器上设置读锁定有效，确保没有数据库操作，以便获得一个一致性的快照（选做根据数据的大小）
+	flush tables with read lock;
+4.mysqldump -uroot -p123  -l -F > bak.sql
+5.scp bak.sql 192.168.1.2:/tmp/ 回车输入yes回车输入密码#传送备份数据到从服务器
+
+从服务器
+1. 把主服务器的数据备份后恢复到从服务器
+2.配置
+	开启binlog
+	server-id=2
+	master-host = 192.168.1.11 #主服务器的ip
+	master-user = test #主服务器允许此ip登录的用户名(也授权的用户)
+	master-password = 123456 #主服务器允许此ip登录的密码
+	master-port = 3306#主服务器允许此ip登录的端口
+3.重启 pkill mysqld 或 kill -9 或 kill -2
+4.登录mysql执行：show slave status\G
+	如果
+	Slave-IO_Running:yes
+	Slave_SQL_Running:yes
+	值都是yes 表示主从配置成功
+
+查询用从服务器
+增删改用主服务器
+
+从服务器常用命令
+start slave#启动复制进程
+stop slave#关闭复制进程
+show slave status#查看从数据库状态
+show master logs #查看主数据库bin-log日志
+changemaster to#动态改变到主服务器的配置
+show processList#查看从数据库运行进程
+
+常见错误
+从数据库无法同步：
+show slave status 显示Slave_SQL_Running为No,Seconds_Behind_Master 为null
+原因：
+a.程序可能在slave上进行了写操作
+b.也可能是slave机器重启后，事务回滚造成的
+解决
+1.slave stop;
+	set GLOBAL SQL_SLAVE_SKIP_COUNTER=1;
+	slave start;
+2.slave库，slave stop;停止slave服务master库，去主服务器show master status;
+	得到主服务器上当前的二进制日志名和偏移量，然后到从服务器操作
+	change master to
+	master-host = 192.168.1.11 #主服务器的ip
+	master-user = test #主服务器允许此ip登录的用户名(也授权的用户)
+	master-password = 123456 #主服务器允许此ip登录的密码
+	master-port = 3306#主服务器允许此ip登录的端口
+	master_log_file="mysql-bin.000002"#要恢复的日志
+	master_log_pos=98;#要恢复的段
+
+	启动slave服务
+	slave start;
+	通过show slave status 查看Slave_SQL_Running为yes,Seconds_Behind_Master为0既为正常
+
+ 

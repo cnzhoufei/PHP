@@ -16,7 +16,12 @@ drop table 表名;--删除表
 rename table 原表名 to 新表名;--修改表名
 use 库名;--进入库
 show table;--查看所有表
-
+#表复制
+create table 要创建的新表名 like 要复制的表名;
+insert into t2 select * from t1;
+#视图
+create view 要创建的视图名称 as select * from t1 where id > 1000 and id < 10000;#创建视图
+drop view 要删除的视图名称;#删除视图
 
 truncate table  表名  索引从新归零
 FLUSH TABLES WITH READ LOCK;锁住所有表 只可以读
@@ -29,7 +34,7 @@ alter table 表名 add 要添加的字段名称 字段声明 after 增加在谁�
 alter table 表名 change 要修改的字段名 新字段名+字段声明;--修改字段
 alter table `表名` modify `字段名` 新的字段声明; --修改字段类型
 alter table 表名 drop 字段名;--删除字段 
-
+alter table 表名 charset=utf8;
 
 
 --视图 view（把查询出来的结果保存成一个虚拟表） 视图与表一一对应 一个发生改变另一个也会改变  当一个sql频繁出现的时候 可以做一个是视图
@@ -78,11 +83,13 @@ index --普通索引  仅仅加快查询速度
 unique index --唯一索引  加快查询速度 and 行上的值不能重复
 primary key --主键索引 
 fulltext index --全文索引
+create index orderid_productid on orders(order_id, product_id)
 show index from 表名 --查看表的所有索引
 --建立索引
-alter table 表名 add index/unique/fulltext/primary key [索引名](列名);
+alter table 表名 add index/unique/fulltext/primary key [索引名](列名(长度));
 alter table dede_article add index (aid);#创建普通索引
 alter table dede_article add primary key (id);#创建主键索引
+alter table article add index typeid1_pypeid2_pyteid3(typeid1,typeid2,typeid3);#创建组合索引--组合索引查询时遵循最左匹配(只有查询时用到了最左边的字段才会用到索引)
 #创建表时创建索引
 create table if not exists g(
 	`gid` int(11) unsigned not null auto_increment comment '商品id',
@@ -96,7 +103,7 @@ create table if not exists g(
 
 
 alter table 表名 drop index 索引名;--删除索引
-alter table 表名 drop primary key; --删除主键索引
+alter table 表名 drop primary key; --删除主键索引 如果有自增 要先删除自增
 select * from 表名 where match(全文索引的字段名称) against ('要搜索的关键词');--全文索引的查询方法
 
 -------------------------------------------------增删改查-------------------------------------------------------
@@ -143,8 +150,8 @@ select * from 表名 where status = 1 order by id,name;--已多个字段排序
 select * From `goods` where id in (178,171,176,188,189) order by field(id,178,171,176,188,189);--不排序
 
 --group by 分组
-select * from 表名 where status = 1 order by id asc group by `字段`;--   select * from `shop_category` group by `pid`;
-
+select *,count(typeid)每个分组的个数 from 表名 where status = 1 order by id asc group by `字段`;--   select * from `shop_category` group by `pid`;
+select *,count(pname) from 表名  where status = 1  group by cnanme,pname with rollup;#再次聚合 后面会得到一个总数with rollup不能喝order 不要一起使用
 --like 搜索
 select * from 表名 where 字段 like '%要搜索的关键词%';--select * from goods where goods_name like '%测试商品%';
 
@@ -242,10 +249,48 @@ min() 求最小
 sum() 求总和  
 count() 求总行数
 rand()   随机函数
+
 concat() 连接字段
+lcase()转换成小写
+ucase()转换成大写
+length()字符串的长度
+ltrim()去除前端的空
+rtrim()去除后端的空
+repeat()重复多次 select repeat('test',10) 
+replace(要替换的字符串，要搜索的值，替换成什么)字符串替换
+substring(原字符，从第几，取到第几)字符串截取
+space(count)生成count个空格
+
+bin()十进制转二进制
+ceiling() 向上取整
+floor()向下取整
+sqrt()开平方
+rand()返回0-1的内置随机值
+
+curdate()返回当前的日期
+curtime()返回当前的时间
+now();#当前时间 select now();--2017-12-13 20:20:20
+UNIX_TIMESTAMP(datetime)#当前时间转换成时间戳 比如运行SELECT UNIX_TIMESTAMP('2010-03-01 00:00:00')返回1267372800
+FROM_UNIXTIME(unixtime)#格式化时间戳 运行SELECT FROM_UNIXTIME(1267372800)返回'2010-03-01 00:00:00'
+week() 返回日期data为一年中的第几周
+datediff()返回起始时间和结束时间 间的天数
+
 mysql_real_escape_string()--防止sql注入 php函数
 group_concat()链接字段的值
 RAND();随机函数
+explain | desc#explain或者desc 查看执行计划 explain select * from t where name = 'bbs' and keyword = 'bbs';
+-- type=const表示通过索引一次就找到了；
+-- key=primary的话，表示使用了主键；
+-- type=all,表示为全表扫描；
+-- key=null表示没用到索引。type=ref,因为这时认为是多个匹配行，在联合查询中，一般为REF。
+
+\s;查看数据库信息
+#查看帮助
+? contents;#这个帮助文档可以一层一层往下找
+? %
+? create
+?reg%
+
 
 
 
@@ -299,15 +344,15 @@ drop table person_tbl;--删除原表
 alter table tmp rename to person_tbl;--将临时表改名为原表名
 
 
+备份数据前应该锁定所以表 备份完成后解锁
+备份表：mysqldump -u用户名 -p密码 库名 表名1 表名2 -l -F > 地址/文件名;#-l锁住insert和delete -F生成新的binlog日志
+mysqldump -uroot -p123 liuyan liuyan -l -F > F://vzhoufei.sql
 
-备份表：mysqldump -u用户名 -p密码 库名 表名1 表名2 > 地址/文件名
-mysqldump -uroot -p123 liuyan liuyan > F://vzhoufei.sql
 
+备份库下面的所有表：mysqldump -u用户名 -p密码 库名 -l -F > 地址/文件名
 
-备份库下面的所有表：mysqldump -u用户名 -p密码 库名 > 地址/文件名
-
-备份库：mysqldump -u用户名 -p密码 -B 库名1 库名2 库名3  > 地址/文件名
-备份所有库：mysqldump -u用户名 -p密码 -A > 地址/文件名
+备份库：mysqldump -u用户名 -p密码 -B 库名1 库名2 库名3  -l -F > 地址/文件名
+备份所有库：mysqldump -u用户名 -p密码 -A -l -F> 地址/文件名
 
 
 登录状态下恢复：
@@ -316,11 +361,24 @@ mysqldump -uroot -p123 liuyan liuyan > F://vzhoufei.sql
 source F://vzhoufei.sql
 
 
-不登录状态下恢复：
+不登录状态下恢复：可选参数 -v 查看导入的详细信息 -f 当遇到错误时继续执行
 以库为单位：mysql -u用户名 -p密码 < 备份文件地址
 以表为单位：mysql -u用户名 -p密码 库名 表名 <备份文件地址
 
+root 密码丢失
+1.关闭mysql
+2.mysqld_safe --skip-grant-tables --user=mysql & #跳过授权标mysql.user和mysql.db这些表
+3.mysql -uroot
+4.set password=password('123456');#这条会报错因为用了--skip-grant-tables
+4.update user set password=password('123456') where user='root' and host="localhost";
+5.set password for root@localhost=password('123456');
+6.set password=password('123456');#和第五步一样都可以修改密码
 
+
+
+开启慢查询 mysql.cnf msqld下
+log_show_queries=slow.log
+long_query_time=5#大于五秒的记录
 
 -----------------------------------------------触发器----------------------------------------------------------
 

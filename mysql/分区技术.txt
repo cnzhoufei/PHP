@@ -1,0 +1,63 @@
+ \d $ #修改结束符号
+建立一个存储
+ crate procedure p3()
+ begin
+ set @i = 1;
+ while @i < 10000 do
+ insert inot t3 values(@i);
+ set @i + 1;
+ end while;
+ end;
+ show procedure status;#查看存储
+ show create procedure p3;#查看存储
+ call p3();#调用存储
+
+创建一个具有分区的表
+create table test(
+	c1 int(11) default null,
+	c2 varchar(30) default null,
+	c3 date default null
+)engine=MyISSAM default charset=utf8
+partition by range (year(c3))#把c3转换成年
+(
+partition p0 values less than(1995) engine = MyISAM,#如果等于1995到第0分区
+partition p1 values less than(1996) engine = MyISAM,
+partition p2 values less than(1997) engine = MyISAM,
+partition p3 values less than(1998) engine = MyISAM,
+partition p4 values less than(1999) engine = MyISAM,
+partition p5 values less than(2000) engine = MyISAM,
+partition p6 values less than(2001) engine = MyISAM,
+partition p7 values less than(2002) engine = MyISAM,
+partition p8 values less than(2003) engine = MyISAM,
+partition p9 values less than(2004) engine = MyISAM,
+partition p10 values less than(2010) engine = MyISAM,
+partition p11 values less MAXVALUE  engine = MyISAM#否则都不匹配存到这个分区
+);
+create procedure load_part_tab()
+begin
+declare v int default 0;
+while v < 8000000 do
+insert into part_tab
+values(v,'testing partitions',adddate('1995-01-01'),(rand(v)*36520) mod 3652);
+set v = v + 1;
+end while;
+end
+//
+
+
+watch -n1 ls -lh#动态查看目录的变化 
+
+
+对于表引擎是innodb的在做以下配置
+	innodb_data_home_dir="/mysql/data"#代表为数据库文件所在的目录
+	innodb_log_group_home_dir="mysql/data"#日志存放目录
+	这个设置配置一个可看扩展大小的尺寸为10M的单独文件，名为idbdata1，没有给出文件文章，所以默认的是在MySQL的数据目录
+	innodb_data_file_path=idbdata1:10M:autoextend
+	innodb_file_per_table=1#是否使用共享或独占表空间
+
+	创建一个innodb的分区表 分区类型为hash
+	create table t7(
+	in int
+	)engine=innodb
+	partition by hash(id)
+	partitions 5;#分成5个分区
