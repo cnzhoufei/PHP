@@ -1,0 +1,101 @@
+
+内网转发
+1.准备三台服务器 
+	lvs负载均衡8.8.8.8   192.168.1.1需要两块网卡  网卡改成vmnet1
+	真实服务器192.168.1.2 网卡改成vmnet2
+	真实服务器192.168.0.3 网卡改成vmnet2
+
+
+2.实体机ip配置
+ip地址：8.8.8.1 
+子网掩码：255.255.255.0
+
+3.设置lvsip
+ ifconfig eth0 8.8.8.8 netmask 255.255.255.0
+ ifconfig eth1 192.168.0.1 netmask 255.255.255.0
+
+ 4.web服务器ip配置
+ roue add default gw 192.168.0.1 #设置临时网关
+ ifconfig eth0 192.168.0.2 服务器1
+ ifconfig eth0 192.168.0.3 服务器2
+
+ 5.关闭所有防火墙
+ 	查看防火墙：iptables -L -n
+ 	关闭防火墙：service iptables stop
+ 	查看SELlinux：sestatus
+ 	关闭SELlinux:setenforce 0
+
+ 6.配置lvs server
+ 	echo 1 > /proc/sys/net/ipv4/ip_forward #开启路由管道
+ 	ipvsaclm -C
+ 	ipvsadm -At 8.8.8.8:80 -s rr
+ 	ipvsadm -at 8.8.8.8:80 -r 192.168.0.2 -m
+ 	ipvsadm -at 8.8.8.8:80 -r 192.168.0.3 -m
+
+
+
+
+
+
+lvs ip-tun ip隧道技术
+用到的网段要相同#在虚拟机选择vm1
+lvs.server：192.168.1.11
+服务器1：192.168.1.22
+服务器2：192.168.1.33
+
+lvs配置说明 不用执行
+directorserver 192.168.1.11
+sealserver 192.168.1.22
+sealserver 192.168.1.33
+vip=192.168.1.10 #虚拟ip
+
+lvs配置可以写成shell脚本执行
+ifconfig tunl0 192.168.1.10 netmask 225.225.225.225 up
+route add -host 192.168.1.10 dev tunl0
+ipvsadm -C
+ipvsadm -At 192.168.1.10:80 -s rr
+ipvsadm -at 192.168.1.22:80 -i
+ipvsadm -at 192.168.1.33:80 -i
+ipvsadm -L -n
+
+真实服务器配置
+ifconfig tunl0 192.168.1.10 netmask 225.225.225.225 up
+route add -host 192.168.1.10 dev tunl0
+echo '1' > /proc/sys/net/ipv4/conf/tunl0/arp_ignore
+echo '2' > /proc/sys/net/ipv4/conf/tunl0/arp_announce
+echo '1' > /proc/sys/net/ipv4/conf/all/arp_ignore
+echo '2' > /proc/sys/net/ipv4/conf/all/arp_announce
+
+
+
+
+
+
+
+lvs dr  直接路由技术
+	用到的网段要相同#在虚拟机选择vm1
+	lvs.server：192.168.1.11
+	服务器1：192.168.1.22
+	服务器2：192.168.1.33
+
+	lvs配置说明 不用执行
+	directorserver 192.168.1.11
+	sealserver 192.168.1.22
+	sealserver 192.168.1.33
+	vip=192.168.1.10 #虚拟ip
+
+	lvs dr 服务器脚本
+	ifconfig eth0:0 192.168.1.10 netmask 225.225.225.225
+	route add -host 192.168.1.10 dev eth0:0
+	ipvsadm -At 192.168.1.10:80 -s rr
+	ipvsadm -at 192.168.1.10 -r 192.168.1.22 -g
+	ipvsadm -at 192.168.1.10 -r 192.168.1.33 -g
+	ipvsadm -L -n
+
+	真实服务器配置
+	ifconfig lo:0 192.168.1.10 netmask 225.225.225.225
+	route add -host 192.168.1.10 dev lo:0
+	echo '1' > /proc/sys/net/ipv4/conf/tunl0/arp_ignore
+	echo '2' > /proc/sys/net/ipv4/conf/tunl0/arp_announce
+	echo '1' > /proc/sys/net/ipv4/conf/all/arp_ignore
+	echo '2' > /proc/sys/net/ipv4/conf/all/arp_announce

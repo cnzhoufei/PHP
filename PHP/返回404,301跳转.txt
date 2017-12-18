@@ -30,3 +30,4 @@ header('HTTP/1.1 404 Not Found');
 header("status: 404 Not Found"); 
 include('404.php'); //404提示页
 exit();
+

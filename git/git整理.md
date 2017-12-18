@@ -69,11 +69,16 @@ git clone  https://github.com/vzhoufei/ThinkPHP.git
 
 分支管理
 创建分支：git checkout -b 分支名
-切换分支：git branch 分支名
+切换分支：git checkout 分支名
 查看分支：git branch
+查看远程分支：git branch -a
 
-
-
+删除本地分支：git branch -d xxxxx
+删除远程分支  
+git branch -r -d origin/branch-name  
+git push origin :branch-name  
+删除远程版本：git push origin :br-1.0.0  
+合并分支：git merge seller
 
 
 

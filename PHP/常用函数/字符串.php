@@ -1,5 +1,5 @@
 <?php
-
+sprintf('%011d','100');#不够11位用0补
 trim()	删除字符串两端的空格或其他预定义字符	"$str = ""\r\nHello World!\r\n"";
 echo trim($str);
 "
