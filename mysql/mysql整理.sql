@@ -165,10 +165,10 @@ select * from 表名 limit 5,10;--跳过5条 取10条
 select * from goods where (status = 1 and goods_name like '%测试商品%') group by cid order by goods_id desc limit 10;
 
 
-left join --左连接  
+left join --左连接  以左边表为准
 select goods_id,gooos.cat_id,cat_name,goods_name,shop_price from goods left join category on goods.cat_id = category.cat_id;
 
-right join --右连接
+right join --右连接 以右边为准
 select goods_id,gooos.cat_id,cat_name,goods_name,shop_price from goods right join category on goods.cat_id = category.cat_id;
 
 inner join --内连接
