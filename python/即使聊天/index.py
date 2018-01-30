@@ -4,7 +4,7 @@ from socket import *
 import json, time, threading
 config = {
     'HOST': 'localhost',
-    'PORT': 11011,
+    'PORT': 8986,
     'LISTEN_CLIENT': 50,
     'KEY': '391f10fadc339e9ec5fa15af60030ac1',
     'SIZE': 2048,

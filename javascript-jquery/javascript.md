@@ -1,3 +1,6 @@
+http://pan.baidu.com/share/qrcode?w=150&h=150&url=http://www.baidu.com--二维码接口
+
+
 正则表达式：http://www.jb51.net/article/43190.htm
 var str = '12345abcdefghijkrmnopqlstuvwxyz';
 function insertSpace(s) 
@@ -460,6 +463,7 @@ alert(window.history.length);
 
         键盘：
             keypress  键盘事件
+        *  onkeyup     弹起
         *  onkeydown   按下
         *   keyCode   键盘编码 返回按键码数字
         $(document).keydown(function(event){ 

@@ -1,0 +1,28 @@
+
+
+1.打开 /include/inc/inc.funAadmin.php 查找 SpGetEditor 这个函数，在这个函数上方加入
+
+	echo '<script type="text/javascript" charset="utf-8" src="/dede/ueditor/ueditor.config.js"></script>
+            <script type="text/javascript" charset="utf-8" src="/dede/ueditor/ueditor.all.min.js"> </script>
+            <script type="text/javascript" charset="utf-8" src="/dede/ueditor/lang/zh-cn/zh-cn.js"></script>';
+
+2.然后查找 else if($GLOBALS['cfg_html_editor']=='ckeditor') 在上方加入
+
+else if($GLOBALS['cfg_html_editor']=='ueditor')
+    {
+    $fvalue = $fvalue=='' ? '' : $fvalue;
+    $code .= "<script type='text/javascript' style='width:100%;height:300px;' id='{$fname}' name='{$fname}'>{$fvalue}</script><script type='text/javascript'>UE.getEditor('{$fname}');</script>";
+    if($gtype=="print")
+    {
+    echo $code;
+    }
+    else
+    {
+    return $code;
+    }
+    }
+
+3.将后台编辑器配置修改为 ueditor  修改方式：系统->系统参数设置->核心设置->Html编辑器（ckeditor,需要fck的用户可以去官网下载）：
+
+
+4.百度编辑器放到dede目录下

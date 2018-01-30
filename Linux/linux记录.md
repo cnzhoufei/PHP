@@ -1,3 +1,6 @@
+安装中文包
+yum -y groupinstall chinese-support
+
 
 linux下最强大的搜索命令为”find“。它的格式为”find <指定目录> <指定条件> <指定动作>“；比如使用find命令搜索在根目录下的所有interfaces文件所在位置，命令格式为”find / -name  'interfaces'
 
@@ -57,7 +60,9 @@ BOOTPROTO=no  no改成dhcp
 链接外网的一种方法 来自百度链接 https://jingyan.baidu.com/album/b907e627b12dbb46e7891c87.html?picindex=4
 1.网络链接模式改为桥接同时勾选启动时自动链接
 2.点击编辑->虚拟机网络编辑->设置第0块网卡为自动同时勾选 桥接模式将虚拟机直接链接到外部网络
-
+3.vim /etc/sysconfig/network-scripts/ifcfg-eth0
+	BOOTPROTO=no  no改成dhcp
+4. service network restart 重启网络服务
 
 
 

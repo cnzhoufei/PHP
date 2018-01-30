@@ -1,3 +1,6 @@
+
+
+
 www.python.org
 www.pycharm.com #开发工具
 ldea.lanyus.com #获取pycharm 的秘钥
@@ -5,7 +8,6 @@ ldea.lanyus.com #获取pycharm 的秘钥
 sublimeREPL插件
 1.sublimeREPL->python
 2.sublimeREPL->shell
-
 
 
 test = 100;
@@ -329,7 +331,33 @@ x not in s #测试 x 是否不是 s 的成员
 
 
 文件处理
+1.mkdir( path [,mode] )  只创建一个目录，上层目录没有就抛出错误
+      作用：创建一个目录，可以是相对或者绝对路径，mode的默认模式是0777。 
 
+      如果目录有多级，则创建最后一级。如果最后一级目录的上级目录有不存在的，则会抛出一个OSError。
+
+ 2.makedirs( path [,mode] )-------可以创建级联目录
+      作用： 创建递归的目录树，可以是相对或者绝对路径，mode的默认模式也是0777。
+      如果子目录创建失败或者已经存在，会抛出一个OSError的异常，Windows上Error 183即为目录已经存在的异常错误。如果path只有一级，与mkdir一样。例如：
+
+
+
+判断文件是否存在
+import os
+os.path.exists(test_file.txt)
+#True
+
+os.path.exists(no_exist_file.txt)
+#False
+判断文件夹是否存在
+import os
+os.path.exists(test_dir)
+#True
+
+os.path.exists(no_exist_dir)
+#False
+
+ 
 #可以打开多个文件  with执行完成后会自动关闭释放内存
 with open('ssssssss','r') as f:
 	f.readline()

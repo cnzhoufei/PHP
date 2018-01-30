@@ -33,7 +33,7 @@ body{width: 100%; height: 100%; background: #000; position: relative;}
 var socket;  
    
 function init(username){
-  var host = "ws://localhost:11011/name/"+username;
+  var host = "ws://localhost:8986/name/"+username;
   try{  
     socket = new WebSocket(host);  
     socket.onopen    = function(msg){

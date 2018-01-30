@@ -39,6 +39,8 @@ rtrim 是去除一个字符串右部空格，
 ltrim 是去除一个字符串左部空格。 
 str_split（）指定位数分割字符串
 
+getimagesize（url）获取图片的宽高支持远程
+
 实时输出类容
   for($i=0;$i<10;$i++){
             echo $i;

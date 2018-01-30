@@ -106,6 +106,42 @@ alter table 表名 drop index 索引名;--删除索引
 alter table 表名 drop primary key; --删除主键索引 如果有自增 要先删除自增
 select * from 表名 where match(全文索引的字段名称) against ('要搜索的关键词');--全文索引的查询方法
 
+
+
+-------------------------------------------------外键约束-------------------------------------------------------
+#创建一个文章表
+create table if not exists `article`(
+	`article_id` int unsigned not null auto_increment,
+	`article_name` char(255) not null default '',
+	`type_id` int unsigned not null default 0,
+	`article_addtime` datetime not null default CURRENT_TIMESTAMP
+	PRIMARY KEY (`article_id`) comment '主键索引',
+	KEY `typeid`(`type_id`)
+)engine=innodb default charset=utf8;
+#创建文章分类表
+create table if not exists `type`(
+	`type_id` int unsigned not null auto_increment,
+	`type_name` char(255) not null default '',
+	PRIMARY KEY (`type_id`) comment '主键索引'
+)engine=innodb default charset=utf8;
+#创建外键约束
+-- ALTER TABLE `article` ADD CONSTRAINT `fk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+alter table `article(文章表名)` add constraint `typeid(文章表中的索引名)` foreign key (`type_id(文章表中的字段)`) references `type(文章分类表名)`(`type_id(文章分类表中的索引)`);
+--如果文章表中的数据和文章分类表还有关联时，删除分类表中对应的一条数据会保存
+--如果子表试图创建一个在父表中不存在的外键值，InnoDB会拒绝任何INSERT或UPDATE操作。如果父表试图UPDATE或者DELETE任何子表中存在或匹配的外键值，最终动作取决于外键约束定义中的ON UPDATE和ON DELETE选项。InnoDB支持5种不同的动作，如果没有指定ON DELETE或者ON UPDATE，默认的动作为RESTRICT:
+--删除外键
+ALTER TABLE article DROP FOREIGN KEY typeid;
+--添加外键
+ALTER TABLE `article` ADD CONSTRAINT `typeid` FOREIGN KEY ( `type_id` )
+REFERENCES `type` ( `type_id` )
+ON DELETE CASCADE ON UPDATE CASCADE
+
+--此时article中的记录也会被删除
+delete from category where id=1;
+--此时article中的category_id也会被更新成3
+UPDATE `test`.`category` SET `id` = '3' WHERE `category`.`id` =2;
+
+
 -------------------------------------------------增删改查-------------------------------------------------------
 -- 增
 insert into 表名(字段信息) values(数据信息);--数据和字段一一对应
@@ -296,7 +332,7 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
@@ -316,7 +352,7 @@ revoke insert on linfei.* from yundi888@localhost; --回收权限 如果权限�
 
 
 修改密码
-UPDATE user SET password=PASSWORD('j$ass&aDg9DaSk5') WHERE user='root';
+UPDATE user SET password=PASSWORD('gNiQffsg$WFfff3@&7ssj*GfYX') WHERE user='hk_dna_cc';
 FLUSH PRIVILEGES;
 
 
