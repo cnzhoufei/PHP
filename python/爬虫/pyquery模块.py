@@ -54,6 +54,14 @@ items.siblings()
 
 
 #遍历
+doc = pq(filename='hello.html')
+lis = doc('li')
+for li in lis.items():
+    print li.html()
+
+print lis.each(lambda e: e)
+
+
 lis = doc('li').items()
 for li in lis:
 	print(li)

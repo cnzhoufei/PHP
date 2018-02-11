@@ -1,4 +1,5 @@
 import requests
+
 # httpbin.org
 # response = requests.get('https://www.baidu.com');
 # print('返回的类型',type(response))

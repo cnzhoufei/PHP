@@ -27,6 +27,24 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+#设置浏览器不加载图片
+options = webdriver.ChromeOptions()
+prefs = {
+    'profile.default_content_setting_values': {
+        'images': 2
+    }
+}
+options.add_experimental_option('prefs', prefs)
+
+#设置头信息
+options.add_argument('User-Agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3278.0 Safari/537.36"')
+
+browser = webdriver.Chrome(chrome_options=options)#声明一个浏览器对象
+
+
+
+
+
 browser = webdriver.Chrome()#声明一个浏览器对象
 try:
 	browser.get('https://www.baidu.com')
@@ -114,6 +132,43 @@ actions = ActionChains(browser)
 actions.drag_and_drop(source,target)#拖拽
 actions.perform()
 
+2.ActionChains方法列表
+
+click(on_element=None) ——单击鼠标左键
+
+click_and_hold(on_element=None) ——点击鼠标左键，不松开
+
+context_click(on_element=None) ——点击鼠标右键
+
+double_click(on_element=None) ——双击鼠标左键
+
+drag_and_drop(source, target) ——拖拽到某个元素然后松开
+
+drag_and_drop_by_offset(source, xoffset, yoffset) ——拖拽到某个坐标然后松开
+
+key_down(value, element=None) ——按下某个键盘上的键
+
+key_up(value, element=None) ——松开某个键
+
+move_by_offset(xoffset, yoffset) ——鼠标从当前位置移动到某个坐标
+
+move_to_element(to_element) ——鼠标移动到某个元素
+
+move_to_element_with_offset(to_element, xoffset, yoffset) ——移动到距某个元素（左上角坐标）多少距离的位置
+
+perform() ——执行链中的所有动作
+
+release(on_element=None) ——在某个元素位置松开鼠标左键
+
+send_keys(*keys_to_send) ——发送某个键到当前焦点的元素
+
+send_keys_to_element(element, *keys_to_send) ——发送某个键到指定元素 
+接下来用示例来详细说明和演示每一个方法的用法：
+
+
+
+
+
 #截图 全屏
 driver.get_screenshot_as_file("test.png")
 driver.save_screenshot(r'photo.png')
@@ -147,6 +202,12 @@ print(logo.get_attribute('class'))
 inputs = browser.find_element_by_class_name('test')
 print(inputs.text)
 
+inputs.get_attribute('innerHTML')
+innerHTML 会返回元素的内部 HTML， 包含所有的HTML标签。 
+textContent 和 innerText 只会得到文本内容，而不会包含 HTML 标签。 
+textContent 是 W3C 兼容的文字内容属性，但是 IE 不支持
+innerText 不是 W3C DOM 的指定内容，FireFox不支持
+
 
 #获取ID、位置、标签名、大小
 inputs.id
@@ -176,7 +237,7 @@ print(inputs.button)
 
 title_is标H是某内容
 title_contains标H包含某内容
-presence_of_etement_located元索加软出，传入定位元绝，如(ByJD, »
+ presence_of_element_located 元素加载出，传入定位元组，如(By.ID, 'p')
 visibility_of_elementjocatod元索可见，传入定位元组
 visibility_of可见，传入元索对象
 presence_of_all_elements_located 所有元索加载出
@@ -204,6 +265,8 @@ browser.back()#后退
 browser.forward()#后退
 browser.close()
 
+#跳转
+browser.navigate().to("http://www.sina.com.cn");
 
 #cookies
 browser.get('https://www.zhihu.com/explore')
@@ -241,6 +304,15 @@ driver.close()
 driver.switch_to.window(windows[-1])
 driver.close()
 
+
+ driver.get("http://anjuke.com");
+driver.navigate().to("http://www.baidu.com");
+//后退到anjuke.com
+driver.navigate().back();
+//前进到baidu.com
+driver.navigate().forward();
+//刷新当前页面
+driver.navigate().refresh();
 
 
 

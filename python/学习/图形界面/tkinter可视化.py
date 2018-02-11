@@ -23,6 +23,9 @@ button3 = Button(root,text='退出',command=root.quit,width=10,height=10)
 # button2.pack()
 # button3.pack()
 
+#关闭当前窗口
+root.destroy()
+
 #输入控件
 #还可以用于简单的文本内容
 entry = Entry(root)

@@ -219,6 +219,7 @@ def test():
 
 	remove() 同 unlink() 的功能是一样的 删除文件
 
+	open('ssss','a')#追加
 	open('ssss','r+')#读写
 	open('sssss','w+')#写读
 	open('sss','rb')#二进制读取
