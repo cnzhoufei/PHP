@@ -298,11 +298,17 @@ class MonitoringDZ(object):
 					
 			else:
 
-				browser.get(url+'/member.php?mod=logging&action=login')#访问登录页面
-				inputusername = browser.find_element(By.CSS_SELECTOR,'input[name=username]') 
-				inputusername.send_keys(username)#向用户输入框发送用户名
-				inputpassword = browser.find_element(By.CSS_SELECTOR,"input[name='password']") 
-				inputpassword.send_keys(password)#向密码输入框发送密码
+				try:
+					browser.get(url+'/member.php?mod=logging&action=login')#访问登录页面
+					inputusername = browser.find_element(By.CSS_SELECTOR,'input[name=username]') 
+					inputusername.send_keys(username)#向用户输入框发送用户名
+					inputpassword = browser.find_element(By.CSS_SELECTOR,"input[name='password']") 
+					inputpassword.send_keys(password)#向密码输入框发送密码
+					pass
+				except Exception as e:
+					print(url,' 无法登陆此网站')
+					myqueue.get()
+				
 
 				#如果validation 为True 启动手动验证
 				if self.validation:
@@ -384,6 +390,7 @@ class MonitoringDZ(object):
 					pass
 
 		except Exception as e:
+			myqueue.get()
 			pass
 			# print(e)
 		time.sleep(10)	
