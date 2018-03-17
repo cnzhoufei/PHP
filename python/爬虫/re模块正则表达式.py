@@ -25,7 +25,7 @@ print('获取()中的内容',result2.group(1))
 import requests
 content=requests.get('https://book.doubdn.com',timeout=100000).text
 exit()
-pattern = re.compite('<li.*?covor.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>',re.S)
+pattern = re.compile(r'<li.*?covor.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>',re.S)
 results = re.findall(pattern,content)
 print(result)
 for result in results:

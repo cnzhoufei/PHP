@@ -209,3 +209,5 @@ $_SESSION ----->会话控制的时候会用到
 $_COOKIE ----->会话控制的时候会用到
 
 Request.QueryString
+
+http_build_query($_GET); 将数组转换成地址栏参数

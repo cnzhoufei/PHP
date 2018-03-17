@@ -78,8 +78,7 @@ print "the first variable is:", first
 whereis python3
 
 
-
-F:\Python36\Scripts\
-F:\Python36\
-F:\Python36\Scripts
-F:\phantomjs-2.1.1-windows\bin
+# 安装
+https://www.anaconda.com/download/
+ln -s /anaconda3/bin/python3 /usr/bin/python3
+ln -s /anaconda3/bin/pip /usr/bin/pip3

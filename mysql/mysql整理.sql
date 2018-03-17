@@ -332,7 +332,7 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'DgLs@1SL@*JLG[dE6URzf^O8&IEY4f$(U5TO*3ghWI)YfH]' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限

@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\monitoring]
+@="URL:monitoring Protocol"
+"URL Protocol"="---PATH---\\monitoring.exe"
+ 
+[HKEY_CLASSES_ROOT\monitoring\DefaultIcon]
+@="---PATH---\\monitoring.exe,1"
+ 
+[HKEY_CLASSES_ROOT\monitoring\shell]
+@="open"
+ 
+[HKEY_CLASSES_ROOT\monitoring\shell\open]
+@="open"
+ 
+[HKEY_CLASSES_ROOT\monitoring\shell\open\command]
+@="\"---PATH---\\monitoring.exe\" \"%1\""

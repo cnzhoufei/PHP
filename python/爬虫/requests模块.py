@@ -10,6 +10,8 @@ import requests
 # print('返回的headers',response.headers)
 # print('返回的url',response.url)
 # print('返回的history',response.history)
+# requests.utils.get_encodings_from_content(getlogin.text)[0]#页面中获取编码方式 
+# response.encoding 编码方式
 
 
 # requests.get("https://github.com/timeline.json") #GET请求
@@ -89,7 +91,7 @@ import requests
 # response = requests.get('https://www.12306.cn',cert='证书路径')#验证证书
 # print(response.status_code)
 
-
+https://github.com/germey/proxypool  代理池
 # #代理设置
 # proxies = {
 # 	"http":"http://127.0.0.1:9743",

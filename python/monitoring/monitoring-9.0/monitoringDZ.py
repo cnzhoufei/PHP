@@ -128,33 +128,33 @@ class MonitoringDZ(object):
 	def signIn(self,browser,url):
 		"""签到"""
 		print(url, ' 检测签到')
-		try:
-			geturl = url+'/plugin.php?id=dsu_paulsign:sign'
-			browser.get(geturl)
-			#查看是否可以签到
-			# print(browser.page_source)
-			q = pyquery.PyQuery(browser.page_source)
-			todaysay = q("#todaysay").attr('id')
-			# print(todaysay)
-			if todaysay:
-				print(url,' 正在签到')
-				#执行签到
-				img = browser.find_elements(By.CSS_SELECTOR,'.qdsmile li')
-				img[random.randint(0,8)].click()
+		# try:
+		# 	geturl = url+'/plugin.php?id=dsu_paulsign:sign'
+		# 	browser.get(geturl)
+		# 	#查看是否可以签到
+		# 	# print(browser.page_source)
+		# 	q = pyquery.PyQuery(browser.page_source)
+		# 	todaysay = q("#todaysay").attr('id')
+		# 	# print(todaysay)
+		# 	if todaysay:
+		# 		print(url,' 正在签到')
+		# 		#执行签到
+		# 		img = browser.find_elements(By.CSS_SELECTOR,'.qdsmile li')
+		# 		img[random.randint(0,8)].click()
 
-				msg = ['6666666666666...','哈哈哈哈哈哈...','呵呵呵呵呵呵...','嘻嘻嘻嘻嘻嘻...','我来了哦...']
-				inputtodaysay = browser.find_element(By.CSS_SELECTOR,"input[name='todaysay']")
-				inputtodaysay.send_keys(msg[random.randint(0,4)])
+		# 		msg = ['6666666666666...','哈哈哈哈哈哈...','呵呵呵呵呵呵...','嘻嘻嘻嘻嘻嘻...','我来了哦...']
+		# 		inputtodaysay = browser.find_element(By.CSS_SELECTOR,"input[name='todaysay']")
+		# 		inputtodaysay.send_keys(msg[random.randint(0,4)])
 
-				button = browser.find_element(By.CSS_SELECTOR,'tr td div a[onclick*="showWindow"]')
-				button.click()
-				print(url,' 签到成功')
-			else:
-				print(url, ' 不需要签到')
-		except Exception as e:
-			# print(e)
-			pass
-		time.sleep(3)
+		# 		button = browser.find_element(By.CSS_SELECTOR,'tr td div a[onclick*="showWindow"]')
+		# 		button.click()
+		# 		print(url,' 签到成功')
+		# 	else:
+		# 		print(url, ' 不需要签到')
+		# except Exception as e:
+		# 	# print(e)
+		# 	pass
+		# time.sleep(3)
 
 
 
@@ -283,6 +283,8 @@ class MonitoringDZ(object):
 					myqueue.get()
 					#等待所以登录完成
 					browser.set_window_size(0,0)
+					browser.quit()
+					sys.exit()
 
 					print(url,' 等待其他登录完成...')
 					while True:
@@ -379,6 +381,8 @@ class MonitoringDZ(object):
 					    f.write(jsonCookies)
 					#等待所以登录完成
 					browser.set_window_size(0,0)
+					browser.quit()
+					sys.exit()
 
 					print(url,' 等待其他登录完成...')
 					while True:
