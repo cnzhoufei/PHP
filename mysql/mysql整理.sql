@@ -188,6 +188,14 @@ select * From `goods` where id in (178,171,176,188,189) order by field(id,178,17
 --group by 分组
 select *,count(typeid)每个分组的个数 from 表名 where status = 1 order by id asc group by `字段`;--   select * from `shop_category` group by `pid`;
 select *,count(pname) from 表名  where status = 1  group by cnanme,pname with rollup;#再次聚合 后面会得到一个总数with rollup不能喝order 不要一起使用
+
+select *,count(userid) as user from behavior group by userid order by user desc limit 10;#查询userid 最多的
+
+SELECT *, count( * ) AS count
+FROM lginlog 
+GROUP BY userid
+ORDER BY count DESC
+LIMIT 20
 --like 搜索
 select * from 表名 where 字段 like '%要搜索的关键词%';--select * from goods where goods_name like '%测试商品%';
 
@@ -332,7 +340,7 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'DgLs@1SL@*JLG[dE6URzf^O8&IEY4f$(U5TO*3ghWI)YfH]' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
