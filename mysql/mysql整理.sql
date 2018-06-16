@@ -340,7 +340,7 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'KsfD$NsL*8S@KD8sK&SgFJ3GS3G' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
@@ -427,3 +427,9 @@ long_query_time=5#大于五秒的记录
 -----------------------------------------------触发器----------------------------------------------------------
 
 
+
+
+------------------------------------------------php操作MySQL-----------------------------------------------
+
+
+mysqli_insert_id($conn);#获取最后插入的自增id
