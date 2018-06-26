@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="http://libs.cdnjs.net/vue/2.5.2/vue.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{ message }}
+	</div>
+<script type="text/javascript">
+	let vm = new Vue({
+		el:"#app",
+		data:{
+			message:'hello',
+		},
+		beforeCreate(){
+			alert('实例创建前')
+		},
+		created(){
+			alert('实例已经创建完成')
+		},
+		beforeMount(){
+			alert('实例挂载前')
+
+		},
+		mounted(){
+			alert('实例已经挂载')
+		},
+		beforeUpdate(){
+			alert('数据更改前')
+		},
+		update(){
+			aelrt('数据已经更改')
+		},
+		beforeDestroy(){
+			'实例销毁前'
+		},
+		destroyed(){
+			alert('实例已经销毁')
+		}
+	})
+</script>
+</body>
+</html>
