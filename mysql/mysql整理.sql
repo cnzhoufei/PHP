@@ -340,7 +340,7 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 允许远程登录命令
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;--允许所有主机登录
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'KsfD$NsL*8S@KD8sK&SgFJ3GS3G' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
@@ -428,12 +428,6 @@ long_query_time=5#大于五秒的记录
 
 create database if not exists test;
 
-create table if not exists g(
-	`gid` int(11) unsigned not null auto_increment primary key comment '商品id',
-	`gname` char(255) not null default '' comment '商品名称',
-	`much` int(11) unsigned not null default 0 comment '商品库存',
-	index(gname)
-)engine=innodb default charset=utf8 comment '商品表';
 
 
 create table if not exists o(
@@ -450,3 +444,9 @@ for each row
 begin
 update g set much = much - new.num where gid = new.gid;
 end$
+
+
+------------------------------------------------php操作MySQL-----------------------------------------------
+
+
+mysqli_insert_id($conn);#获取最后插入的自增id

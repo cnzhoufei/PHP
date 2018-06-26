@@ -681,3 +681,15 @@ vi  /etc/mail/sendmail.mc
 找到包含Addr的这一行：    
 DAEMON_OPTIONS(`Family=inet,  Name=MTA-v4, Port=smtp, Addr=127.0.0.1')dnl
 修改Addr=0.0.0.0  ，表明可以连接到任何服务器
+
+
+
+#文件传输1
+scp [参数] <源地址（用户名@IP地址或主机名）>:<文件路径> <目的地址（用户名 @IP 地址或主机名）>:<文件路径> 
+举例： 
+scp /home/work/source.txt work@192.168.0.10:/home/work/  #把本地的source.txt文件拷贝到192.168.0.10机器上的/home/work目录下
+
+#文件传输1
+rsync [参数] <源地址（用户名@IP地址或主机名）>:<文件路径> <目的地址（用户名 @IP 地址或主机名）>:<文件路径> 
+举例：
+rsync /home/work/source.txt work@192.168.0.10:/home/work/  #把本地的source.txt文件拷贝到192.168.0.10机器
