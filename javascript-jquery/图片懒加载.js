@@ -49,3 +49,21 @@ window.Echo = (function(window, document, undefined) {
 //     offset: 0,
 //     throttle: 0
 // });
+
+##########自定义
+function loadimg(){
+    height = window.innerHeight;
+    imgdata = $('[data-src]')
+    for(i = 0;i < imgdata.length;i++){
+        sTop = $(window).scrollTop();//滚动条顶部高度
+        mtop = $(imgdata[i]).offset().top;//当前元素位置
+        activity = mtop - sTop;
+        if (activity < (height - 120) && activity > 50){
+            $(imgdata[i]).attr('src',$(imgdata[i]).attr('data-src'))
+        }
+    }
+}
+window.onscroll=function(){ 
+
+loadimg()
+}

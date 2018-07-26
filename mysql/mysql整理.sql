@@ -239,7 +239,7 @@ show variables like '%dir%';--查看mysql目录
 --查看建表语句
 use information_schema;
 select * from columns where table_name='表名';
-select group_concat(column_name) from columns where table_name = '表名';--将所有字段用逗号链接起来
+select group_concat(column_name) from information_schema.columns where table_name = '表名';--将所有字段用逗号链接起来
 
 DESC 表名;--查看表字段
 SHOW FULL COLUMNS FROM 表名 --查询表结构
