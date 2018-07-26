@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+	<script type="text/javascript" src="http://libs.cdnjs.net/vue/2.5.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  {{ message }}
+</div>
+<!-- JavaScript 代码需要放在尾部（指定的HTML元素之后） -->
+</body>
+
+<script>
+let vm = new Vue({
+    el:'#app',
+    data: {
+        message:'Hello World!'
+    },
+		beforeCreate(){
+			alert('实例创建前')
+		},
+		created(){
+			alert('实例已经创建完成')
+		},
+		beforeMount(){
+			alert('实例挂载前')
+
+		},
+		mounted(){
+			alert('实例已经挂载')
+		},
+		beforeUpdate(){
+			alert('数据更改前')
+		},
+		update(){
+			aelrt('数据已经更改')
+		},
+		beforeDestroy(){
+			'实例销毁前'
+		},
+		destroyed(){
+			alert('实例已经销毁')
+		}
+});
+console.log(vm)
+</script>
+</html>

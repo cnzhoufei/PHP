@@ -1,0 +1,25 @@
+
+v-text
+v-content
+v-html
+v-model
+v-pre
+v-cloak
+
+
+
+<div v-show="msg">aaaa</div> 条件成立才显示内容 不成立会改变styel样式
+v-if
+v-else-if
+v-else
+
+<li v-for="val,key in arr">{{val}}{{key}}</li>
+
+
+
+16388
+4524
+2727
+8600
+
+32329

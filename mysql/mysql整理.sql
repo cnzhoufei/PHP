@@ -429,15 +429,30 @@ long_query_time=5#大于五秒的记录
 
 -----------------------------------------------触发器----------------------------------------------------------
 
+create database if not exists test;
 
+
+
+create table if not exists o(
+	`oid` int(11) unsigned not null auto_increment primary key comment '订单id',
+	`gid` int(11) unsigned not null default 0 comment '商品id',
+	`num` int(11) unsigned not null default 0 comment '商品数量'
+)engine=innodb default charset=utf8 comment '点单表';
+
+
+#创建触发器
+create trigger monitoring_o
+after insert on o
+for each row
+begin
+update g set much = much - new.num where gid = new.gid;
+end$
 
 
 ------------------------------------------------php操作MySQL-----------------------------------------------
 
 
 mysqli_insert_id($conn);#获取最后插入的自增id
-
-
 
 mysql 存储文字表情 需要修改配置如下然后重启(库和表字符集也必须是utf8mb4)
 #mysqld部分

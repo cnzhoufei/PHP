@@ -1,3 +1,7 @@
+https://pecl.php.net/package/redis  扩展下载地址
+
+
+
 
 http://www.tuicool.com/articles/NzArqm7
 Windows下Redis的安装及PHP扩展使用

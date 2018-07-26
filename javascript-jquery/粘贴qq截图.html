@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<script type="text/javascript" src="http://www.vip.com/public/static/login/js/jquery.js"></script>
+</head>
+<body>
+	<div id="textarea2"></div>
+	<textarea  id="textarea" contenteditable="true"></textarea>
+<script type="text/javascript">
+function paseImg()
+  {
+    var imgReader = function (item) {
+        var blob = item.getAsFile(),
+            reader = new FileReader();
+
+        reader.onloadend = function (e) {
+
+            //显示图像
+            var msg = "<img src='"+e.target.result+"' style='width:300px;'/>";
+            $('#textarea2').append(msg);
+        };
+
+        reader.readAsDataURL(blob);
+    };
+
+    document.getElementById("textarea").addEventListener("paste",function(e){
+      var clipboardData = e.clipboardData,
+        i = 0,
+        items, item, types;
+        if (clipboardData) {
+          items = clipboardData.items;
+
+          if (!items) {
+              return;
+          }
+
+          item = items[0];
+          types = clipboardData.types || [];
+
+          for (; i < types.length; i++) {
+              if (types[i] === 'Files') {
+                  item = items[i];
+                  break;
+              }
+          }
+
+          if (item && item.kind === 'file' && item.type.match(/^image\//i)) {
+              imgReader(item);
+          }
+        }
+    });
+  }
+  paseImg();
+
+</script>
+</body>
+</html>
