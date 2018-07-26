@@ -12,7 +12,7 @@ php -r "unlink('composer-setup.php');"
 {"require":{}}
 
 5.安装composer  安装时所用的php环境变量是 /usr/bin/php 如果没有软连接指向这里自己指向这里  如：ln /www/wdlinux/php/bin/php /usr/bin/php
-php composer.phar pudate
+php composer.phar update
 
 安装成功
 

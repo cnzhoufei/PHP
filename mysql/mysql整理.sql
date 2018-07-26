@@ -1,4 +1,6 @@
 -- 库
+
+utf8mb4 编码支持存储文字表情
 create database if not exists 库名 default charset utf8 collate utf8_general_ci comment '注释';--创建数据库
 create database if not exists 库名;--创建数据库
 drop database 库名--删除库
@@ -239,7 +241,8 @@ show variables like '%dir%';--查看mysql目录
 --查看建表语句
 use information_schema;
 select * from columns where table_name='表名';
-select group_concat(column_name) from information_schema.columns where table_name = '表名';--将所有字段用逗号链接起来
+select group_concat(column_name) from INFORMATION_SCHEMA.columns where table_name = '表名' and table_schema='库名';--将所有字段用逗号链接起来
+select COLUMN_NAME,column_comment from INFORMATION_SCHEMA.Columns where table_name='zp_company' and table_schema='zhaopin';
 
 DESC 表名;--查看表字段
 SHOW FULL COLUMNS FROM 表名 --查询表结构
@@ -450,3 +453,13 @@ end$
 
 
 mysqli_insert_id($conn);#获取最后插入的自增id
+
+mysql 存储文字表情 需要修改配置如下然后重启(库和表字符集也必须是utf8mb4)
+#mysqld部分
+[mysqld]
+character-set-server=utf8mb4
+collation_server=utf8mb4_unicode_ci
+init-connect="SET NAMES utf8mb4"
+#mysql部分
+[mysql]
+default-character-set=utf8mb4
