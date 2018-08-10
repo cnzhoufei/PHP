@@ -1,52 +1,52 @@
-filetype·µ»ØÎÄ¼şµÄÀàĞÍ
+filetypeè¿”å›æ–‡ä»¶çš„ç±»å‹
 
-is_dir()  ÊÇ·ñÄ¿Â¼
-is_file(); ÊÇ·ñÎÄ¼ş
-is_link()¡ª ÅĞ¶Ï¸ø¶¨ÎÄ¼şÃûÊÇ·ñÎªÒ»¸ö·ûºÅÁ¬½Ó 
-
-
-move_uploaded_file() ¼ôÇĞÍ¼Æ¬  ÉÏ´«Í¼Æ¬Ê±ÓÃ
-is_executable(); ÊÇ·ñ¿ÉÖ´ĞĞ
-is_readable()  ÊÇ·ñ¿É¶Á
-		is_writable(); ÊÇ·ñ¿ÉĞ´
-file_exists() 		¼ì²éÎÄ¼ş»òÄ¿Â¼ÊÇ·ñ´æÔÚ
-filesize() 	 		È¡µÃÎÄ¼ş´óĞ¡
-filectime() 		»ñÈ¡ÎÄ¼şµÄ´´½¨Ê±¼ä
-filemtime() 		»ñÈ¡ÎÄ¼şµÄĞŞ¸ÄÊ±¼ä
-fileatime()  		»ñÈ¡ÎÄ¼şµÄ·ÃÎÊÊ±¼ä
-stat() 				»ñÈ¡ÎÄ¼ş´ó²¿·ÖÊôĞÔ
-__FILE__·µ»Øµ±Ç°ÎÄ¼şÂ·¾¶
-
-opendir--´ò¿ªÄ¿Â¼¾ä±ú 
-readdir--´ÓÄ¿Â¼¾ä±úÖĞ¶ÁÈ¡ÌõÄ¿ 
-closedir--¹Ø±ÕÄ¿Â¼¾ä±ú 
-rewinddir--µ¹»ØÄ¿Â¼¾ä±ú
-
-disk_free_space ·µ»Ø¿ÉÓÃ¿Õ¼ä
-disk_total_space·µ»Ø×Ü¿Õ¼ä
-
-file_existsÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
-
-closedir¹Ø±ÕÄ¿Â¼
+is_dir()  æ˜¯å¦ç›®å½•
+is_file(); æ˜¯å¦æ–‡ä»¶
+is_link()â€” åˆ¤æ–­ç»™å®šæ–‡ä»¶åæ˜¯å¦ä¸ºä¸€ä¸ªç¬¦å·è¿æ¥ 
 
 
-$fh = fopen($filename, "a");//ÒÔĞ´·½Ê½´ò¿ª
-                $fwrite = fwrite($fh, $word); //Ğ´ÈëÀàÈİ
-                fclose($fh);//¹Ø±Õ
+move_uploaded_file() å‰ªåˆ‡å›¾ç‰‡  ä¸Šä¼ å›¾ç‰‡æ—¶ç”¨
+is_executable(); æ˜¯å¦å¯æ‰§è¡Œ
+is_readable()  æ˜¯å¦å¯è¯»
+		is_writable(); æ˜¯å¦å¯å†™
+file_exists() 		æ£€æŸ¥æ–‡ä»¶æˆ–ç›®å½•æ˜¯å¦å­˜åœ¨
+filesize() 	 		å–å¾—æ–‡ä»¶å¤§å°
+filectime() 		è·å–æ–‡ä»¶çš„åˆ›å»ºæ—¶é—´
+filemtime() 		è·å–æ–‡ä»¶çš„ä¿®æ”¹æ—¶é—´
+fileatime()  		è·å–æ–‡ä»¶çš„è®¿é—®æ—¶é—´
+stat() 				è·å–æ–‡ä»¶å¤§éƒ¨åˆ†å±æ€§
+__FILE__è¿”å›å½“å‰æ–‡ä»¶è·¯å¾„
+
+opendir--æ‰“å¼€ç›®å½•å¥æŸ„ 
+readdir--ä»ç›®å½•å¥æŸ„ä¸­è¯»å–æ¡ç›® 
+closedir--å…³é—­ç›®å½•å¥æŸ„ 
+rewinddir--å€’å›ç›®å½•å¥æŸ„
+
+disk_free_space è¿”å›å¯ç”¨ç©ºé—´
+disk_total_spaceè¿”å›æ€»ç©ºé—´
+
+file_existsåˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+
+closedirå…³é—­ç›®å½•
 
 
-rtrim ¡ª É¾³ı×Ö·û´®Ä©¶ËµÄ¿Õ°××Ö·û£¨»òÕßÆäËû×Ö·û£© 
+$fh = fopen($filename, "a");//ä»¥å†™æ–¹å¼æ‰“å¼€
+                $fwrite = fwrite($fh, $word); //å†™å…¥ç±»å®¹
+                fclose($fh);//å…³é—­
+
+
+rtrim â€” åˆ é™¤å­—ç¬¦ä¸²æœ«ç«¯çš„ç©ºç™½å­—ç¬¦ï¼ˆæˆ–è€…å…¶ä»–å­—ç¬¦ï¼‰ 
 
 /*
-	php.ini µÄÅäÖÃ
-	file_uploads = On  ÊÇ·ñ¿ªÆôÎÄ¼şÉÏ´«
-	upload_max_filesize = 2M  ÔÚ·şÎñÆ÷ÉèÖÃÉÏ´«´óĞ¡
+	php.ini çš„é…ç½®
+	file_uploads = On  æ˜¯å¦å¼€å¯æ–‡ä»¶ä¸Šä¼ 
+	upload_max_filesize = 2M  åœ¨æœåŠ¡å™¨è®¾ç½®ä¸Šä¼ å¤§å°
 	post_max_size = 8M  
-	upload_tmp_dir = 'ÁÙÊ±´æ·ÅµÄÂ·¾¶' 
+	upload_tmp_dir = 'ä¸´æ—¶å­˜æ”¾çš„è·¯å¾„' 
 */
 
 
-file_put_contents();½«×Ö·û´®Ğ´ÈëÎÄ¼şÖĞ
-file_get_contents ¡ª ½«Õû¸öÎÄ¼ş¶ÁÈëÒ»¸ö×Ö·û´® 
-scandir ¡ª ÁĞ³öÖ¸¶¨Â·¾¶ÖĞµÄÎÄ¼şºÍÄ¿Â¼
+file_put_contents();å°†å­—ç¬¦ä¸²å†™å…¥æ–‡ä»¶ä¸­
+file_get_contents â€” å°†æ•´ä¸ªæ–‡ä»¶è¯»å…¥ä¸€ä¸ªå­—ç¬¦ä¸² 
+scandir â€” åˆ—å‡ºæŒ‡å®šè·¯å¾„ä¸­çš„æ–‡ä»¶å’Œç›®å½•
 
