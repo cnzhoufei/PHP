@@ -1,0 +1,8 @@
+#安装pecl php官方扩展管理工具，安装完成后会在php 'bin'目录中出现 'pecl'，调用即可安装扩展
+yum -y install libmemcached-devel
+
+#安装swoole
+phpbin目录/pecl install swoole
+
+#配置php.ini 
+extension=swoole.so

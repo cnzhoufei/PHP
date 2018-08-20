@@ -88,7 +88,7 @@ function page($toal,$psize=20)
 
 
 #删除文件
-function deldir($dir) {  
+function delDir($dir) {  
     //先删除目录下的文件：  
     $dh = opendir($dir);  
     while ($file = readdir($dh)) {  
@@ -182,7 +182,7 @@ function getWeixinToken()
 /**
  * 获取php.exe的路径
  */
-function php_path() {   
+function phpPath() {   
     $php_path='';    
     if ($php_path != '') {           
         return $php_path;      
@@ -227,7 +227,7 @@ function checkSignature()
 
 
 //不同环境下获取真实的IP
-function get_ip(){
+function getIp(){
     //判断服务器是否允许$_SERVER
     if(isset($_SERVER)){    
         if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
@@ -302,4 +302,96 @@ function imgCompression($file,$width,$height){
 	$filename .= '.'.$type;
 	$image->thumb($width, $height)->save('.'.$path.$filename);
 	return $path.$filename;
+}
+
+
+#过滤数据
+function filter($data) {
+    foreach($data as &$v){
+      $v = trim($v);
+      $v = stripslashes($v);
+      $v = htmlspecialchars($v);
+    }
+    return $data;
+}
+
+
+
+#微信签名
+#key 商户后台配置的密钥
+function getSign($data,$key){
+    $data = array_filter($data);//去除数组中的空值
+    ksort($data);//按照键名字典排序
+    $str = http_build_query($data). "&key=".$key;//连接
+    $str = urldecode($str);//URL解码为中文
+    echo $str;
+    return  strtoupper(md5($str));
+}
+
+
+/**
+ * 数组转xml字符
+ * @param  string   $xml xml字符串
+**/
+function arrayToXml($data){
+    if(!is_array($data) || count($data) <= 0){
+        return false;
+    }
+    $xml = "<xml>";
+    foreach ($data as $key=>$val){
+        if (is_numeric($val)){
+            $xml.="<".$key.">".$val."</".$key.">";
+        }else{
+            $xml.="<".$key."><![CDATA[".$val."]]></".$key.">";
+        }
+    }
+    $xml.="</xml>";
+    return $xml; 
+}
+
+
+/**
+ * 将xml转为array
+ * @param  string   $xml xml字符串或者xml文件名
+ * @param  bool     $isfile 传入的是否是xml文件名
+ * @return array    转换得到的数组
+ */
+function xmlToArray($xml,$isfile=false){   
+    //禁止引用外部xml实体
+    libxml_disable_entity_loader(true);
+    if($isfile){
+        if(!file_exists($xml)) return false;
+        $xmlstr = file_get_contents($xml);
+    }else{
+        $xmlstr = $xml;
+    }
+    $result= json_decode(json_encode(simplexml_load_string($xmlstr, 'SimpleXMLElement', LIBXML_NOCDATA)), true);        
+    return $result;
+
+}
+
+
+#判断设备
+function isMobile() {
+    static $is_mobile = null;
+  
+     if (isset($is_mobile)) {
+        return $is_mobile;
+     }
+  
+    if (empty($_SERVER['HTTP_USER_AGENT'])) {
+        $is_mobile = false;
+    } elseif ( strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false 
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'Android') !== false
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'Silk/') !== false
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'Kindle') !== false
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'BlackBerry') !== false
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== false
+      || strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mobi') !== false ) {
+        $is_mobile = true;
+     } else {
+        $is_mobile = false;
+     }
+  
+    return $is_mobile;
 }
