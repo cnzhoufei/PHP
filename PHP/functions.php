@@ -82,7 +82,7 @@ function page($toal,$psize=20)
 	    $_GET['p'] = $pagenum;$query = http_build_query($_GET);
 	   $page .= "<a href='?$query'>末页</a></page>";
 	  }
-	  return ['limit'=>$limit,'page'=>$page];
+	  return ['limit'=>$limit,'page'=>$page,'pagenum'=>$pagenum];
 }
 
 
@@ -177,6 +177,29 @@ function getWeixinToken()
     
 }
 
+
+#获取微信jsdk所需ticket
+function getJsApiTicket(){
+
+    $redis = new \Redis();
+    //连接服务器
+    $redis->connect('localhost',6379);
+    $weixin_ticket = $redis->get('weixin_ticket');
+    // if($weixin_ticket){
+    //     return $weixin_ticket;
+    // }
+
+    $accessToken = getWeixinToken();
+    $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token={$accessToken}";
+    $res = json_decode(curlGet($url));
+    $ticket = $res->ticket;
+    if($ticket){
+        $redis->setex('weixin_ticket',7000,$ticket);
+        return $ticket;
+    }else{
+        return '获取ticket失败';
+    }
+}
 
 
 /**

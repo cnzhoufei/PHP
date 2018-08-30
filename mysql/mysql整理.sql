@@ -216,7 +216,7 @@ select goods_id,gooos.cat_id,cat_name,goods_name,shop_price from goods left join
 
 right join --右连接 以右边为准
 select goods_id,gooos.cat_id,cat_name,goods_name,shop_price from goods right join category on goods.cat_id = category.cat_id;
-
+ 
 inner join --内连接
 select Persons.LastName, Persons.FirstName, Orders.OrderNo from Persons inner join Orders on Persons.Id_P = Orders.Id_P order by Persons.LastName
 --多表联查 把前面查询的结果当成一个表 后面继续 inner join 
@@ -340,14 +340,11 @@ explain | desc#explain或者desc 查看执行计划 explain select * from t wher
 
 
 
-
-
 允许远程登录命令
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'KsfD$NsL*8S@KD8sK&SgFJ3GS3G' WITH GRANT OPTION;--允许所有主机登录
 GRANT ALL PRIVILEGES ON *.* TO 'jack'@'10.10.50.127' IDENTIFIED BY '654321' WITH GRANT OPTION;--允许指定ip登录
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION
 flush privileges;--更新权限
-
 
 --权限 *.*(库名.表名)
 create user yundi88@'localhost'  IDENTIFIED by '$mysql_osdf'; --创建用户 先设置该用户只有show database权限
