@@ -418,3 +418,93 @@ function isMobile() {
   
     return $is_mobile;
 }
+
+
+#获取图片类型
+function getImgType($url)
+{
+    $type = get_headers($url)[3];
+    switch ($type) {
+        case 'Content-Type: image/jpeg':
+            return 'jpeg';
+            break;
+        case 'Content-Type: image/png':
+            return 'png';
+            break;
+        case 'Content-Type: image/gif':
+            return 'gif';
+            break;
+        case 'Content-Type: image/jpg':
+            return 'jpg';
+            break;
+        default:
+            return $type;
+            break;
+    }
+}
+
+
+
+#获取远程图片到本地
+function getImg($url,$path='./',$filename=''){
+    if(!is_dir($path)){
+        mkdir($path,0777,true);
+    }
+    $type = getImgType($url);
+    if(!$filename){
+        $filename = mt_rand(111111,999999);
+    }
+    if (file_exists($path . $filename.'.'.$type)){
+        return $path . $filename.'.'.$type;
+    }
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+      $file = curl_exec($ch);
+      curl_close($ch);
+      $resource = fopen($path . $filename.'.'.$type, 'a');
+      fwrite($resource, $file);
+      fclose($resource);
+      return $path . $filename.'.'.$type;
+}
+
+#处理成圆图片,如果图片不是正方形就取最小边的圆半径,从左边开始剪切成圆形
+function yjImg($imgpath) {
+
+    #获取图片类型
+    $ext     = pathinfo($imgpath);
+    $src_img = null;
+    switch ($ext['extension']) {
+    case 'png':
+        $src_img = imagecreatefrompng($imgpath);
+        break;
+    default:
+        $src_img = imagecreatefromjpeg($imgpath);
+        break;
+    }
+    $wh  = getimagesize($imgpath);
+    $w   = $wh[0];
+    $h   = $wh[1];
+    $w   = min($w, $h);
+    $h   = $w;
+    $img = imagecreatetruecolor($w, $h);
+    imagesavealpha($img, true);
+    //拾取一个完全透明的颜色,最后一个参数127为全透明
+    $bg = imagecolorallocatealpha($img, 255, 255, 255, 127);
+    imagefill($img, 0, 0, $bg);
+    $r   = $w / 2; //圆半径
+    $y_x = $r; //圆心X坐标
+    $y_y = $r; //圆心Y坐标
+    for ($x = 0; $x < $w; $x++) {
+        for ($y = 0; $y < $h; $y++) {
+            $rgbColor = imagecolorat($src_img, $x, $y);
+            if (((($x - $r) * ($x - $r) + ($y - $r) * ($y - $r)) < ($r * $r))) {
+                imagesetpixel($img, $x, $y, $rgbColor);
+            }
+        }
+    }
+
+    header('content-type:image/png');
+    imagepng($img);
+}

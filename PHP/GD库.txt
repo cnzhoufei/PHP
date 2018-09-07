@@ -1,6 +1,6 @@
 
 imagecreatetruecolor  创建画布
-
+imagecreatefrompng($filename)--由文件或 URL 创建一个新图象
 imagecolorallocate($img,123,123,123) 创建颜色
 
 imagefill($img,0,0,$color)
