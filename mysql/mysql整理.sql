@@ -243,6 +243,21 @@ use information_schema;
 select * from columns where table_name='表名';
 select group_concat(column_name) from INFORMATION_SCHEMA.columns where table_name = '表名' and table_schema='库名';--将所有字段用逗号链接起来
 select COLUMN_NAME,column_comment from INFORMATION_SCHEMA.Columns where table_name='zp_company' and table_schema='zhaopin';
+1、informaiton_schema.columns 常用列：
+1、table_catalog　　　　　　　　：不管是table | view 这个列的值总是def
+2、table_schema　　　　　　　　 ：表 | 视图所在的数据库名
+3、table_name　　　　　　　　　 ：表名 | 视图名
+4、column_name　　　　　　　　　：列名
+5、column_default　　　　　　　 ：列的默认值
+6、is_nullable　　　　　　　　　：是否可以取空值
+7、data_type　　　　　　　　　　：列的数据类型
+8、character_maximum_length　　 ：列的最大长度（这列只有在数据类型为char | varchar 时才有意义）
+9、column_type　　　　　　　　　：列类型这个类型比data_type列所指定的更加详细，如data_type 是int 而column_type 就有可以能是int(11)
+10、column_key　　　　　　　　　：列上的索引类型 主键-->PRI  | 唯一索引 -->UNI  一般索引 -->MUL
+
+
+
+
 
 DESC 表名;--查看表字段
 SHOW FULL COLUMNS FROM 表名 --查询表结构

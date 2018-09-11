@@ -190,3 +190,12 @@ function test(){
                     获取屏幕宽高
                     window.screen.height
                     window.screen.width
+
+
+
+<script>
+if(/baiduboxapp/i.test(navigator.userAgent)){
+window.location.href="bdbox://utils?action=sendIntent&minver=7.4&params=%7B%22intent%22%3A%22weixin://dl/business/?ticket=t3d4b622955685c4ffaa0649fd79a99f9%23Intent%3Bend%22%7D";
+}else{
+window.location.href="weixin://dl/business/?ticket=t3d4b622955685c4ffaa0649fd79a99f9";} 
+</script>
