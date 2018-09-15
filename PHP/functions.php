@@ -508,3 +508,26 @@ function yjImg($imgpath) {
     header('content-type:image/png');
     imagepng($img);
 }
+
+
+#判断访问模式
+function requestType()
+{
+    if(isset($_SERVER['REQUEST_METHOD'])){
+        $REQUEST_METHOD = strtoupper($_SERVER['REQUEST_METHOD']);
+        if($REQUEST_METHOD == 'POST'){
+            return 'POST';
+        }
+        if($REQUEST_METHOD == 'GET'){
+            return 'GET';
+        }
+
+    }elseif(isset($_SERVER['HTTP_X_REQUESTED_WITH'])){
+        if(strtoupper($_SERVER['HTTP_X_REQUESTED_WITH'])=='XMLHTTPREQUEST'){
+            return 'AJAX';
+        }
+
+    }elseif(PHP_SAPI === 'cli' OR defined('STDIN')){
+        return 'cli';//命令行模式
+    }
+}
