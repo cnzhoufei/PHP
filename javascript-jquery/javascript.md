@@ -730,7 +730,7 @@ top.location='/AdultSupplies/index3.html
 2,window.location.protocol
 URL 的协议部分
 本例返回值:http:
-
+window.location.protocol+"://"+window.location.host+window.location.pathname
 3,window.location.host
 URL 的主机部分
 本例返回值:www.maidq.com
