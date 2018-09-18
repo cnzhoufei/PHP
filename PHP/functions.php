@@ -531,3 +531,59 @@ function requestType()
         return 'cli';//命令行模式
     }
 }
+
+
+
+#上次base64格式图片
+#$imgBase64 base64格式的图片字符串
+#path  要保存的位置
+function uploadBase64($imgBase64,$path='tmp/'){
+    if (!$imgBase64){
+        return '没有上传的图片';
+    }
+    #生成目录
+    $path.=date('Y-m-d').'/';
+    if(!is_dir($path)){
+        mkdir($path,0777,true);
+    }
+    #生成图片名称
+    $imgname = time().uniqid().'.png';
+    #data:image/png;base64, 判断去除这部分
+    if (strstr($imgBase64,",")){
+        $imgBase64 = explode(',',$imgBase64);
+        $imgBase64 = $imgBase64[1];
+    }
+
+    #转码写入文件
+    $res = file_put_contents($path.$imgname, base64_decode($imgBase64));
+    if($res){
+        return $path.$imgname;
+    }else{
+        return false;
+    }
+
+
+
+#配合使用的js fun
+// function upload(obj){
+//    var reader = new FileReader();
+//     var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
+//     var file = obj.files[0];
+//     var imgUrlBase64;
+//     if (file) {
+//         //将文件以Data URL形式读入页面  
+//         imgUrlBase64 = reader.readAsDataURL(file);
+//         reader.onload = function (e) {
+//           if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
+//                 alert( '上传失败，请上传不大于2M的图片！');
+//                 return;
+//             }else{
+//                 //执行上传操作
+//                 // alert(reader.result);
+//                 $('#img').attr('src',reader.result)
+//                 $('input[name=img]').val(reader.result);
+//             }
+//         }
+//      }
+// }
+}
