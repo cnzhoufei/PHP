@@ -534,7 +534,7 @@ function requestType()
 
 
 
-#上次base64格式图片
+#上传base64格式图片
 #$imgBase64 base64格式的图片字符串
 #path  要保存的位置
 function uploadBase64($imgBase64,$path='tmp/'){

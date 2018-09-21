@@ -289,7 +289,7 @@ setfacl -m u:test:000 -R /mnt/web/yundi88_com/public_html/ThinkPHP
 mount /dev/vdb1 /www
 mount -t ext3 /dev/sda /www 指定类型
 
-echo '/dev/xvdb1  /www ext3 defaults 1  2' >> /etc/fstab  写入自动挂载
+echo '/dev/vdb1  /www ext3 defaults 1  2' >> /etc/fstab  写入自动挂载
 
 卸载
 umount /dev/vdb1
