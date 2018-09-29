@@ -1,5 +1,5 @@
 -- 库
-
+create database if not exists `pay` default charset set utf8mb4;
 utf8mb4 编码支持存储文字表情
 create database if not exists 库名 default charset utf8 collate utf8_general_ci comment '注释';--创建数据库
 create database if not exists 库名;--创建数据库
@@ -475,3 +475,28 @@ init-connect="SET NAMES utf8mb4"
 #mysql部分
 [mysql]
 default-character-set=utf8mb4
+
+
+
+#事务处理
+MYSQL 事务处理主要有两种方法：
+1、用 BEGIN, ROLLBACK, COMMIT来实现
+
+BEGIN 开始一个事务
+ROLLBACK 事务回滚
+COMMIT 事务确认
+2、直接用 SET 来改变 MySQL 的自动提交模式:
+
+SET AUTOCOMMIT=0 禁止自动提交
+SET AUTOCOMMIT=1 开启自动提交
+
+mysqli_query($conn, "set names utf8");
+mysqli_select_db( $conn, 'RUNOOB' );
+mysqli_query($conn, "SET AUTOCOMMIT=0"); // 设置为不自动提交，因为MYSQL默认立即执行
+mysqli_begin_transaction($conn);            // 开始事务定义
+ 
+if(!mysqli_query($conn, "insert into runoob_transaction_test (id) values(8)"))
+{
+    mysqli_query($conn, "ROLLBACK");     // 判断当执行失败时回滚
+}
+mysqli_commit($conn);   

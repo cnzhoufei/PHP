@@ -779,3 +779,6 @@ URL 的路径部分(就是文件地址)
                         window.setTimeout("window.location='mobile/index.html'");
                 }
         </script>
+
+
+history.back(-1) #返回上一页
