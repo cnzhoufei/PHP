@@ -202,6 +202,31 @@ function getJsApiTicket(){
 }
 
 
+
+#微信公众号生成带参数的二维码
+function createQR($data)
+{
+    $action_name = $data['action_name'];#QR_LIMIT_SCENE 永久 ，QR_STR_SCENE 临时
+    $scene_id = $data['scene_id'];#场景值id(临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）)
+    $scene_str = $data['scene_str'];#场景值ID（字符串形式的ID），字符串类型，长度限制为1到64
+    $TOKEN = getWeixinToken();
+    $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token={$TOKEN}";
+    $datas = [];
+    $datas['action_name'] = $action_name;
+    $datas['action_info'] = [];
+    $datas['action_info']['scene'] = ['scene_id'=>$scene_id,'scene_str'=>$scene_str];
+    $res = curlPost($url,json_encode($datas));
+    $arr = json_decode($res,true);
+    if(isset($arr['ticket'])){
+        $arr['qrurl'] = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket='.$arr['ticket'];
+        return $arr;
+    }else{
+        return false;
+    }
+
+
+}
+
 /**
  * 获取php.exe的路径
  */
@@ -423,24 +448,32 @@ function isMobile() {
 #获取图片类型
 function getImgType($url)
 {
-    $type = get_headers($url)[3];
-    switch ($type) {
-        case 'Content-Type: image/jpeg':
-            return 'jpeg';
-            break;
-        case 'Content-Type: image/png':
-            return 'png';
-            break;
-        case 'Content-Type: image/gif':
-            return 'gif';
-            break;
-        case 'Content-Type: image/jpg':
-            return 'jpg';
-            break;
-        default:
-            return $type;
-            break;
+    $type = get_headers($url);
+    if(!$type){
+        #截取后缀
+        $arr = explode('.', $url);
+        $type = $arr[count($arr)-1];
     }
+    $typearr = [
+        'Content-Type: image/jpeg',
+        'Content-Type: image/png',
+        'Content-Type: image/gif',
+        'Content-Type: image/jpg'
+    ];
+    if(is_array($type)){
+        foreach($typearr as $v){
+            $res = array_search($v,$type);
+            if($res){
+                $type = $type[$res];
+                $type = explode(':', $type);
+                $type = explode('/', $type[1]);
+                $type = $type[1];
+                break;
+            }
+        }
+    }
+    return $type;
+ 
 }
 
 
