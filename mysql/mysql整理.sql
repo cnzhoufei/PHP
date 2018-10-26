@@ -322,7 +322,6 @@ repeat()重复多次 select repeat('test',10)
 replace(要替换的字符串，要搜索的值，替换成什么)字符串替换
 substring(原字符，从第几，取到第几)字符串截取
 space(count)生成count个空格
-
 bin()十进制转二进制
 ceiling() 向上取整
 floor()向下取整

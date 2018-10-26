@@ -1,6 +1,23 @@
 <?php
 
 
+#生成EXCEL列名数组(A,B,C...AA,AB,AC)
+function EXCEL_col_arr($num){
+    $data = [];
+    for ($i = 0; $i <= $num; $i++) {
+        $y = ($i / 26);
+        if ($y >= 1) {
+            $y = intval($y);
+            $data[] = chr($y+64).chr($i-$y*26 + 65);
+        } else {
+            $data[] = chr($i+65);
+        }
+
+    }
+    return $data;
+}
+
+
 
 #随机字符
 #len 生成长度

@@ -1,0 +1,139 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跳转中.....</title>
+</head>
+<body>
+
+<script>var mainPPMS=[{sourceUrl:"//wqs.jd.com/portal/wx/portal_indexV4.shtml?PTAG=17035.9.1&ptype=1&_appBack=1",targetUrl:"//union.click.jd.com/jdc?e=0&p=AyIHVCtaJQMiQwpDBUoyS0IQWlALHFRHFwQAQB1AWQkFGktBV1cIBR1cHFNZFl4LSGxKWABPEnIHDUUMXgdIDHNiJW1XFQQTBVEEUwoCBUYQUxpBDhIQO0saVHFCVQ8XWyVnYWNUSSFzB3dHBQECbFtvQyNDIGBiHgtlGF0cBhUEVBJaJQEUDlAeXBQDEjdlfSYlSXwGZR5TFwIaBVQfXCUCFwFSGF4VChAPUh9fJQUiZwZYBVNARkRlK2sl&t=W1dCFBBFC0RSRUpADgpQTFtLWgVWR0JaS10SC0NMRBBLBntaTVIBUjwQHVBeEEcGG2N3dyMXWxMDEANKE0QVFVNCHVoPGQIFaQVaGmZSQF1ZGw%3D%3D"}];</script>
+
+<iframe id="toApp" width="1" height="1" frameborder="0" style="display:none;border: 0;" name="toApp"></iframe>
+<script>
+    var openWx = {
+        home: 'https://wq.jd.com/mcoss/wxmall/home?ptype=1',
+        turl: '',
+        toWeb: '',
+        timeout: 5000,
+        init: function(){
+            var that = this;
+            that.turl = decodeURIComponent(that.getUrlParam('turl')); // 需要打开的页面地址
+            that.unopen = that.getUrlParam('unopen');
+            //如果传入这个参数，则默认不以默认浏览器打开页面
+            if(!/^(http:|https:)\/\/([\w\-]+\.)+jd(pay)?\.com\//.test(that.turl)){ // 非jd页面直接在当前环境打开portal首页
+                // show home
+                document.location.replace(that.home);
+            }else{
+                // set web url
+                that.toWeb = that.getTargetUrl(that.turl);
+                //that.toWeb="http://union.click.jd.com/jdc?e=0&p=AyIHVCtaJQMiQwpDBUoyS0IQWlALHFRHFwQAQB1AWQkFGktBV1cIBR1cHFNZFl4LSGxKWABPEnIHDUUMXgdIDHNiJW1XFQQTBlMEWxcdEhAUXhNUVh4HZRg7flJlGRJGOWdCb3hPHi1nGGZkLXtXGTIRAVwfXBYDGwZlGF0cBxcAVBpbJTJ0emVQNRQyFwNRGFoQARsPZRteEwcRAFQfWhIFFAdlHGt1UVFZE1kPVjIiN2U%3D&t=W1dCFBBFC0RSRUpADgpQTFtLWgVWR0JaS10SC0NMRBBLBntaTVIBUjwQHVBeEEcGG2N3dyMXWxMDEwFKG1kKAgVGEFMaQQ4S";
+                that.open();
+            }
+        },
+        open: function(){
+            var that = this;
+            window['getOpenLink'] = function(data){
+                if(+data.errcode === 0){
+                    console.log(data.openlink);
+                    location.replace(data.openlink); // weixin://dl/business/?ticket=t76488aa7896c1c298521ac3b73d97180
+                }
+            };
+            if(/^(http:|https:)\/\/([\w\-]+\.)+jd(pay)?\.com\//.test(that.toWeb) && that.getEnv() !== "weixin"){ // 需要打开的是wqs的页面，而且不在微信环境中
+                // var url = "//wq.jd.com/mjgj/link/GetOpenLink?callback=getOpenLink&rurl=" + encodeURIComponent("http://wqs.jd.com/ad/jump.shtml?curl=" + encodeURIComponent(that.toWeb));
+                var url = "//wq.jd.com/mjgj/link/GetOpenLink2?callback=getOpenLink&rurl=" + encodeURIComponent(that.toWeb);
+                that.loadUrl({url: url});
+
+                if(!that.unopen) {	//如果有unopen参数则不在web中show（360carman用）
+                    setTimeout(function(){
+                        // web show
+                        document.location.replace(that.addUrlParam(that.toWeb, {openlink: 3}));
+                    }, that.timeout);
+                }
+            }else{
+                if(!that.unopen) { // 马上打开
+                    document.location.replace(that.addUrlParam(that.toWeb, {openlink: 3}));
+                }
+            }
+        },
+        getUrlParam: function (name, url) {
+            // 参数：变量名，url为空则表从当前页面的url中取
+            var u = arguments[1] || window.location.search,
+                reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"),
+                r = u.substr(u.indexOf("\?") + 1).match(reg);
+            return r != null ? r[2] : "";
+        },
+        loadUrl:function(a) { // TODO
+            function b() {
+                c && (c.onload = c.onreadystatechange = c.onerror = null, c.parentNode && c.parentNode.removeChild(c), c = null)
+            }
+            a.element = a.element || "script";
+            var c = document.createElement(a.element);
+            c.charset = a.charset || "utf-8";
+            a.onBeforeSend && a.onBeforeSend(c);
+            c.onload = c.onreadystatechange = function() {
+                (/loaded|complete/i.test(this.readyState) || -1 == navigator.userAgent.toLowerCase().indexOf("msie")) && (a.onLoad && a.onLoad(), b())
+            },
+            c.onerror = function() {
+                b()
+            };
+            c.src = a.url;
+            document.getElementsByTagName("head")[0].appendChild(c);
+        },
+        getEnv: function(){
+            var _ua = navigator.userAgent.toLowerCase();
+            if(!/mobile|android/.test(_ua)){
+                return "pc";
+            }else{
+                if(/micromessenger(\/[\d\.]+)*/.test(_ua)){
+                    return "weixin";
+                }else if(/qq\/(\/[\d\.]+)*/.test(_ua) || /qzone\//.test(_ua)){
+                    return "qq";
+                } else {
+                    return "h5";
+                }
+            }
+        },
+        getTargetUrl: function(sourceUrl){
+            if(!mainPPMS || !mainPPMS.length){
+                return sourceUrl;
+            }
+            var validItems = mainPPMS.filter(function(item){return sourceUrl.indexOf(item.sourceUrl) > -1;});
+            if(!validItems || !validItems.length){
+                return sourceUrl;
+            }
+            var validUrl = validItems[0].targetUrl,
+                resultUrl = '';
+            if(validUrl){
+                resultUrl = validUrl;
+            }else{
+               resultUrl = sourceUrl;
+            }
+            if(resultUrl.indexOf('http') != 0){ // TODO
+                return 'http:' + resultUrl;
+            }
+            return resultUrl;
+        },
+        addUrlParam: function(url, paramObj) {
+            var parts = url.split("#");
+            var hash = parts[1];
+            var hasParam = url.indexOf("?") >= -1;
+            url = parts[0];
+            for (var name in paramObj) {
+                var reg = new RegExp("([?&])" + name + "=[^&]*(&|$)", "i")
+                if (reg.test(url)) { //判断是否存在这个参数，若存在则替换
+                    url = url.replace(reg, "$1" + name + "=" + paramObj[name] + "$2");
+                } else { //不存在则追加
+                    url += (url.indexOf("?") > -1 ? "&" : "?") + name + "=" + paramObj[name];
+                }
+            }
+            if (hash) {
+                url = url + "#" + hash;
+            }
+            return url;
+        }
+    };
+    openWx.init();
+</script>
+</body>
+</html>
