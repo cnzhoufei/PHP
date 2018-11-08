@@ -423,24 +423,19 @@ function isMobile() {
 #获取图片类型
 function getImgType($url)
 {
-    $type = get_headers($url)[3];
-    switch ($type) {
-        case 'Content-Type: image/jpeg':
-            return 'jpeg';
-            break;
-        case 'Content-Type: image/png':
-            return 'png';
-            break;
-        case 'Content-Type: image/gif':
-            return 'gif';
-            break;
-        case 'Content-Type: image/jpg':
-            return 'jpg';
-            break;
-        default:
-            return $type;
-            break;
+    $type = get_headers($url);
+    $imagesType = [
+        "Content-Type: image/jpeg",
+        "Content-Type: image/png",
+        "Content-Type: image/gif",
+        "Content-Type: image/jpg"
+    ];
+    foreach($imagesType as $v){
+        if (in_array($v,$type)){
+            return explode('/',$v)[1];
+        }
     }
+    return $type;
 }
 
 
