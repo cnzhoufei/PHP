@@ -1,5 +1,5 @@
 ﻿http://www.turingapi.com/#/platfrom 图灵机器人
-
+https://www.workerman.net/web-sender  推送
 
 http://www.utovr.com/sdk/download/  全景视屏播放器VR
 

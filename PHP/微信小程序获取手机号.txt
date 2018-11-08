@@ -1,0 +1,65 @@
+
+#后端代码
+    public function test3(){
+
+
+      $code = $_GET['code'];
+      $encryptedData = $_GET['encryptedData'];
+      $iv = $_GET['iv'];
+
+      $url = "https://api.weixin.qq.com/sns/jscode2session?appid=fff&secret=ffff&js_code={$code}&grant_type=authorization_code";
+      $data = curlGet($url);
+      $data = json_decode($data,true);
+      $sessionKey = $data['session_key'];
+
+      // import('PHP.wxBizDataCrypt', EXTEND_PATH);
+      include ROOT_PATH.'extend/PHP/wxBizDataCrypt.php';#官方下载https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html
+      $pc = new \WXBizDataCrypt('wx2a6d34429952dc73', $sessionKey);
+      $errCode = $pc->decryptData($encryptedData, $iv, $data );
+      echo json_encode($data);
+
+
+
+
+
+    }
+
+
+#小程序js
+getPhoneNumber: function (res) {
+
+    console.log(res)
+    if (res.detail.errMsg == "getPhoneNumber:ok"){
+      var encryptedData = res.detail.encryptedData;
+      var iv = res.detail.iv;
+      wx.login({
+        success(res) {
+          if (res.code) {
+            //发起网络请求
+            wx.request({
+              url: 'https://zhaopin.heigrace.com/index/index/test3',
+              data: { encryptedData: encryptedData,iv:iv,code:res.code},
+              method: 'GET',
+              dataType: 'json',
+              responseType: 'text',
+              success: function(res) {
+                console.log(res)
+              },
+              fail: function(res) {},
+              complete: function(res) {},
+            })      
+
+
+
+
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
+
+
+    }
+
+#小程序html
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >进入客服会话</button>
