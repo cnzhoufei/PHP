@@ -80,7 +80,7 @@ function decryption($cipher){
 	return $decrypted;
 }
 
-$a = encryption('周菲');
+$a = encryption('呵哈');
 var_dump($a);
 var_dump(decryption($a));exit;
 

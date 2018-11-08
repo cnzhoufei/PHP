@@ -2,7 +2,8 @@ $(document).ready(function (e) {
     $('#imageUploadForm').on('submit',(function(e) {
         e.preventDefault();
         var formData = new FormData(this);
-
+        if(!formData.get('username')){layer.msg('请填写姓名');return}
+        if(!formData.get('mobile')){layer.msg('请填写手机号');return;}
         $.ajax({
             type:'POST',
             url: $(this).attr('action'),

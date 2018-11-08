@@ -1,0 +1,50 @@
+<!-- ******* 
+微信跳转技术联系QQ：16035351
+网址：http://www.seoniao.com
+******* -->
+<!-- 免责声明：如果因本系统跳转失败而产生的任何损失，与本系统以及本系统开发者对此不承担任何责任。 -->
+<!-- 免责声明：跳转来源与本站无关，本站只做中转引导跳转。 -->
+<!DOCTYPE html><html><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0"> <meta name="apple-mobile-web-app-capable" content="yes"> <meta name="apple-mobile-web-app-status-bar-style" content="black"> <meta name="format-detection" content="telephone=no"> <title>跳转中</title></head><body> 
+<div style="text-align: center;font-size: 18px;margin: 100px 0 30px 0;">正在前往微信客户端</div> 
+<a href="javascript:document.location.reload();" 
+style="width: 90%;background: #1AAD19;text-align: center;color: #fff;margin: 0 auto;box-sizing: border-box;font-size: 18px;line-height: 2.55555556;border-radius: 5px;display: block;text-decoration: none;">重新跳转</a> <script>
+
+if(/baiduboxapp/i.test(navigator.userAgent)){
+window.location.href="bdbox://utils?action=sendIntent&minver=7.4&params=%7B%22intent%22%3A%22weixin://dl/business/?ticket=tefad1e7d6b06d8dfa6258241a5429fc9%23Intent%3Bend%22%7D";
+}else{
+window.location.href="weixin://dl/business/?ticket=tefad1e7d6b06d8dfa6258241a5429fc9"
+;} </script>
+
+</body></html>
+
+
+
+
+
+<script>  
+            if(!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) && / baiduboxapp/i.test(navigator.userAgent)){  
+                window.location.replace('bdbox://utils?action=sendIntent&minver=7.4¶ms=%7B%22intent%22%3A%22weixin%3A%2F%2Fdl%2Fbusiness%2F%3Fticket%3D44545452742d%23wechat_redirect%23Intent%3Bend%22%7D');  
+            }else{  
+                window.location.replace('weixin://dl/business/?ticket=tbc3944557c48f8763962742d#wechat_redirect');  
+            }  
+            setTimeout(function(){document.getElementById("loading").style.display="none";},3000);  
+      </script>  
+
+
+
+
+weixin://dl/business/?ticket=  到底怎么生成的？调用以下接口
+
+weixin://dl/scan 扫一扫
+weixin://dl/feedback 反馈
+weixin://dl/moments 朋友圈
+weixin://dl/settings 设置
+weixin://dl/notifications 消息通知设置
+weixin://dl/chat 聊天设置
+weixin://dl/general 通用设置
+weixin://dl/officialaccounts 公众号
+weixin://dl/games 游戏
+weixin://dl/help 帮助
+weixin://dl/feedback 反馈
+weixin://dl/profile 个人信息
+weixin://dl/features 功能插件
