@@ -722,6 +722,9 @@ iframe 中给父窗口传值
 $('#urlss', window.parent.document).val('sssssssssssssssss');
 //跳转到顶层窗口
 top.location='/AdultSupplies/index3.html
+iframe中跨域是获取顶层窗口链接
+document.referrer;
+
 
 1, window.location.href
 整个URl字符串(在浏览器中就是完整的地址栏)

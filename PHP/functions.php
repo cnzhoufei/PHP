@@ -146,13 +146,20 @@ function curlGet($url){
         return $data;
 }
 
-function curlPost($url,$data){
+function curlPost($url,$data,$header=null){
 
+    // $url = "https://open.workec.com/auth/accesstoken";
+    // $headers = [];
+    // $headers[] = "cache-control:no-cache";
+    // $headers[] = "content-type:application/json";
+    // $data = json_encode(['appId'=>342620696708382720,'appSecret'=>'OhPE5SGH9ygLUwIlglA']);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//跳过证书
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, $header); 
+        if($header){
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header); 
+        }
         // post数据
         curl_setopt($ch, CURLOPT_POST, 1);
         // post的变量
