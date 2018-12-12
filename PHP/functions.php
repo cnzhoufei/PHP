@@ -473,31 +473,19 @@ function isMobile() {
 function getImgType($url)
 {
     $type = get_headers($url);
-    if(!$type){
-        #截取后缀
-        $arr = explode('.', $url);
-        $type = $arr[count($arr)-1];
-    }
-    $typearr = [
-        'Content-Type: image/jpeg',
-        'Content-Type: image/png',
-        'Content-Type: image/gif',
-        'Content-Type: image/jpg'
+    $imagesType = [
+        "Content-Type: image/jpeg",
+        "Content-Type: image/png",
+        "Content-Type: image/gif",
+        "Content-Type: image/jpg"
     ];
-    if(is_array($type)){
-        foreach($typearr as $v){
-            $res = array_search($v,$type);
-            if($res){
-                $type = $type[$res];
-                $type = explode(':', $type);
-                $type = explode('/', $type[1]);
-                $type = $type[1];
-                break;
-            }
+    foreach($imagesType as $v){
+        if (in_array($v,$type)){
+            return explode('/',$v)[1];
         }
     }
     return $type;
- 
+
 }
 
 

@@ -171,6 +171,11 @@ select c1 + c2 from table where Id = 1
 --如果其中有一个字段有可能为空 那用也下方法
 select IFNULL(c1,0) + IFNULL(c2,0) from table where Id = 1
 
+
+查询为空的数据isNull
+select * from table where isNull(id);
+
+
 select count(uid),sum(total),avg(total) from wolf_orders;--总共多少条，总数，平均数
 select *  from wolf_orders where (select count(uid) from wolf_orders) order by total limit 2; --查销量最好的产品
 

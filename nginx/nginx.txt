@@ -1,0 +1,12 @@
+
+阿里云官方yum源地址
+	https://opsx.alibaba.com/mirror
+
+#安装ngxin
+
+1.安装pcre --让ngxin支持伪静态
+	yum -y install pcre pcre-devel --安装命令
+	rem -qa pcre pcre-devel        --查看安装
+
+
+2.
