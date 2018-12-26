@@ -298,6 +298,9 @@ Threads_created :代表从最近一次服务启动，已创建线程的数量。
 Threads_running :代表当前激活的（非睡眠状态）线程数。并不是代表正在使用的线程数，有时候连接已建立，但是连接处于sleep状态，这里相对应的线程也是sleep状态。
 show variables like '%datadir%';查看数据文件存放路径
 
+show OPEN TABLES where In_use > 0;查询mysql 哪些表正在被锁状态
+
+
 select unix_timestamp(now()) ;获取当前时间戳
 select UNIX_TIMESTAMP(datetime);--格式化的日期格式转换成时间戳
 select FROM_UNIXTIME(unixtime);--将时间戳转换成格式化的时间格式
