@@ -1,5 +1,5 @@
 -- 库
-create database if not exists `pay` default charset set utf8mb4;
+create database if not exists `pay` default charset=utf8mb4;
 utf8mb4 编码支持存储文字表情
 create database if not exists 库名 default charset utf8 collate utf8_general_ci comment '注释';--创建数据库
 create database if not exists 库名;--创建数据库
@@ -474,15 +474,15 @@ end$
 mysqli_insert_id($conn);#获取最后插入的自增id
 
 mysql 存储文字表情 需要修改配置如下然后重启(库和表字符集也必须是utf8mb4)
-#mysqld部分
-[mysqld]
-character-set-server=utf8mb4
-collation_server=utf8mb4_unicode_ci
-init-connect="SET NAMES utf8mb4"
-#mysql部分
-[mysql]
-default-character-set=utf8mb4
-
+[client] 
+default-character-set = utf8mb4 
+[mysql] 
+default-character-set = utf8mb4 
+[mysqld] 
+character-set-client-handshake = FALSE 
+character-set-server = utf8mb4 
+collation-server = utf8mb4_unicode_ci 
+init_connect='SET NAMES utf8mb4'
 
 
 #事务处理
