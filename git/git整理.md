@@ -134,8 +134,8 @@ Your identification has been saved in /Users/you/.ssh/id_rsa.
 # 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
 
 
-
-
+# 清除记住的账号密码
+git config --system --unset credential.helper
 
 
 
