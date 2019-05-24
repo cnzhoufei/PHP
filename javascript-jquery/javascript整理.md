@@ -121,6 +121,12 @@ function test(){
         }
     }
 
+    if(check){
+        $('#channel input').prop('checked',true);
+    }else{
+        $('#channel input').removeAttr('checked',false);
+    }
+
 
 
     /******************** 定时器 ********************/

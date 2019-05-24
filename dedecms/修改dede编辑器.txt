@@ -1,12 +1,12 @@
 
 
-1.´ò¿ª /include/inc/inc.funAadmin.php ²éÕÒ SpGetEditor Õâ¸öº¯Êı£¬ÔÚÕâ¸öº¯ÊıÉÏ·½¼ÓÈë
+1.æ‰“å¼€ /include/inc/inc.funAadmin.php æŸ¥æ‰¾ SpGetEditor è¿™ä¸ªå‡½æ•°ï¼Œåœ¨è¿™ä¸ªå‡½æ•°ä¸Šæ–¹åŠ å…¥
 
-	echo '<script type="text/javascript" charset="utf-8" src="/dede/ueditor/ueditor.config.js"></script>
+    echo '<script type="text/javascript" charset="utf-8" src="/dede/ueditor/ueditor.config.js"></script>
             <script type="text/javascript" charset="utf-8" src="/dede/ueditor/ueditor.all.min.js"> </script>
             <script type="text/javascript" charset="utf-8" src="/dede/ueditor/lang/zh-cn/zh-cn.js"></script>';
 
-2.È»ºó²éÕÒ else if($GLOBALS['cfg_html_editor']=='ckeditor') ÔÚÉÏ·½¼ÓÈë
+2.ç„¶åæŸ¥æ‰¾ else if($GLOBALS['cfg_html_editor']=='ckeditor') åœ¨ä¸Šæ–¹åŠ å…¥
 
 else if($GLOBALS['cfg_html_editor']=='ueditor')
     {
@@ -22,7 +22,7 @@ else if($GLOBALS['cfg_html_editor']=='ueditor')
     }
     }
 
-3.½«ºóÌ¨±à¼­Æ÷ÅäÖÃĞŞ¸ÄÎª ueditor  ĞŞ¸Ä·½Ê½£ºÏµÍ³->ÏµÍ³²ÎÊıÉèÖÃ->ºËĞÄÉèÖÃ->Html±à¼­Æ÷£¨ckeditor,ĞèÒªfckµÄÓÃ»§¿ÉÒÔÈ¥¹ÙÍøÏÂÔØ£©£º
+3.å°†åå°ç¼–è¾‘å™¨é…ç½®ä¿®æ”¹ä¸º ueditor  ä¿®æ”¹æ–¹å¼ï¼šç³»ç»Ÿ->ç³»ç»Ÿå‚æ•°è®¾ç½®->æ ¸å¿ƒè®¾ç½®->Htmlç¼–è¾‘å™¨ï¼ˆckeditor,éœ€è¦fckçš„ç”¨æˆ·å¯ä»¥å»å®˜ç½‘ä¸‹è½½ï¼‰ï¼š
 
 
-4.°Ù¶È±à¼­Æ÷·Åµ½dedeÄ¿Â¼ÏÂ
+4.ç™¾åº¦ç¼–è¾‘å™¨æ”¾åˆ°dedeç›®å½•ä¸‹

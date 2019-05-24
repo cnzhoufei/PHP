@@ -72,6 +72,7 @@ git clone  https://github.com/vzhoufei/ThinkPHP.git
 切换分支：git checkout 分支名
 查看分支：git branch
 查看远程分支：git branch -a
+拉取远程分支： git pull origin 分支名
 
 删除本地分支：git branch -d xxxxx
 删除远程分支  

@@ -1,0 +1,5 @@
+<a href="http://ow365.cn/?i=12592&furl=http://abc.qybk.cn/{$file.file}" target="_blank">查看</a>    //一天免费查看500次 优点速度快  非会员                     
+
+<a href="http://api.idocv.com/view/url?url=http://abc.qybk.cn/{$file.file}" target="_blank">查看</a>//每个文件能看只能看5次 好像没有每次限制就是有每个文件查看次数限制？ 非会员
+
+<a href="http://view.officeapps.live.com/op/view.aspx?src=http://abc.qybk.cn/{$file.file}" target="_blank">查看</a> //微软官方自带的

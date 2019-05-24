@@ -228,10 +228,16 @@ select Persons.LastName, Persons.FirstName, Orders.OrderNo from Persons inner jo
 select .... from t1 inner join t2 on t1.id = t2.id inner join t3 
 select store.store_id from yd_store as store inner join yd_shouji on store.store_id = yd_shouji.userid where store.tpl like '%shuma%' and store.store_id > 9 ;
 
+--查询 销量最好的商品
+select goodId,count(goodId) as count,sum(goodPrice),max(goodPrice),min(goodPrice),avg(goodPrice) from goods group by goodId order by count desc limit 10;
+
+--查询结果当成一张表再查询
+select * from (select goodId,count(goodId) as count,sum(goodPrice),max(goodPrice),min(goodPrice),avg(goodPrice) from goods group by goodId order by count desc) as t where t.cid = 1;
+
 --其它查询
 mysql -uroot -p123456 -e "select * from database.table";--不用登陆mysql 直接查询数据
 mysql -uroot -p123456 -e "select * from database.table" > mysql.sql;--在linux时下直接将查询结果写入到文件中
-
+select table_name from information_schema.tables where table_schema='当前数据库' #查看所有表
 group_concat(id) 用逗号链接某一个字段(结果是所有记录) 默认长度为1024 GROUP_CONCAT(`key` SEPARATOR '_') ;两个字段相连
 group_concat_max_len = 1024 #你要的最大长度 在配置文件中修改长度
 SET GLOBAL group_concat_max_len=10240000; #sql语句修改 作用域全局
@@ -469,7 +475,8 @@ end$
 
 
 ------------------------------------------------php操作MySQL-----------------------------------------------
-
+#获取最后插入的自增id
+select auto_increment from INFORMATION_SCHEMA.tables where table_name = 'column' and table_schema = 'boke'
 
 mysqli_insert_id($conn);#获取最后插入的自增id
 

@@ -14,6 +14,9 @@ netstat -ntlp   //查看当前所有tcp端口·
 　　netstat -an | grep 3306   //查看所有3306端口使用情况·
 
 
+查看程序的执行命令
+ps -ef | grep python3
+
 
 环境安装 wdlinux 3.1
 http://www.wdlinux.cn/bbs/forum-5-1.html
@@ -179,7 +182,7 @@ whoami 查看当前登录用户名
 
 qi8Y5H4H0U3I9O6ch8SeS
 
-useradd -d /www/web/qiche/public_html -m qiche --指定家目录创建用户
+useradd -d /www/web/qiche/public_html -m zhoufei --指定家目录创建用户
 passwd qiche --更改密码
 setfacl -m u:qiche:777 -R /www/web/qiche/public_html 
 chown -R qiche /www/web/qiche/public_html --将此目录下所有文件所属主改为yzjy
@@ -693,3 +696,5 @@ scp /www/web/weixin/public_html/weixin.zip root@172.18.239.104:/www/wwwroot/weix
 rsync [参数] <源地址（用户名@IP地址或主机名）>:<文件路径> <目的地址（用户名 @IP 地址或主机名）>:<文件路径> 
 举例：
 rsync /home/work/source.txt work@192.168.0.10:/home/work/  #把本地的source.txt文件拷贝到192.168.0.10机器
+
+
